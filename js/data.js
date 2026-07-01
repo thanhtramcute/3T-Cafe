@@ -315,7 +315,7 @@ const DATA = {
 <li>Bảo quản lạnh và sử dụng trong 1-2 tuần</li>
 </ol>
 <p>Thưởng thức với đá hoặc sữa tùy ý!</p>`,
-            image: 'images/cf5.jpg',
+            image: 'images/cf4.jpg',
             author: '3TCoffee', publishedAt: '2025-04-28', views: 2100,
         },
         {
