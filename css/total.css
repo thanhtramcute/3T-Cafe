@@ -1,0 +1,173 @@
+.container {
+    position: relative;
+    /* min-height: 100vh; */
+    overflow: auto;
+}
+.container > div {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+
+		.gradient-text {
+			background: linear-gradient(45deg, #ffffff, #ffffff); 
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			font-weight: bold;
+		}
+
+
+		.slider-item {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden;
+}
+
+.slider-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Giúp hình nền luôn phủ kín */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.one-half.img {
+    flex: 1; /* Chiếm toàn bộ chiều rộng có thể */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.one-half.img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.menu-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px; 
+}
+
+.menu-entry .img {
+    display: block;
+    width: 100%;
+    height: 200px; 
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.menu-entry .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-entry .img:hover img {
+    transform: scale(1.1);
+}
+
+/* ------------------------ */
+
+.gallery {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* ------------------------ */
+
+.background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: -1; 
+}
+
+
+.blog-img img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 5px; 
+}
+
+
+.blog-entry img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+
+/* ------------------ */
+
+.menu-wrap .img {
+    display: block;
+    width: 100%;
+    /* height: 200px;  */
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.menu-wrap .img img {
+    width: 100%;
+    /* height: 100%; */
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-wrap .img:hover img {
+    transform: scale(1.1);
+}
+
+
+/* -------------------- */
+
+.blog-entry .block-20{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.blog-entry .block-20 img{
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.blog-entry .block-20:hover img{
+    transform: scale(1.1);
+}

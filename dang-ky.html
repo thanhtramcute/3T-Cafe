@@ -1,0 +1,667 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đăng ký - 3T Coffee</title>
+    <meta name="description" content="Đăng ký tài khoản 3T Coffee - Cà phê nguyên chất từ Pleiku">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+    <link rel="shortcut icon" href="images/iconas.ico">
+
+    <style>
+        :root {
+            --coffee-50: #fdf8f3;
+            --coffee-100: #f5e6d3;
+            --coffee-200: #e8c9a8;
+            --coffee-300: #d4a574;
+            --coffee-400: #c08552;
+            --coffee-500: #a0623a;
+            --coffee-600: #7d4a2e;
+            --coffee-700: #5c3522;
+            --coffee-800: #3d2318;
+            --coffee-900: #2a1810;
+        }
+
+        body.auth-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--coffee-50) 0%, var(--coffee-100) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 60px rgba(45, 35, 24, 0.2);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            border: 1px solid rgba(245, 230, 211, 0.8);
+        }
+
+        .auth-card .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-card .logo img {
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .auth-card .logo-text {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+        }
+
+        .auth-card h3 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-card .subtitle {
+            text-align: center;
+            color: var(--coffee-500);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--coffee-700);
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+
+        .form-control-coffee {
+            width: 100%;
+            padding: 11px 16px;
+            border: 1.5px solid var(--coffee-200);
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--coffee-900);
+            background: white;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .form-control-coffee:focus {
+            border-color: var(--coffee-500);
+            box-shadow: 0 0 0 3px rgba(125, 74, 46, 0.1);
+        }
+
+        .form-control-coffee::placeholder {
+            color: var(--coffee-400);
+        }
+
+        .form-control-coffee.is-invalid {
+            border-color: #ef4444;
+        }
+
+        .form-error {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-error.show {
+            display: block;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .form-control-coffee {
+            padding-right: 48px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--coffee-400);
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            padding: 4px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: var(--coffee-600);
+        }
+
+        .password-strength {
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 6px;
+            background: var(--coffee-100);
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.3s, background 0.3s;
+        }
+
+        .strength-weak { background: #ef4444; width: 33%; }
+        .strength-medium { background: #f59e0b; width: 66%; }
+        .strength-strong { background: #22c55e; width: 100%; }
+
+        .btn-coffee {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--coffee-600), var(--coffee-500));
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-coffee:hover {
+            background: linear-gradient(135deg, var(--coffee-500), var(--coffee-400));
+            box-shadow: 0 4px 16px rgba(125, 74, 46, 0.4);
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        .btn-coffee:active {
+            transform: scale(0.98);
+        }
+
+        .btn-coffee:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 1.25rem;
+        }
+
+        .terms-check input[type="checkbox"] {
+            margin-top: 2px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--coffee-600);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .terms-check label {
+            font-size: 0.875rem;
+            color: var(--coffee-700);
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .terms-check label a {
+            color: var(--coffee-600);
+            font-weight: 500;
+        }
+
+        .terms-check label a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.25rem 0;
+            color: var(--coffee-400);
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--coffee-200);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.25rem;
+            color: var(--coffee-600);
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: var(--coffee-600);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .login-link a:hover {
+            color: var(--coffee-500);
+            text-decoration: underline;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .plei-toast {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: toastIn 0.4s ease;
+            max-width: 360px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes toastOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+
+        .toast-success { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .toast-error { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .toast-info { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+        .home-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .home-link a {
+            color: var(--coffee-500);
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .home-link a:hover {
+            color: var(--coffee-700);
+        }
+
+        .field-hint {
+            font-size: 0.78rem;
+            color: var(--coffee-400);
+            margin-top: 4px;
+        }
+
+        @media (max-width: 575.98px) {
+            .auth-card {
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="auth-page">
+
+    <div class="auth-card">
+        <div class="logo">
+            <img src="images/logo-bill.png" alt="3T Coffee Logo">
+            <span class="logo-text">3T Coffee</span>
+        </div>
+
+        <h3>Đăng ký tài khoản</h3>
+        <p class="subtitle">Tạo tài khoản để hưởng ưu đãi đặc biệt!</p>
+
+        <div id="alertContainer"></div>
+
+        <form id="registerForm" onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label for="fullname">Họ tên</label>
+                <input type="text" id="fullname" class="form-control-coffee" placeholder="Nhập họ tên của bạn" required autocomplete="name">
+                <div class="form-error" id="fullnameError">Vui lòng nhập họ tên</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control-coffee" placeholder="email@example.com" required autocomplete="email">
+                <div class="form-error" id="emailError">Email không hợp lệ</div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Số điện thoại</label>
+                <input type="tel" id="phone" class="form-control-coffee" placeholder="0xxx xxx xxx" required autocomplete="tel">
+                <div class="form-error" id="phoneError">Số điện thoại không hợp lệ</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" class="form-control-coffee" placeholder="Tối thiểu 6 ký tự" required autocomplete="new-password" oninput="checkPasswordStrength()">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password', 'eyeIcon1')" aria-label="Hiện/ẩn mật khẩu">
+                        <svg id="eyeIcon1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="strengthBar"></div>
+                </div>
+                <div class="field-hint" id="strengthHint"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Xác nhận mật khẩu</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirmPassword" class="form-control-coffee" placeholder="Nhập lại mật khẩu" required autocomplete="new-password">
+                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', 'eyeIcon2')" aria-label="Hiện/ẩn mật khẩu">
+                        <svg id="eyeIcon2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="form-error" id="confirmError">Mật khẩu không khớp</div>
+            </div>
+
+            <div class="terms-check">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">Tôi đồng ý với <a href="dieu-khoan.html" target="_blank">Điều khoản sử dụng</a> và <a href="chinh-sach-bao-mat.html" target="_blank">Chính sách bảo mật</a></label>
+            </div>
+
+            <button type="submit" class="btn-coffee" id="registerBtn">
+                <span id="registerText">Đăng ký</span>
+            </button>
+        </form>
+
+        <div class="divider"><span>hoặc</span></div>
+
+        <div class="login-link">
+            Đã có tài khoản? <a href="dang-nhap.html">Đăng nhập</a>
+        </div>
+
+        <div class="home-link">
+            <a href="trang-chu.html">← Về trang chủ</a>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/layout.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentUser = localStorage.getItem('plei_current_user');
+            if (currentUser) {
+                try {
+                    var user = JSON.parse(currentUser);
+                    if (user && user.email) {
+                        window.location.href = 'tai-khoan.html';
+                    }
+                } catch(e) {}
+            }
+        });
+
+        function togglePassword(inputId, iconId) {
+            var input = document.getElementById(inputId);
+            var icon = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+            }
+        }
+
+        function checkPasswordStrength() {
+            var pwd = document.getElementById('password').value;
+            var bar = document.getElementById('strengthBar');
+            var hint = document.getElementById('strengthHint');
+
+            bar.className = 'password-strength-bar';
+
+            if (pwd.length === 0) {
+                bar.style.width = '0%';
+                hint.textContent = '';
+                return;
+            }
+
+            var score = 0;
+            if (pwd.length >= 6) score++;
+            if (pwd.length >= 8) score++;
+            if (/[A-Z]/.test(pwd) && /[a-z]/.test(pwd)) score++;
+            if (/[0-9]/.test(pwd)) score++;
+            if (/[^A-Za-z0-9]/.test(pwd)) score++;
+
+            if (score <= 2) {
+                bar.classList.add('strength-weak');
+                hint.textContent = 'Mật khẩu yếu';
+                hint.style.color = '#ef4444';
+            } else if (score <= 3) {
+                bar.classList.add('strength-medium');
+                hint.textContent = 'Mật khẩu trung bình';
+                hint.style.color = '#f59e0b';
+            } else {
+                bar.classList.add('strength-strong');
+                hint.textContent = 'Mật khẩu mạnh';
+                hint.style.color = '#22c55e';
+            }
+        }
+
+        function showToast(message, type) {
+            type = type || 'success';
+            var existing = document.querySelector('.plei-toast');
+            if (existing) existing.remove();
+
+            var toast = document.createElement('div');
+            toast.className = 'plei-toast toast-' + type;
+            toast.innerHTML = '<span>' + message + '</span>';
+            document.body.appendChild(toast);
+
+            setTimeout(function() {
+                toast.style.animation = 'toastOut 0.4s ease forwards';
+                setTimeout(function() { toast.remove(); }, 400);
+            }, 3000);
+        }
+
+        function showAlert(message, type) {
+            var container = document.getElementById('alertContainer');
+            container.innerHTML = '<div style="border-radius: 0.75rem; padding: 12px 16px; margin-bottom: 1rem; font-size: 0.9rem; background: ' + (type === 'success' ? '#dcfce7; border: 1px solid #bbf7d0; color: #16a34a;' : '#fee2e2; border: 1px solid #fecaca; color: #dc2626;') + '">' + message + '</div>';
+            setTimeout(function() {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePhone(phone) {
+            return /^(0[0-9]{9,10})$/.test(phone.replace(/\s/g, ''));
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+
+            var fullname = document.getElementById('fullname').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var phone = document.getElementById('phone').value.trim();
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var terms = document.getElementById('terms').checked;
+            var btn = document.getElementById('registerBtn');
+            var btnText = document.getElementById('registerText');
+
+            var hasError = false;
+
+            document.querySelectorAll('.form-error').forEach(function(el) { el.classList.remove('show'); });
+            document.querySelectorAll('.form-control-coffee').forEach(function(el) { el.classList.remove('is-invalid'); });
+
+            if (!fullname) {
+                document.getElementById('fullname').classList.add('is-invalid');
+                document.getElementById('fullnameError').classList.add('show');
+                hasError = true;
+            }
+
+            if (!email || !validateEmail(email)) {
+                document.getElementById('email').classList.add('is-invalid');
+                document.getElementById('emailError').textContent = 'Vui lòng nhập email hợp lệ';
+                document.getElementById('emailError').classList.add('show');
+                hasError = true;
+            }
+
+            if (!phone || !validatePhone(phone)) {
+                document.getElementById('phone').classList.add('is-invalid');
+                document.getElementById('phoneError').classList.add('show');
+                hasError = true;
+            }
+
+            if (password.length < 6) {
+                document.getElementById('password').classList.add('is-invalid');
+                hasError = true;
+            }
+
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPassword').classList.add('is-invalid');
+                document.getElementById('confirmError').classList.add('show');
+                hasError = true;
+            }
+
+            if (!terms) {
+                showAlert('Bạn cần đồng ý với Điều khoản sử dụng!', 'danger');
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            btn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span> Đang xử lý...';
+
+            setTimeout(function() {
+                var allUsers = DATA.users || [];
+                var storedUsers = localStorage.getItem('plei_users');
+                if (storedUsers) {
+                    try {
+                        var extraUsers = JSON.parse(storedUsers);
+                        if (Array.isArray(extraUsers)) {
+                            allUsers = allUsers.concat(extraUsers);
+                        }
+                    } catch(e) {}
+                }
+
+                var emailExists = allUsers.some(function(u) { return u.email === email; });
+
+                if (emailExists) {
+                    showAlert('Email này đã được đăng ký! Vui lòng sử dụng email khác.', 'danger');
+                    btn.disabled = false;
+                    btnText.textContent = 'Đăng ký';
+                    return;
+                }
+
+                var newUser = {
+                    id: 'user_' + Date.now(),
+                    email: email,
+                    password: password,
+                    name: fullname,
+                    phone: phone,
+                    role: 'customer',
+                    address: '',
+                    loyaltyPoints: 50,
+                    createdAt: new Date().toISOString()
+                };
+
+                var extraUsers = [];
+                var existingExtra = localStorage.getItem('plei_users');
+                if (existingExtra) {
+                    try {
+                        extraUsers = JSON.parse(existingExtra);
+                        if (!Array.isArray(extraUsers)) extraUsers = [];
+                    } catch(e) { extraUsers = []; }
+                }
+                extraUsers.push(newUser);
+                localStorage.setItem('plei_users', JSON.stringify(extraUsers));
+
+                var safeUser = {
+                    id: newUser.id,
+                    email: newUser.email,
+                    name: newUser.name,
+                    role: newUser.role,
+                    phone: newUser.phone,
+                    address: newUser.address,
+                    loyaltyPoints: newUser.loyaltyPoints
+                };
+                localStorage.setItem('plei_current_user', JSON.stringify(safeUser));
+                localStorage.setItem('plei_user', JSON.stringify(safeUser));
+                localStorage.setItem('currentUser', JSON.stringify(safeUser));
+
+                showToast('Đăng ký thành công! Bạn được tặng 50 điểm tích lũy.', 'success');
+
+                setTimeout(function() {
+                    window.location.href = 'tai-khoan.html';
+                }, 1000);
+            }, 700);
+        }
+    </script>
+</body>
+</html>

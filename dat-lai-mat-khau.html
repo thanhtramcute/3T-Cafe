@@ -1,0 +1,661 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đặt lại mật khẩu - 3T Coffee</title>
+    <meta name="description" content="Đặt lại mật khẩu tài khoản 3T Coffee">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+    <link rel="shortcut icon" href="images/iconas.ico">
+
+    <style>
+        :root {
+            --coffee-50: #fdf8f3;
+            --coffee-100: #f5e6d3;
+            --coffee-200: #e8c9a8;
+            --coffee-300: #d4a574;
+            --coffee-400: #c08552;
+            --coffee-500: #a0623a;
+            --coffee-600: #7d4a2e;
+            --coffee-700: #5c3522;
+            --coffee-800: #3d2318;
+            --coffee-900: #2a1810;
+        }
+
+        body.auth-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--coffee-50) 0%, var(--coffee-100) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 60px rgba(45, 35, 24, 0.2);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            border: 1px solid rgba(245, 230, 211, 0.8);
+        }
+
+        .auth-card .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-card .logo img {
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .auth-card .logo-text {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+        }
+
+        .auth-card h3 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-card .subtitle {
+            text-align: center;
+            color: var(--coffee-500);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--coffee-700);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .form-control-coffee {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--coffee-200);
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--coffee-900);
+            background: white;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .form-control-coffee:focus {
+            border-color: var(--coffee-500);
+            box-shadow: 0 0 0 3px rgba(125, 74, 46, 0.1);
+        }
+
+        .form-control-coffee::placeholder {
+            color: var(--coffee-400);
+        }
+
+        .form-control-coffee.is-invalid {
+            border-color: #ef4444;
+        }
+
+        .form-error {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-error.show {
+            display: block;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .form-control-coffee {
+            padding-right: 48px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--coffee-400);
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            padding: 4px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: var(--coffee-600);
+        }
+
+        .password-strength {
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 6px;
+            background: var(--coffee-100);
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.3s, background 0.3s;
+        }
+
+        .strength-weak { background: #ef4444; width: 33%; }
+        .strength-medium { background: #f59e0b; width: 66%; }
+        .strength-strong { background: #22c55e; width: 100%; }
+
+        .field-hint {
+            font-size: 0.78rem;
+            color: var(--coffee-400);
+            margin-top: 4px;
+        }
+
+        .btn-coffee {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--coffee-600), var(--coffee-500));
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-coffee:hover {
+            background: linear-gradient(135deg, var(--coffee-500), var(--coffee-400));
+            box-shadow: 0 4px 16px rgba(125, 74, 46, 0.4);
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        .btn-coffee:active {
+            transform: scale(0.98);
+        }
+
+        .btn-coffee:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-coffee-outline {
+            width: 100%;
+            padding: 13px;
+            background: transparent;
+            color: var(--coffee-600);
+            border: 2px solid var(--coffee-300);
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            margin-top: 0.75rem;
+        }
+
+        .btn-coffee-outline:hover {
+            background: var(--coffee-50);
+            border-color: var(--coffee-600);
+            color: var(--coffee-600);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .plei-toast {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: toastIn 0.4s ease;
+            max-width: 360px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes toastOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+
+        .toast-success { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .toast-error { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .toast-info { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--coffee-100), var(--coffee-200));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+        }
+
+        .icon-box svg {
+            width: 28px;
+            height: 28px;
+            color: var(--coffee-600);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            animation: scaleIn 0.4s ease;
+        }
+
+        .success-icon svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .success-message h4 {
+            font-family: 'Josefin Sans', sans-serif;
+            color: var(--coffee-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: var(--coffee-600);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .back-link {
+            display: flex;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .back-link a {
+            color: var(--coffee-500);
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .back-link a:hover {
+            color: var(--coffee-700);
+        }
+
+        .home-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .home-link a {
+            color: var(--coffee-500);
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .home-link a:hover {
+            color: var(--coffee-700);
+        }
+
+        .token-info {
+            background: var(--coffee-50);
+            border: 1px solid var(--coffee-200);
+            border-radius: 0.5rem;
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            color: var(--coffee-600);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        @media (max-width: 575.98px) {
+            .auth-card {
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="auth-page">
+
+    <div class="auth-card">
+        <div class="logo">
+            <img src="images/logo.png" alt="3T Coffee Logo">
+            <span class="logo-text">3T Coffee</span>
+        </div>
+
+        <div id="formSection" class="form-section active">
+            <div class="icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+            </div>
+            <h3>Đặt lại mật khẩu</h3>
+            <p class="subtitle">Nhập mật khẩu mới cho tài khoản của bạn.</p>
+
+            <div class="token-info" id="tokenInfo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                Liên kết đặt lại hợp lệ
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <form id="resetForm" onsubmit="handleResetPassword(event)">
+                <div class="form-group">
+                    <label for="newPassword">Mật khẩu mới</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="newPassword" class="form-control-coffee" placeholder="Tối thiểu 6 ký tự" required autocomplete="new-password" oninput="checkPasswordStrength()">
+                        <button type="button" class="password-toggle" onclick="togglePassword('newPassword', 'eyeIcon1')" aria-label="Hiện/ẩn mật khẩu">
+                            <svg id="eyeIcon1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="field-hint" id="strengthHint"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Xác nhận mật khẩu mới</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirmPassword" class="form-control-coffee" placeholder="Nhập lại mật khẩu mới" required autocomplete="new-password">
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', 'eyeIcon2')" aria-label="Hiện/ẩn mật khẩu">
+                            <svg id="eyeIcon2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-error" id="confirmError">Mật khẩu không khớp</div>
+                </div>
+
+                <button type="submit" class="btn-coffee" id="resetBtn">
+                    <span id="resetText">Đặt lại mật khẩu</span>
+                </button>
+            </form>
+
+            <div class="back-link">
+                <a href="dang-nhap.html">← Quay lại đăng nhập</a>
+            </div>
+        </div>
+
+        <div id="successSection" class="form-section">
+            <div class="success-message">
+                <div class="success-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <h4>Đặt lại mật khẩu thành công!</h4>
+                <p>Mật khẩu của bạn đã được thay đổi. Bây giờ bạn có thể đăng nhập với mật khẩu mới.</p>
+            </div>
+
+            <a href="dang-nhap.html" class="btn-coffee">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
+                </svg>
+                Đăng nhập ngay
+            </a>
+
+            <div class="back-link">
+                <a href="dang-nhap.html">← Đăng nhập</a>
+            </div>
+        </div>
+
+        <div class="home-link">
+            <a href="trang-chu.html">← Về trang chủ</a>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+
+    <script>
+        function getQueryParam(name) {
+            var params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        function togglePassword(inputId, iconId) {
+            var input = document.getElementById(inputId);
+            var icon = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+            }
+        }
+
+        function checkPasswordStrength() {
+            var pwd = document.getElementById('newPassword').value;
+            var bar = document.getElementById('strengthBar');
+            var hint = document.getElementById('strengthHint');
+
+            bar.className = 'password-strength-bar';
+
+            if (pwd.length === 0) {
+                bar.style.width = '0%';
+                hint.textContent = '';
+                return;
+            }
+
+            var score = 0;
+            if (pwd.length >= 6) score++;
+            if (pwd.length >= 8) score++;
+            if (/[A-Z]/.test(pwd) && /[a-z]/.test(pwd)) score++;
+            if (/[0-9]/.test(pwd)) score++;
+            if (/[^A-Za-z0-9]/.test(pwd)) score++;
+
+            if (score <= 2) {
+                bar.classList.add('strength-weak');
+                hint.textContent = 'Mật khẩu yếu';
+                hint.style.color = '#ef4444';
+            } else if (score <= 3) {
+                bar.classList.add('strength-medium');
+                hint.textContent = 'Mật khẩu trung bình';
+                hint.style.color = '#f59e0b';
+            } else {
+                bar.classList.add('strength-strong');
+                hint.textContent = 'Mật khẩu mạnh';
+                hint.style.color = '#22c55e';
+            }
+        }
+
+        function showToast(message, type) {
+            type = type || 'success';
+            var existing = document.querySelector('.plei-toast');
+            if (existing) existing.remove();
+
+            var toast = document.createElement('div');
+            toast.className = 'plei-toast toast-' + type;
+            toast.innerHTML = '<span>' + message + '</span>';
+            document.body.appendChild(toast);
+
+            setTimeout(function() {
+                toast.style.animation = 'toastOut 0.4s ease forwards';
+                setTimeout(function() { toast.remove(); }, 400);
+            }, 3000);
+        }
+
+        function showAlert(message, type) {
+            var container = document.getElementById('alertContainer');
+            container.innerHTML = '<div style="border-radius: 0.75rem; padding: 12px 16px; margin-bottom: 1rem; font-size: 0.9rem; background: ' + (type === 'success' ? '#dcfce7; border: 1px solid #bbf7d0; color: #16a34a;' : '#fee2e2; border: 1px solid #fecaca; color: #dc2626;') + '">' + message + '</div>';
+            setTimeout(function() {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        function handleResetPassword(event) {
+            event.preventDefault();
+
+            var newPassword = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var btn = document.getElementById('resetBtn');
+            var btnText = document.getElementById('resetText');
+
+            var hasError = false;
+
+            document.querySelectorAll('.form-error').forEach(function(el) { el.classList.remove('show'); });
+            document.querySelectorAll('.form-control-coffee').forEach(function(el) { el.classList.remove('is-invalid'); });
+
+            if (newPassword.length < 6) {
+                document.getElementById('newPassword').classList.add('is-invalid');
+                hasError = true;
+            }
+
+            if (newPassword !== confirmPassword) {
+                document.getElementById('confirmPassword').classList.add('is-invalid');
+                document.getElementById('confirmError').classList.add('show');
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            btn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span> Đang xử lý...';
+
+            setTimeout(function() {
+                var resetEmail = localStorage.getItem('plei_reset_email');
+                var storedUsers = localStorage.getItem('plei_users');
+
+                if (storedUsers && resetEmail) {
+                    try {
+                        var users = JSON.parse(storedUsers);
+                        var idx = users.findIndex(function(u) { return u.email === resetEmail; });
+                        if (idx > -1) {
+                            users[idx].password = newPassword;
+                            localStorage.setItem('plei_users', JSON.stringify(users));
+                        }
+                    } catch(e) {}
+                }
+
+                localStorage.removeItem('plei_reset_email');
+
+                document.getElementById('formSection').classList.remove('active');
+                document.getElementById('successSection').classList.add('active');
+                document.querySelector('.home-link').style.display = 'none';
+            }, 800);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var token = getQueryParam('token');
+            var email = getQueryParam('email');
+
+            if (email) {
+                localStorage.setItem('plei_reset_email', email);
+            }
+
+            if (token) {
+                document.getElementById('tokenInfo').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> Liên kết đặt lại hợp lệ';
+            }
+        });
+    </script>
+</body>
+</html>

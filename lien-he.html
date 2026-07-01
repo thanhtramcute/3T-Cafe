@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Liên hệ 3T Café - Cửa hàng cà phê nguyên chất Tây Nguyên tại TP.HCM. Địa chỉ, số điện thoại, giờ mở cửa và biểu mẫu liên hệ.">
+    <meta name="robots" content="index, follow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/iconas.ico">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/total.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+
+    <title>Liên hệ - 3T Café</title>
+</head>
+<body class="bg-coffee-50">
+
+    <!-- PAGE LOADER -->
+    <div id="page-loader">
+        <div class="loader-logo">3T Café</div>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- ============================
+         HEADER
+         ============================ -->
+    <header class="site-header">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between py-2">
+                <a href="trang-chu.html" class="site-logo d-flex align-items-center gap-2">
+                    <img src="images/logo.png" alt="3T Café - Cà phê nguyên chất" style="height:48px; width:48px; border-radius:50%; object-fit:cover; border:2px solid rgba(255,255,255,0.15)">
+                    <span class="d-none d-sm-inline" style="font-family:var(--bs-heading-font-family);font-weight:800;font-size:1.3rem;letter-spacing:0.5px">3T Café</span>
+                </a>
+
+                <nav class="d-none d-md-flex align-items-center gap-1">
+                    <a href="trang-chu.html" class="nav-link">Trang chủ</a>
+                    <a href="san-pham.html" class="nav-link">Menu</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="thong-tin-don-hang.html" class="nav-link">Theo dõi đơn</a>
+                    <a href="lien-he.html" class="nav-link active">Liên hệ</a>
+                </nav>
+
+                <div class="d-flex align-items-center gap-2">
+                    <form id="headerSearchForm" class="d-none d-lg-flex">
+                        <div class="header-search">
+                            <input type="search" name="q" placeholder="Tìm kiếm..." autocomplete="off">
+                            <button type="submit">🔍</button>
+                        </div>
+                    </form>
+
+                    <a href="trang-yeu-thich.html" class="nav-link d-none d-sm-flex align-items-center justify-content-center" style="width:38px;height:38px;padding:0">
+                        <span style="font-size:18px">♡</span>
+                    </a>
+
+                    <button class="nav-link d-flex align-items-center justify-content-center position-relative"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer"
+                            onclick="openCartDrawer()" data-cart-toggle title="Giỏ hàng">
+                        <span style="font-size:18px">🛒</span>
+                        <span id="cartBadge" class="cart-badge" style="display:none">0</span>
+                    </button>
+
+                    <div id="navAuthItem">
+                        <a href="dang-nhap.html" class="nav-link d-flex align-items-center gap-1">
+                             
+                            <span class="d-none d-sm-inline">Đăng nhập</span>
+                        </a>
+                    </div>
+
+                    <button id="mobileMenuToggle" class="d-md-none nav-link d-flex align-items-center justify-content-center"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer">
+                        <span class="menu-icon" style="font-size:20px">☰</span>
+                    </button>
+                </div>
+            </div>
+
+            <nav id="mobileNav" class="mobile-nav collapse">
+                <a href="trang-chu.html" class="nav-link d-block">Trang chủ</a>
+                 <a href="san-pham.html" class="nav-link d-block">Menu</a>
+                <a href="blog.html" class="nav-link d-block">Blog</a>
+                <a href="thong-tin-don-hang.html" class="nav-link d-block">Theo dõi đơn hàng</a>
+                <a href="lien-he.html" class="nav-link d-block">Liên hệ</a>
+                <a href="trang-yeu-thich.html" class="nav-link d-block">Yêu thích</a>
+                <a href="dang-nhap.html" class="nav-link d-block">Đăng nhập / Đăng ký</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ============================
+             PAGE HERO
+             ============================ -->
+        <section class="page-hero">
+            <div class="page-hero-bg" style="background-image:url('images/1.png')"></div>
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content">
+                <h1>Liên hệ</h1>
+                <div class="breadcrumb-nav mt-2">
+                    <a href="trang-chu.html">Trang chủ</a>
+                    <span>/</span>
+                    <span>Liên hệ</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================
+             CONTACT CONTENT
+             ============================ -->
+        <section class="section">
+            <div class="container">
+                <!-- Contact Info Cards -->
+                <div class="row g-3 g-lg-4 mb-5" data-animate>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card-coffee p-4 text-center h-100">
+                            <div style="width:56px;height:56px;background:linear-gradient(135deg,var(--coffee-400),var(--coffee-600));border-radius:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;color:white">📍</div>
+                            <h4 style="font-size:0.95rem;font-weight:700;color:var(--coffee-800);margin-bottom:0.5rem">Địa chỉ</h4>
+                            <p style="color:var(--coffee-600);font-size:0.875rem;margin:0;line-height:1.6">
+                                Số 1 Võ Văn Ngân<br>P. Linh Chiểu, TP. Thủ Đức<br>TP. Hồ Chí Minh
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card-coffee p-4 text-center h-100">
+                            <div style="width:56px;height:56px;background:linear-gradient(135deg,var(--coffee-400),var(--coffee-600));border-radius:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;color:white">📞</div>
+                            <h4 style="font-size:0.95rem;font-weight:700;color:var(--coffee-800);margin-bottom:0.5rem">Điện thoại</h4>
+                            <p style="margin:0">
+                                <a href="tel:0898369761" style="color:var(--coffee-600);font-weight:600;font-size:0.95rem">0898369761</a>
+                                <br>
+                                <a href="tel:0373189077" style="color:var(--coffee-500);font-size:0.85rem">0373 189 077</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card-coffee p-4 text-center h-100">
+                            <div style="width:56px;height:56px;background:linear-gradient(135deg,var(--coffee-400),var(--coffee-600));border-radius:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;color:white">✉️</div>
+                            <h4 style="font-size:0.95rem;font-weight:700;color:var(--coffee-800);margin-bottom:0.5rem">Email</h4>
+                            <p style="margin:0">
+                                <a href="mailto:thanhtram.ute@gmail.com" style="color:var(--coffee-600);font-weight:600;font-size:0.875rem;word-break:break-all">thanhtram.ute@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card-coffee p-4 text-center h-100">
+                            <div style="width:56px;height:56px;background:linear-gradient(135deg,var(--coffee-400),var(--coffee-600));border-radius:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;color:white">🕐</div>
+                            <h4 style="font-size:0.95rem;font-weight:700;color:var(--coffee-800);margin-bottom:0.5rem">Giờ mở cửa</h4>
+                            <p style="color:var(--coffee-600);font-size:0.875rem;margin:0;line-height:1.6">
+                                Thứ 2 - Thứ 6: 7h00 - 21h00<br>
+                                Thứ 7 - CN: 8h00 - 22h00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Contact Area -->
+                <div class="row g-4">
+                    <!-- LEFT: Contact Form -->
+                    <div class="col-lg-7" data-animate>
+                        <div class="card-coffee p-3 p-md-4">
+                            <h3 style="font-family:var(--bs-heading-font-family);font-size:1.35rem;font-weight:800;color:var(--coffee-800);margin-bottom:0.5rem">Gửi tin nhắn cho chúng tôi</h3>
+                            <p style="color:var(--coffee-500);font-size:0.875rem;margin-bottom:1.75rem">Điền thông tin bên dưới, chúng tôi sẽ phản hồi trong vòng 24 giờ.</p>
+
+                            <form id="contactForm" novalidate>
+                                <div class="row g-3">
+                                    <!-- Name -->
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-0">
+                                            <label for="contactName">Họ và tên <span style="color:#ef4444">*</span></label>
+                                            <input type="text" id="contactName" name="name" class="form-control-coffee" placeholder="Nhập họ và tên của bạn" required>
+                                            <div class="field-error" id="nameError" style="color:#ef4444;font-size:0.8rem;margin-top:4px;display:none"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-0">
+                                            <label for="contactEmail">Email <span style="color:#ef4444">*</span></label>
+                                            <input type="email" id="contactEmail" name="email" class="form-control-coffee" placeholder="email@example.com" required>
+                                            <div class="field-error" id="emailError" style="color:#ef4444;font-size:0.8rem;margin-top:4px;display:none"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone -->
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-0">
+                                            <label for="contactPhone">Số điện thoại</label>
+                                            <input type="tel" id="contactPhone" name="phone" class="form-control-coffee" placeholder="0898369761">
+                                            <div class="field-error" id="phoneError" style="color:#ef4444;font-size:0.8rem;margin-top:4px;display:none"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Subject -->
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-0">
+                                            <label for="contactSubject">Chủ đề <span style="color:#ef4444">*</span></label>
+                                            <select id="contactSubject" name="subject" class="form-control-coffee" required>
+                                                <option value="">-- Chọn chủ đề --</option>
+                                                <option value="tu-van">Tư vấn sản phẩm</option>
+                                                <option value="dat-hang">Đặt hàng số lượng lớn</option>
+                                                <option value="doi-tra">Yêu cầu đổi/trả</option>
+                                                <option value="kinh-doanh">Hợp tác kinh doanh</option>
+                                                <option value="phan-hoi">Góp ý / Phản hồi</option>
+                                                <option value="khac">Khác</option>
+                                            </select>
+                                            <div class="field-error" id="subjectError" style="color:#ef4444;font-size:0.8rem;margin-top:4px;display:none"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Message -->
+                                    <div class="col-12">
+                                        <div class="form-group mb-0">
+                                            <label for="contactMessage">Nội dung tin nhắn <span style="color:#ef4444">*</span></label>
+                                            <textarea id="contactMessage" name="message" class="form-control-coffee" rows="5" placeholder="Mô tả chi tiết yêu cầu của bạn..." required style="resize:vertical;min-height:120px"></textarea>
+                                            <div class="field-error" id="messageError" style="color:#ef4444;font-size:0.8rem;margin-top:4px;display:none"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit -->
+                                    <div class="col-12">
+                                        <button type="submit" class="btn-coffee d-flex align-items-center justify-content-center gap-2" id="contactSubmitBtn" style="padding:14px 36px;border-radius:0.75rem;font-size:1rem">
+                                            <span id="submitText">✉️ Gửi tin nhắn</span>
+                                            <span id="submitSpinner" style="display:none">
+                                                <span style="display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:loaderSpin 0.8s linear infinite"></span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- Success Message -->
+                            <div id="contactSuccess" style="display:none;margin-top:1.5rem">
+                                <div style="background:linear-gradient(135deg,rgba(34,197,94,0.08),rgba(34,197,94,0.04));border:2px solid rgba(34,197,94,0.2);border-radius:1rem;padding:2rem;text-align:center">
+                                    <div style="font-size:3rem;margin-bottom:0.75rem">✅</div>
+                                    <h4 style="color:var(--coffee-800);margin-bottom:0.5rem">Gửi tin nhắn thành công!</h4>
+                                    <p style="color:var(--coffee-600);font-size:0.9rem;margin-bottom:1.25rem">Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi qua email trong vòng 24 giờ.</p>
+                                    <button onclick="resetContactForm()" class="btn-secondary-coffee d-inline-flex align-items-center gap-2" style="padding:10px 24px;border-radius:0.5rem">
+                                        ✉️ Gửi tin nhắn khác
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Map & Social -->
+                    <div class="col-lg-5" data-animate data-delay="1">
+                        <!-- Map -->
+                        <div class="card-coffee mb-4" style="overflow:hidden">
+                            <div style="position:relative;padding-bottom:65%;height:0;background:var(--coffee-100)">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.4!2d106.7!3d10.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ4JzAwLjAiTiAxMDYgcGjGsOG7mW5n!5e0!3m2!1svi!2s!4v1234567890"
+                                    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    title="3T Café Location">
+                                </iframe>
+                            </div>
+                        </div>
+
+                        <!-- Store Hours Detail -->
+                        <div class="card-coffee p-4 mb-4">
+                            <h4 style="font-size:1rem;font-weight:700;color:var(--coffee-800);margin-bottom:1rem;display:flex;align-items:center;gap:8px">
+                                🕐 Lịch hoạt động chi tiết
+                            </h4>
+                            <div style="display:flex;flex-direction:column;gap:8px">
+                                <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--coffee-100)">
+                                    <span style="color:var(--coffee-700);font-size:0.9rem">Thứ Hai</span>
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">7:00 - 21:00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--coffee-100)">
+                                    <span style="color:var(--coffee-700);font-size:0.9rem">Thứ Ba</span>
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">7:00 - 21:00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--coffee-100)">
+                                    <span style="color:var(--coffee-700);font-size:0.9rem">Thứ Tư</span>
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">7:00 - 21:00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--coffee-100)">
+                                    <span style="color:var(--coffee-700);font-size:0.9rem">Thứ Năm</span>
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">7:00 - 21:00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--coffee-100)">
+                                    <span style="color:var(--coffee-700);font-size:0.9rem">Thứ Sáu</span>
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">7:00 - 21:00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--coffee-100)">
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">Thứ Bảy</span>
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">8:00 - 22:00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center py-2">
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">Chủ Nhật</span>
+                                    <span style="color:var(--coffee-600);font-size:0.9rem;font-weight:600">8:00 - 22:00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social -->
+                        <div class="card-coffee p-4">
+                            <h4 style="font-size:1rem;font-weight:700;color:var(--coffee-800);margin-bottom:1rem;display:flex;align-items:center;gap:8px">
+                                🌐 Kết nối với chúng tôi
+                            </h4>
+                            <div class="d-flex gap-3 flex-wrap">
+                                <a href="#" class="d-flex flex-column align-items-center gap-2 text-decoration-none" style="flex:1;min-width:80px;padding:1rem;background:var(--coffee-50);border-radius:1rem;transition:all 0.3s;border:1px solid var(--coffee-100)" onmouseover="this.style.background='var(--coffee-100)';this.style.transform='translateY(-3px)'" onmouseout="this.style.background='var(--coffee-50)';this.style.transform=''">
+                                    <span style="font-size:1.75rem">📘</span>
+                                    <span style="font-size:0.75rem;font-weight:600;color:var(--coffee-700)">Facebook</span>
+                                </a>
+                                <a href="#" class="d-flex flex-column align-items-center gap-2 text-decoration-none" style="flex:1;min-width:80px;padding:1rem;background:var(--coffee-50);border-radius:1rem;transition:all 0.3s;border:1px solid var(--coffee-100)" onmouseover="this.style.background='var(--coffee-100)';this.style.transform='translateY(-3px)'" onmouseout="this.style.background='var(--coffee-50)';this.style.transform=''">
+                                    <span style="font-size:1.75rem">📷</span>
+                                    <span style="font-size:0.75rem;font-weight:600;color:var(--coffee-700)">Instagram</span>
+                                </a>
+                                <a href="#" class="d-flex flex-column align-items-center gap-2 text-decoration-none" style="flex:1;min-width:80px;padding:1rem;background:var(--coffee-50);border-radius:1rem;transition:all 0.3s;border:1px solid var(--coffee-100)" onmouseover="this.style.background='var(--coffee-100)';this.style.transform='translateY(-3px)'" onmouseout="this.style.background='var(--coffee-50)';this.style.transform=''">
+                                    <span style="font-size:1.75rem">💬</span>
+                                    <span style="font-size:0.75rem;font-weight:600;color:var(--coffee-700)">Zalo</span>
+                                </a>
+                                <a href="#" class="d-flex flex-column align-items-center gap-2 text-decoration-none" style="flex:1;min-width:80px;padding:1rem;background:var(--coffee-50);border-radius:1rem;transition:all 0.3s;border:1px solid var(--coffee-100)" onmouseover="this.style.background='var(--coffee-100)';this.style.transform='translateY(-3px)'" onmouseout="this.style.background='var(--coffee-50)';this.style.transform=''">
+                                    <span style="font-size:1.75rem">🎵</span>
+                                    <span style="font-size:0.75rem;font-weight:600;color:var(--coffee-700)">TikTok</span>
+                                </a>
+                            </div>
+                            <div class="mt-3 p-3 rounded-3" style="background:linear-gradient(135deg,var(--coffee-50),white);border:1px solid var(--coffee-100)">
+                                <p style="color:var(--coffee-700);font-size:0.875rem;margin:0;font-weight:600;text-align:center">
+                                    📞 Hotline: <a href="tel:0898369761" style="color:var(--coffee-600);font-size:1.1rem">0898369761</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================
+             NEWSLETTER
+             ============================ -->
+        <section class="newsletter-cta">
+            <div class="container text-center text-white">
+                <h2 class="font-display mb-3" style="color:var(--coffee-50);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800">Đăng ký nhận ưu đãi</h2>
+                <p class="mb-4" style="color:var(--coffee-50);max-width:500px;margin:0 auto 1.5rem">
+                    Nhận ngay coupon giảm 10% cho đơn hàng đầu tiên và cập nhật những ưu đãi độc quyền
+                </p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Nhập email của bạn" required>
+                    <button type="submit">Đăng ký ngay</button>
+                </form>
+                <div id="newsletterSuccess" style="display:none" class="mt-3">
+                    <div style="background:rgba(34,197,94,0.2);border-radius:1rem;padding:1.5rem;max-width:440px;margin:0 auto">
+                        <p style="font-weight:700;font-size:1.1rem;margin-bottom:0.25rem;color:white">Đăng ký thành công!</p>
+                        <p style="color:var(--coffee-200);margin:0;font-size:0.9rem">Cảm ơn bạn đã đăng ký. Hãy kiểm tra email!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================
+         FOOTER
+         ============================ -->
+    <footer class="site-footer">
+        <div class="container py-5">
+            <div class="row g-4 g-lg-5">
+                <div class="col-lg-4">
+                    <div class="footer-brand mb-3">
+                        <a href="trang-chu.html" class="d-flex align-items-center gap-2 mb-3">
+                            <img src="images/logo.png" alt="3T Café" style="height:40px;border-radius:50%">
+                            <span class="logo-text">3T Café</span>
+                        </a>
+                    </div>
+                    <p style="font-size:0.875rem;line-height:1.7;margin-bottom:1rem">
+                        Trải nghiệm cà phê nguyên chất, rang xay từ những hạt cà phê chọn lọc vùng Tây Nguyên Việt Nam.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><img src="images/facebook.png" alt="Facebook" width="32" height="24"></a>
+                        <a href="#" title="Instagram"><img src="images/insta.png" alt="Instagram" width="22" height="24"></a>
+                        <a href="#" title="Zalo"><img src="images/zalo.png" alt="Zalo" width="32" height="24"></a>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h5>Cửa hàng</h5>
+                    <ul class="footer-links">
+                        <li><a href="san-pham.html">Sản phẩm</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-den">Cà phê đen</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-sua">Cà phê sữa</a></li>
+                        <li><a href="san-pham.html?category=latte-cappuccino">Latte &amp; Cappuccino</a></li>
+                        <li><a href="voucher.html">Voucher</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h5>Hỗ trợ</h5>
+                    <ul class="footer-links">
+                        <li><a href="cau-hoi-thuong-gap.html">Câu hỏi thường gặp</a></li>
+                        <li><a href="thong-tin-don-hang.html">Theo dõi đơn hàng</a></li>
+                        <li><a href="chinh-sach-doi-tra.html">Chính sách đổi trả</a></li>
+                        <li><a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a></li>
+                        <li><a href="dieu-khoan.html">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <h5>Liên hệ</h5>
+                    <ul class="footer-links" style="gap:1rem;display:flex;flex-direction:column">
+                        <li class="d-flex gap-2">
+                            <span>📍</span>
+                            <span>Số 1 Võ Văn Ngân, P.Linh Chiểu, TP.Thủ Đức, TP.HCM</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>📞</span>
+                            <a href="tel:0898369761">0898369761</a>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>✉️</span>
+                            <a href="mailto:thanhtram.ute@gmail.com">thanhtram.ute@gmail.com</a>
+                        </li>
+                    </ul>
+                    <div class="mt-3">
+                        <p style="font-size:0.75rem;color:var(--coffee-500);margin-bottom:8px">Chấp nhận thanh toán:</p>
+                        <div class="payment-badges">
+                            <span>💵 COD</span>
+                            <span>🏦 Banking</span>
+                            <span>💳 VNPay</span>
+                            <span>💜 MoMo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                    <p class="mb-0">© 2025–2026 3T Café. Tất cả quyền được bảo lưu.</p>
+                    <p class="mb-0" style="color:var(--coffee-600)">☕ Cà phê nguyên chất - Vì người Việt</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================
+         CART DRAWER
+         ============================ -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h4>🛒 Giỏ hàng</h4>
+            <button class="cart-drawer-close" id="cartDrawerClose">✕</button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody">
+        </div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none">
+        </div>
+    </div>
+
+    <button id="backToTop" title="Lên đầu trang">↑</button>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/layout.js"></script>
+
+    <!-- PAGE INIT -->
+    <script>
+    (function() {
+        'use strict';
+
+        var form = document.getElementById('contactForm');
+        var submitBtn = document.getElementById('contactSubmitBtn');
+        var submitText = document.getElementById('submitText');
+        var submitSpinner = document.getElementById('submitSpinner');
+        var successDiv = document.getElementById('contactSuccess');
+
+        function showFieldError(fieldId, message) {
+            var field = document.getElementById(fieldId);
+            var key = fieldId.replace('contact', '').toLowerCase();
+            var errorEl = document.getElementById(key + 'Error');
+            if (field) field.style.borderColor = '#ef4444';
+            if (errorEl) {
+                errorEl.textContent = message;
+                errorEl.style.display = 'block';
+            }
+        }
+
+        function clearFieldError(fieldId) {
+            var field = document.getElementById(fieldId);
+            var key = fieldId.replace('contact', '').toLowerCase();
+            var errorEl = document.getElementById(key + 'Error');
+            if (field) field.style.borderColor = '';
+            if (errorEl) errorEl.style.display = 'none';
+        }
+
+        function clearAllErrors() {
+            ['contactName', 'contactEmail', 'contactPhone', 'contactSubject', 'contactMessage'].forEach(function(id) {
+                clearFieldError(id);
+            });
+        }
+
+        function validateForm() {
+            clearAllErrors();
+            var isValid = true;
+            var name = document.getElementById('contactName').value.trim();
+            var email = document.getElementById('contactEmail').value.trim();
+            var phone = document.getElementById('contactPhone').value.trim();
+            var subject = document.getElementById('contactSubject').value;
+            var message = document.getElementById('contactMessage').value.trim();
+
+            if (!name) {
+                showFieldError('contactName', 'Vui lòng nhập họ và tên');
+                isValid = false;
+            } else if (name.length < 2) {
+                showFieldError('contactName', 'Họ và tên phải có ít nhất 2 ký tự');
+                isValid = false;
+            }
+
+            if (!email) {
+                showFieldError('contactEmail', 'Vui lòng nhập email');
+                isValid = false;
+            } else if (!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                showFieldError('contactEmail', 'Email không hợp lệ! Vui lòng nhập đúng định dạng (VD: ten@gmail.com)');
+                isValid = false;
+            }
+
+            if (phone && !/^(03|05|07|08|09)[0-9]{8}$/.test(phone)) {
+                showFieldError('contactPhone', 'Số điện thoại không hợp lệ! Vui lòng nhập 10 số bắt đầu bằng 03, 05, 07, 08 hoặc 09 (VD: 0898369761)');
+                isValid = false;
+            }
+
+            if (!subject) {
+                showFieldError('contactSubject', 'Vui lòng chọn chủ đề');
+                isValid = false;
+            }
+
+            if (!message) {
+                showFieldError('contactMessage', 'Vui lòng nhập nội dung tin nhắn');
+                isValid = false;
+            } else if (message.length < 10) {
+                showFieldError('contactMessage', 'Nội dung phải có ít nhất 10 ký tự');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Clear errors on input
+        ['contactName', 'contactEmail', 'contactPhone', 'contactSubject', 'contactMessage'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', function() { clearFieldError(id); });
+            }
+        });
+
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (!validateForm()) {
+                    if (typeof showToast === 'function') showToast('Vui lòng điền đầy đủ thông tin cần thiết', 'error');
+                    return;
+                }
+
+                // Show loading
+                submitText.style.display = 'none';
+                submitSpinner.style.display = 'inline-block';
+                submitBtn.disabled = true;
+
+                // Simulate submission (replace with real API call)
+                setTimeout(function() {
+                    submitText.style.display = 'inline';
+                    submitSpinner.style.display = 'none';
+                    submitBtn.disabled = false;
+
+                    form.style.display = 'none';
+                    successDiv.style.display = 'block';
+                    if (typeof showToast === 'function') showToast('Gửi tin nhắn thành công! Chúng tôi sẽ phản hồi sớm nhất.', 'success');
+                }, 1500);
+            });
+        }
+
+        window.resetContactForm = function() {
+            form.reset();
+            form.style.display = 'block';
+            successDiv.style.display = 'none';
+            clearAllErrors();
+        };
+
+        // Newsletter
+        var nlForm = document.getElementById('newsletterForm');
+        if (nlForm) {
+            nlForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                nlForm.style.display = 'none';
+                document.getElementById('newsletterSuccess').style.display = 'block';
+                if (typeof showToast === 'function') showToast('Đăng ký thành công! Cảm ơn bạn 🎉', 'success');
+            });
+        }
+
+    })();
+    </script>
+</body>
+</html>

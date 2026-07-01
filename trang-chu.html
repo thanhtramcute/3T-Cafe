@@ -1,0 +1,690 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="3T Café - Trải nghiệm cà phê nguyên chất, rang xay từ những hạt cà phê chọn lọc vùng Tây Nguyên. Giao hàng nhanh 30 phút, miễn phí cho đơn từ 200K.">
+    <meta name="keywords" content="cà phê, cà phê nguyên chất, cà phê rang xay, 3T Cafe, coffee, Tây Nguyên">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="3T Café">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="3T Café - Cà phê nguyên chất từ Pleiku">
+    <meta property="og:description" content="Trải nghiệm cà phê nguyên chất, rang xay từ những hạt cà phê chọn lọc vùng Tây Nguyên. Giao hàng nhanh 30 phút.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://3TCoffee.vn">
+    <meta property="og:image" content="images/banner1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="canonical" href="https://3TCoffee.vn">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/iconas.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/total.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+
+    <title>3T Café - Cà phê nguyên chất | Giao hàng 30 phút</title>
+</head>
+<body class="bg-coffee-50">
+
+    <!-- PAGE LOADER -->
+    <div id="page-loader">
+        <div class="loader-logo">3T Café</div>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- ============================
+         HEADER
+         ============================ -->
+    <header class="site-header">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between py-2">
+                <!-- Logo -->
+                <a href="trang-chu.html" class="site-logo d-flex align-items-center gap-2">
+                    <img src="images/logo.png" alt="3T Café - Cà phê nguyên chất" style="height:48px; width:48px; border-radius:50%; object-fit:cover; border:2px solid rgba(255,255,255,0.15)">
+                    <span class="d-none d-sm-inline" style="font-family:var(--bs-heading-font-family);font-weight:800;font-size:1.3rem;letter-spacing:0.5px">3T Café</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="d-none d-md-flex align-items-center gap-1">
+                    <a href="trang-chu.html" class="nav-link active">Trang chủ</a>
+                    <a href="san-pham.html" class="nav-link">Menu</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="thong-tin-don-hang.html" class="nav-link">Theo dõi đơn</a>
+                    <a href="lien-he.html" class="nav-link">Liên hệ</a>
+                </nav>
+
+                <!-- Right Actions -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Search -->
+                    <form id="headerSearchForm" class="d-none d-lg-flex">
+                        <div class="header-search">
+                            <input type="search" name="q" placeholder="Tìm kiếm..." autocomplete="off">
+                            <button type="submit">🔍</button>
+                        </div>
+                    </form>
+
+                    <!-- Wishlist -->
+                    <a href="trang-yeu-thich.html" class="d-none d-sm-flex align-items-center justify-content-center position-relative"
+                       style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);transition:all 0.25s;text-decoration:none;color:rgba(255,255,255,0.8)"
+                       onmouseover="this.style.background='rgba(255,255,255,0.15)';this.style.color='white'" onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.8)'">
+                        <span id="wishlistIconHeader" style="font-size:18px">♡</span>
+                    </a>
+
+                    <!-- Cart -->
+                    <button class="nav-link d-flex align-items-center justify-content-center position-relative"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer"
+                            onclick="openCartDrawer()" data-cart-toggle title="Giỏ hàng">
+                        <span style="font-size:18px">🛒</span>
+                        <span id="cartBadge" class="cart-badge" style="display:none">0</span>
+                    </button>
+
+                    <!-- Auth -->
+                    <div id="navAuthItem">
+                        <a href="dang-nhap.html" class="nav-link d-flex align-items-center gap-1">
+                            <span class="d-none d-sm-inline">Đăng nhập</span>
+                        </a>
+                    </div>
+
+                    <!-- Mobile Toggle -->
+                    <button id="mobileMenuToggle" class="d-md-none nav-link d-flex align-items-center justify-content-center"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer">
+                        <span class="menu-icon" style="font-size:20px">☰</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav -->
+            <nav id="mobileNav" class="mobile-nav collapse">
+                <a href="trang-chu.html" class="nav-link d-block">Trang chủ</a>
+                 <a href="san-pham.html" class="nav-link d-block">Menu</a>
+                <a href="blog.html" class="nav-link d-block">Blog</a>
+                <a href="thong-tin-don-hang.html" class="nav-link d-block">Theo dõi đơn hàng</a>
+                <a href="lien-he.html" class="nav-link d-block">Liên hệ</a>
+                <a href="trang-yeu-thich.html" class="nav-link d-block">Yêu thích</a>
+                <a href="dang-nhap.html" class="nav-link d-block">Đăng nhập / Đăng ký</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+    <!-- ============================
+         HERO SLIDER
+         ============================ -->
+    <section class="hero-slider" id="heroSlider">
+        <div class="hero-slide active" data-slide="0">
+            <div class="hero-slide-bg" style="background-image:url('images/1.png')"></div>
+            <div class="hero-slide-overlay"></div>
+            <div class="hero-slide-content">
+                <div>
+                    <span class="hero-badge">Premium Vietnamese Coffee</span>
+                    <h1 class="hero-title">3T Café</h1>
+                    <p class="hero-subtitle">Trải nghiệm cà phê nguyên chất, rang xay từ những hạt cà phê chọn lọc vùng Tây Nguyên</p>
+                    <a href="san-pham.html" class="hero-btn">Khám phá ngay</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide" data-slide="1">
+            <div class="hero-slide-bg" style="background-image:url('images/2.png')"></div>
+            <div class="hero-slide-overlay"></div>
+            <div class="hero-slide-content">
+                <div>
+                    <span class="hero-badge">⚡ Flash Sale</span>
+                    <h1 class="hero-title">Giảm đến 30%</h1>
+                    <p class="hero-subtitle">Ưu đãi hấp dẫn dành cho khách hàng thân thiết của 3T Café</p>
+                    <a href="san-pham.html" class="hero-btn">Xem ngay</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide" data-slide="2">
+            <div class="hero-slide-bg" style="background-image:url('images/3.png')"></div>
+            <div class="hero-slide-overlay"></div>
+            <div class="hero-slide-content">
+                <div>
+                    <span class="hero-badge">☕ Hương vị đặc trưng</span>
+                    <h1 class="hero-title">Cà phê nguyên chất</h1>
+                    <p class="hero-subtitle">Hơn 10,000+ khách hàng tin dùng trong suốt 5 năm qua</p>
+                    <a href="san-pham.html" class="hero-btn">Đặt hàng ngay</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="hero-nav">
+            <button class="hero-dot active" data-dot="0"></button>
+            <button class="hero-dot" data-dot="1"></button>
+            <button class="hero-dot" data-dot="2"></button>
+        </div>
+        <button class="hero-arrow hero-arrow-prev">‹</button>
+        <button class="hero-arrow hero-arrow-next">›</button>
+    </section>
+
+    <!-- ============================
+         FEATURES BAR
+         ============================ -->
+    <section class="features-bar">
+        <div class="container">
+            <div class="features-bar-inner">
+                <div class="features-bar-item">
+                    <span class="icon">☕</span>
+                    <span>100% Cà phê nguyên chất</span>
+                </div>
+                <div class="features-bar-item">
+                    <span class="icon">🚚</span>
+                    <span>Giao hàng 30 phút</span>
+                </div>
+                <div class="features-bar-item">
+                    <span class="icon">🛡️</span>
+                    <span>Đổi trả trong 24h</span>
+                </div>
+                <div class="features-bar-item">
+                    <span class="icon">🏆</span>
+                    <span class="d-none d-sm-inline">Hàng ngàn khách hàng tin dùng</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         STATS BAR
+         ============================ -->
+    <section style="background:var(--coffee-800);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)">
+        <div class="container py-4">
+            <div class="row g-4 text-center" style="display:flex;align-items:center">
+                <div class="col-6 col-md-3">
+                    <div style="font-family:var(--bs-heading-font-family);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;line-height:1" data-count="10000">10,000+</div>
+                    <div style="font-size:0.85rem;color:var(--coffee-400);margin-top:4px;font-weight:500">Khách hàng</div>
+                </div>
+                <div class="col-6 col-md-3" style="border-left:1px solid rgba(255,255,255,0.08);padding-left:var(--bs-gutter-width)">
+                    <div style="font-family:var(--bs-heading-font-family);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;line-height:1">4.9/5</div>
+                    <div style="font-size:0.85rem;color:var(--coffee-400);margin-top:4px;font-weight:500">⭐ Đánh giá trung bình</div>
+                </div>
+                <div class="col-6 col-md-3" style="border-left:1px solid rgba(255,255,255,0.08);padding-left:var(--bs-gutter-width)">
+                    <div style="font-family:var(--bs-heading-font-family);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;line-height:1">50+</div>
+                    <div style="font-size:0.85rem;color:var(--coffee-400);margin-top:4px;font-weight:500">Sản phẩm</div>
+                </div>
+                <div class="col-6 col-md-3" style="border-left:1px solid rgba(255,255,255,0.08);padding-left:var(--bs-gutter-width)">
+                    <div style="font-family:var(--bs-heading-font-family);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;line-height:1">5★</div>
+                    <div style="font-size:0.85rem;color:var(--coffee-400);margin-top:4px;font-weight:500">Năm kinh nghiệm</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         CATEGORIES
+         ============================ -->
+    <section class="section" id="categories">
+        <div class="container">
+            <div class="section-title" data-animate>
+                <span class="eyebrow">Khám phá</span>
+                <h2>Danh mục sản phẩm</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="row g-3 g-md-4" id="categoriesGrid">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         FLASH SALE
+         ============================ -->
+    <section class="flash-sale-section" id="flash-sale" style="display:none">
+        <div class="container">
+            <div class="flash-sale-header">
+                <span class="flash-sale-icon">⚡</span>
+                <h2 class="flash-sale-title">Flash Sale</h2>
+                <div id="flashCountdown"></div>
+            </div>
+            <div class="row g-3 g-lg-4" id="flashSaleGrid">
+                <!-- Loaded by JS -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="flash-sale.html" class="btn btn-light btn-lg px-5 rounded-pill fw-bold">
+                    Xem tất cả ưu đãi →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         FEATURED PRODUCTS
+         ============================ -->
+    <section class="section" id="featured">
+        <div class="container">
+            <div class="section-header-row" data-animate>
+                <div>
+                    <span class="eyebrow d-block" style="color:var(--coffee-50);font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:2px">Bán chạy nhất</span>
+                    <h2 style="margin-bottom:0;font-family:var(--bs-heading-font-family);font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--coffee-50)">Sản phẩm nổi bật</h2>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="san-pham.html" class="btn-coffee-outline" style="padding:8px 20px;font-size:0.85rem;border-radius:50px">Xem tất cả →</a>
+                </div>
+            </div>
+            <div class="row g-3 g-lg-4" id="featuredGrid">
+                <!-- Loaded by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         WHY US
+         ============================ -->
+    <section class="section" id="why-us" style="background:var(--coffee-50)">
+        <div class="container">
+            <div class="section-title" data-animate>
+                <span class="eyebrow3">Tại sao chọn chúng tôi</span>
+                <h1>3T Café - Điểm đến của người yêu cà phê</h1>
+                <div class="divider"></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-animate>
+                    <div class="why-us-card">
+                        <div class="why-us-icon">☕</div>
+                        <h4>Cà phê nguyên chất</h4>
+                        <p>100% hạt cà phê rang mộc từ vùng Tây Nguyên, không chất bảo quản</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-animate data-delay="1">
+                    <div class="why-us-card">
+                        <div class="why-us-icon">🚚</div>
+                        <h4>Giao hàng nhanh</h4>
+                        <p>30 phút trong nội thành, miễn phí ship cho đơn từ 200K</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-animate data-delay="2">
+                    <div class="why-us-card">
+                        <div class="why-us-icon">🛡️</div>
+                        <h4>Cam kết chất lượng</h4>
+                        <p>Đổi trả miễn phí trong 24h nếu sản phẩm không đúng chất lượng</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-animate>
+                    <div class="why-us-card">
+                        <div class="why-us-icon">🏆</div>
+                        <h4>Hơn 10,000+ khách hàng</h4>
+                        <p>Được hàng nghìn khách hàng tin tưởng và ủng hộ trong suốt 5 năm qua</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         TESTIMONIALS
+         ============================ -->
+    <section class="section" id="reviews" style="background:var(--coffee-600)">
+        <div class="container">
+            <div class="section-title" data-animate>
+                <span class="eyebrow">Đánh giá</span>
+                <h2>Khách hàng nói gì về chúng tôi</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-animate>
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626)">N</div>
+                            <div>
+                                <h5 class="mb-1" style="font-size:0.95rem;font-weight:700;color:var(--coffee-800)">Nguyễn Văn Nam</h5>
+                                <div style="display:flex;align-items:center;gap:4px">
+                                    <span style="color:#f59e0b;font-size:12px">★★★★★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">"Cà phê rất ngon, giao hàng nhanh! Đã đặt nhiều lần và lần nào cũng hài lòng. Sẽ tiếp tục ủng hộ 3T Café!"</p>
+                        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--coffee-100);font-size:0.75rem;color:var(--coffee-400)">📍 Quận Thủ Đức · 2 tuần trước</div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-animate>
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">T</div>
+                            <div>
+                                <h5 class="mb-1" style="font-size:0.95rem;font-weight:700;color:var(--coffee-800)">Trần Thị Lan</h5>
+                                <div style="display:flex;align-items:center;gap:4px">
+                                    <span style="color:#f59e0b;font-size:12px">★★★★★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">"Latte caramel là món yêu thích của tôi. Vị ngọt vừa phải, không quá ngấy. Giao hàng cẩn thận, đóng gói xinh xắn."</p>
+                        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--coffee-100);font-size:0.75rem;color:var(--coffee-400)">📍 Quận Gò Vấp · 1 tháng trước</div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-animate>
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#10b981,#059669)">L</div>
+                            <div>
+                                <h5 class="mb-1" style="font-size:0.95rem;font-weight:700;color:var(--coffee-800)">Lê Văn Minh</h5>
+                                <div style="display:flex;align-items:center;gap:4px">
+                                    <span style="color:#f59e0b;font-size:12px">★★★★★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">"Giá cả hợp lý, chất lượng tuyệt vời. Cà phê đen rang mộc đậm đà, uống rất sảng khoái. Highly recommended!"</p>
+                        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--coffee-100);font-size:0.75rem;color:var(--coffee-400)">📍 Quận Bình Thạnh · 3 tuần trước</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         BLOG
+         ============================ -->
+    <section class="section" style="background:var(--coffee-50)" id="blog">
+        <div class="container">
+            <div class="section-header-row" data-animate>
+                <div>
+                    <span class="eyebrow d-block" style="color:var(--coffee-500);font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:2px">Tin tức & Kiến thức</span>
+                    <h2 style="margin-bottom:0;font-family:var(--bs-heading-font-family);font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--coffee-800)">Blog 3T Café</h2>
+                </div>
+                <a href="blog.html" class="btn-coffee-outline" style="padding:8px 20px;font-size:0.85rem;border-radius:50px">Đọc tất cả →</a>
+            </div>
+            <div class="row g-4" id="blogGrid">
+                <!-- Loaded by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         FAQ
+         ============================ -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-title" data-animate>
+                <span class="eyebrow1">Hỗ trợ</span>
+                <h1 class="faq-title">Câu hỏi thường gặp</h1>
+                <div class="divider"></div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8" id="faqList">
+                    <!-- Loaded by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         NEWSLETTER
+         ============================ -->
+    <section class="newsletter-cta">
+        <div class="container text-center text-white">
+            <h2 class="font-display mb-3" style="color:var(--coffee-50);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800">Đăng ký nhận ưu đãi</h2>
+            <p class="mb-4" style="color:var(--coffee-50);max-width:500px;margin:0 auto 1.5rem">
+                Nhận ngay coupon giảm 10% cho đơn hàng đầu tiên và cập nhật những ưu đãi độc quyền
+            </p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Nhập email của bạn" required>
+                <button type="submit">Đăng ký ngay</button>
+            </form>
+            <div id="newsletterSuccess" style="display:none" class="mt-3">
+                <div style="background:rgba(34,197,94,0.2);border-radius:1rem;padding:1.5rem;max-width:440px;margin:0 auto">
+                    <p style="font-weight:700;font-size:1.1rem;margin-bottom:0.25rem;color:white">Đăng ký thành công!</p>
+                    <p style="color:var(--coffee-200);margin:0;font-size:0.9rem">Cảm ơn bạn đã đăng ký. Hãy kiểm tra email!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- ============================
+         FOOTER
+         ============================ -->
+    <footer class="site-footer">
+        <div class="container py-5">
+            <div class="row g-4 g-lg-5">
+                <!-- Brand -->
+                <div class="col-lg-4">
+                    <div class="footer-brand mb-3">
+                        <a href="trang-chu.html" class="d-flex align-items-center gap-2 mb-3">
+                            <img src="images/logo.png" alt="3T Café" style="height:40px;border-radius:50%">
+                            <span class="logo-text">3T Café</span>
+                        </a>
+                    </div>
+                    <p style="font-size:0.875rem;line-height:1.7;margin-bottom:1rem">
+                        Trải nghiệm cà phê nguyên chất, rang xay từ những hạt cà phê chọn lọc vùng Tây Nguyên Việt Nam.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><img src="images/facebook.png" alt="Facebook" width="32" height="24"></a>
+                        <a href="#" title="Instagram"><img src="images/insta.png" alt="Instagram" width="22" height="24"></a>
+                        <a href="#" title="Zalo"><img src="images/zalo.png" alt="Zalo" width="32" height="24"></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-6 col-lg-2">
+                    <h5>Cửa hàng</h5>
+                    <ul class="footer-links">
+                        <li><a href="san-pham.html">Sản phẩm</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-den">Cà phê đen</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-sua">Cà phê sữa</a></li>
+                        <li><a href="san-pham.html?category=latte-cappuccino">Latte & Cappuccino</a></li>
+                        <li><a href="voucher.html">Voucher</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div class="col-6 col-lg-2">
+                    <h5>Hỗ trợ</h5>
+                    <ul class="footer-links">
+                        <li><a href="cau-hoi-thuong-gap.html">Câu hỏi thường gặp</a></li>
+                        <li><a href="thong-tin-don-hang.html">Theo dõi đơn hàng</a></li>
+                        <li><a href="chinh-sach-doi-tra.html">Chính sách đổi trả</a></li>
+                        <li><a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a></li>
+                        <li><a href="dieu-khoan.html">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-4">
+                    <h5>Liên hệ</h5>
+                    <ul class="footer-links" style="gap:1rem;display:flex;flex-direction:column">
+                        <li class="d-flex gap-2">
+                            <span>📍</span>
+                            <span>Số 1 Võ Văn Ngân, P.Linh Chiểu, TP.Thủ Đức, TP.HCM</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>📞</span>
+                            <a href="tel:0901234567">0898369761</a>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>📧</span>
+                            <a href="mailto:thanhtram.ute@gmail.com">thanhtram.ute@gmail.com</a>
+                        </li>
+                    </ul>
+                    <div class="mt-3">
+                        <p style="font-size:0.75rem;color:var(--coffee-500);margin-bottom:8px">Chấp nhận thanh toán:</p>
+                        <div class="payment-badges">
+                            <span>💵 COD</span>
+                            <span>🏦 Banking</span>
+                            <span>💳 VNPay</span>
+                            <span>📱 MoMo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                    <p class="mb-0">© 2025–2026 3T Café. Tất cả quyền được bảo lưu.</p>
+                    <p class="mb-0" style="color:var(--coffee-600)">☕ Cà phê nguyên chất - Vì người Việt</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================
+         CART DRAWER
+         ============================ -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h4>🛒 Giỏ hàng</h4>
+            <button class="cart-drawer-close" id="cartDrawerClose">✕</button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody">
+            <!-- Populated by JS -->
+        </div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <!-- ============================
+         MARKETING POPUP
+         ============================ -->
+    <div id="marketingPopup" class="marketing-popup" style="display:none">
+        <div class="marketing-popup-overlay" onclick="closeMarketingPopup()"></div>
+        <div class="marketing-popup-modal">
+            <button class="marketing-popup-close" onclick="closeMarketingPopup()">✕</button>
+            <img src="images/popup-welcome.jpg" alt="Welcome" class="marketing-popup-img" onerror="this.style.display='none'">
+            <div class="marketing-popup-body">
+                <h3>Chào mừng đến 3T Café! 🎉</h3>
+                <p style="color:var(--coffee-500);margin-bottom:1rem">Đăng ký ngay và nhận <strong style="color:var(--coffee-600)">coupon giảm 10%</strong> cho đơn hàng đầu tiên!</p>
+                <a href="dang-ky.html" class="btn-coffee d-block mb-2">Đăng ký ngay</a>
+                <button class="btn-coffee-outline d-block" onclick="closeMarketingPopup()">Để sau</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button id="backToTop" title="Lên đầu trang">↑</button>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/page-enhance.js"></script>
+
+    <!-- PAGE INIT -->
+    <script>
+    (function() {
+        // Load categories
+        var cats = DATA.categories || [];
+        var catGrid = document.getElementById('categoriesGrid');
+        if (catGrid) {
+            catGrid.innerHTML = cats.map(function(cat, i) {
+                return '<div class="col-6 col-md-4 col-lg" data-animate>' +
+                    '<a href="san-pham.html?category=' + cat.slug + '" class="category-card d-block" style="aspect-ratio:1;height:100%;min-height:200px;border-radius:1rem;overflow:hidden;position:relative;display:block">' +
+                        '<img src="' + (cat.image || 'images/placeholder.jpg') + '" alt="' + cat.name + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s">' +
+                        '<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0) 60%);opacity:0.7;transition:opacity 0.3s"></div>' +
+                        '<div style="position:absolute;bottom:0;left:0;right:0;padding:1rem;color:white">' +
+                            '<h4 style="font-family:var(--bs-heading-font-family);font-size:1rem;font-weight:700;margin-bottom:2px;transform:translateY(0);transition:transform 0.3s">' + cat.name + '</h4>' +
+                            '<p style="font-size:0.78rem;color:rgba(255,255,255,0.8);margin:0;opacity:0;transition:opacity 0.3s">Xem ngay →</p>' +
+                        '</div>' +
+                    '</a>' +
+                '</div>';
+            }).join('');
+        }
+
+        // Load featured products
+        var featured = DATA.products.filter(function(p) { return p.isFeatured; }).slice(0, 8);
+        if (featured.length === 0) featured = DATA.products.slice(0, 8);
+        var featGrid = document.getElementById('featuredGrid');
+        if (featGrid) {
+            featGrid.innerHTML = featured.map(function(p) {
+                return '<div class="col-6 col-md-4 col-lg-3">' + renderProductCard(p) + '</div>';
+            }).join('');
+        }
+
+        // Load flash sale
+        var flashSale = DATA.products.filter(function(p) { return p.isFlashSale; });
+        var flashSection = document.getElementById('flash-sale');
+        if (flashSection && flashSale.length > 0) {
+            flashSection.style.display = 'block';
+            var flashGrid = document.getElementById('flashSaleGrid');
+            if (flashGrid) {
+                flashGrid.innerHTML = flashSale.map(function(p) {
+                    return '<div class="col-6 col-lg-3">' + renderProductCard(p) + '</div>';
+                }).join('');
+            }
+            // Countdown
+            var settings = DATA.settings || {};
+            if (settings.flashSaleEnd) {
+                initFlashCountdown(new Date(settings.flashSaleEnd).getTime());
+            } else {
+                var end = new Date();
+                end.setDate(end.getDate() + 3);
+                initFlashCountdown(end.getTime());
+            }
+        }
+
+        // Load blogs
+        var blogs = DATA.blogs || [];
+        var blogGrid = document.getElementById('blogGrid');
+        if (blogGrid) {
+            blogGrid.innerHTML = blogs.slice(0, 3).map(function(b) {
+                return '<div class="col-md-4" data-animate>' +
+                    '<a href="chi-tiet-blog.html?id=' + b.id + '" class="blog-card d-block text-decoration-none">' +
+                        '<div class="blog-card-img">' +
+                            '<img src="' + (b.image || 'images/placeholder.jpg') + '" alt="' + b.title + '" loading="lazy">' +
+                        '</div>' +
+                        '<div class="blog-card-body">' +
+                            '<div class="blog-card-meta">' + (b.publishedAt || '') + ' · ' + (b.views || 0) + ' lượt xem</div>' +
+                            '<div class="blog-card-title">' + b.title + '</div>' +
+                            '<div class="blog-card-excerpt">' + (b.excerpt || '') + '</div>' +
+                        '</div>' +
+                    '</a>' +
+                '</div>';
+            }).join('');
+        }
+
+        // Load FAQs
+        var faqs = DATA.faqs || [];
+        var faqList = document.getElementById('faqList');
+        if (faqList) {
+            faqList.innerHTML = faqs.map(function(f) {
+                return '<div class="faq-item">' +
+                    '<button class="faq-question w-100">' +
+                        '<span class="flex-grow-1 text-start">' + f.question + '</span>' +
+                        '<span class="faq-toggle">+</span>' +
+                    '</button>' +
+                    '<div class="faq-answer" style="display:none">' + f.answer + '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        // Newsletter
+        var nlForm = document.getElementById('newsletterForm');
+        if (nlForm) {
+            nlForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var email = nlForm.querySelector('input[type="email"]').value;
+                if (email && email.includes('@')) {
+                    nlForm.style.display = 'none';
+                    document.getElementById('newsletterSuccess').style.display = 'block';
+                    showToast('Đăng ký thành công! Cảm ơn bạn 🎉', 'success');
+                }
+            });
+        }
+
+        // Re-init after dynamic content
+        if (typeof initFAQ === 'function') initFAQ();
+        if (typeof window.refreshScrollAnimations === 'function') {
+            window.refreshScrollAnimations();
+        } else {
+            document.querySelectorAll('[data-animate]').forEach(function(el) {
+                el.classList.add('visible');
+            });
+        }
+    })();
+    </script>
+</body>
+</html>

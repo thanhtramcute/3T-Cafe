@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Đặt hàng thành công - 3T Café">
+    <title>Đặt hàng thành công - 3T Café</title>
+    <link rel="shortcut icon" href="images/iconas.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/total.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+    <style>
+        .success-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--coffee-50) 0%, var(--coffee-100) 50%, var(--coffee-50) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+        .success-card {
+            background: white;
+            border-radius: 2rem;
+            box-shadow: var(--bs-shadow-xl);
+            padding: 3rem 2.5rem;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            border: 1px solid rgba(245,230,211,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: rgba(34,197,94,0.05);
+            border-radius: 50%;
+        }
+        .success-icon-wrap {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: successBounce 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 30px rgba(34,197,94,0.3);
+        }
+        @keyframes successBounce {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-icon-wrap .checkmark {
+            font-size: 3rem;
+            color: white;
+            animation: checkDraw 0.5s ease 0.4s both;
+        }
+        @keyframes checkDraw {
+            from { transform: scale(0) rotate(-45deg); opacity: 0; }
+            to { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .success-title {
+            font-family: var(--bs-heading-font-family);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--coffee-800);
+            margin-bottom: 0.5rem;
+        }
+        .success-subtitle {
+            color: var(--coffee-500);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .order-code-display {
+            background: var(--coffee-50);
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px dashed var(--coffee-300);
+        }
+        .order-code-label {
+            font-size: 0.8rem;
+            color: var(--coffee-500);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        .order-code-value {
+            font-family: var(--bs-heading-font-family);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--coffee-700);
+            letter-spacing: 2px;
+        }
+        .order-summary-box {
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid var(--coffee-100);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        .order-summary-header {
+            background: var(--coffee-100);
+            padding: 1rem 1.5rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+            font-size: 0.95rem;
+        }
+        .order-summary-body {
+            padding: 1.25rem 1.5rem;
+        }
+        .summary-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--coffee-700);
+        }
+        .summary-item-row.total {
+            border-top: 2px solid var(--coffee-200);
+            margin-top: 0.5rem;
+            padding-top: 0.75rem;
+            font-weight: 800;
+            font-size: 1.05rem;
+            color: var(--coffee-800);
+        }
+        .next-steps-box {
+            background: linear-gradient(135deg, var(--coffee-50), white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            border: 1px solid var(--coffee-100);
+        }
+        .next-steps-box h5 {
+            font-family: var(--bs-heading-font-family);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+            margin-bottom: 1rem;
+        }
+        .next-step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--coffee-100);
+        }
+        .next-step-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .next-step-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--coffee-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+        .next-step-text {
+            flex: 1;
+        }
+        .next-step-title {
+            font-weight: 600;
+            color: var(--coffee-800);
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        .next-step-desc {
+            font-size: 0.8rem;
+            color: var(--coffee-500);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-action-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            background: linear-gradient(135deg, var(--coffee-600), var(--coffee-500));
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+        .btn-action-primary:hover {
+            background: linear-gradient(135deg, var(--coffee-500), var(--coffee-400));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(125,74,46,0.3);
+        }
+        .btn-action-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            background: transparent;
+            color: var(--coffee-600);
+            border: 2px solid var(--coffee-400);
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+        .btn-action-secondary:hover {
+            background: var(--coffee-50);
+            border-color: var(--coffee-600);
+            color: var(--coffee-600);
+        }
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            top: -10px;
+            animation: confettiFall 3s ease-in forwards;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="success-page">
+        <div class="success-card" data-animate>
+            <div class="success-icon-wrap">
+                <span class="checkmark">✓</span>
+            </div>
+
+            <h1 class="success-title">Đặt hàng thành công!</h1>
+            <p class="success-subtitle">Cảm ơn bạn đã đặt hàng tại 3T Café. Đơn hàng của bạn đang được xử lý.</p>
+
+            <div class="order-code-display">
+                <div class="order-code-label">Mã đơn hàng của bạn</div>
+                <div class="order-code-value" id="displayOrderCode">---</div>
+            </div>
+
+            <div class="order-summary-box">
+                <div class="order-summary-header">📋 Chi tiết đơn hàng</div>
+                <div class="order-summary-body" id="orderSummaryBody">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="next-steps-box">
+                <h5>📌 Những điều cần lưu ý</h5>
+                <div class="next-step-item">
+                    <div class="next-step-icon">📧</div>
+                    <div class="next-step-text">
+                        <div class="next-step-title">Xác nhận qua email</div>
+                        <div class="next-step-desc">Bạn sẽ nhận được email xác nhận đơn hàng trong vài phút</div>
+                    </div>
+                </div>
+                <div class="next-step-item">
+                    <div class="next-step-icon">📱</div>
+                    <div class="next-step-text">
+                        <div class="next-step-title">Theo dõi đơn hàng</div>
+                        <div class="next-step-desc">Truy cập trang Theo dõi đơn hàng và nhập mã để xem trạng thái</div>
+                    </div>
+                </div>
+                <div class="next-step-item">
+                    <div class="next-step-icon">🚚</div>
+                    <div class="next-step-text">
+                        <div class="next-step-title">Giao hàng nhanh 30 phút</div>
+                        <div class="next-step-desc">Đơn hàng sẽ được giao trong thời gian sớm nhất</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="thong-tin-don-hang.html" class="btn-action-primary">
+                    📦 Theo dõi đơn hàng
+                </a>
+                <a href="san-pham.html" class="btn-action-secondary">
+                    ☕ Tiếp tục mua sắm
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/layout.js"></script>
+
+    <script>
+    (function() {
+        // Get order code from URL params or generate one
+        var urlParams = new URLSearchParams(window.location.search);
+        var orderCode = urlParams.get('code');
+        var customerName = urlParams.get('name') || 'Khách hàng';
+        var total = urlParams.get('total') || '0';
+        var payment = urlParams.get('payment') || 'COD';
+
+        if (!orderCode) {
+            // Check localStorage for the latest order
+            var orders = JSON.parse(localStorage.getItem('plei_orders') || '[]');
+            if (orders.length > 0) {
+                var latest = orders[orders.length - 1];
+                orderCode = latest.code;
+                customerName = latest.customerName || customerName;
+                total = latest.total || total;
+                payment = latest.payment || payment;
+            }
+        }
+
+        if (!orderCode) {
+            // Generate random order code
+            var year = new Date().getFullYear();
+            var randomNum = Math.floor(100000 + Math.random() * 900000);
+            orderCode = 'ORD-' + year + '-' + randomNum;
+        }
+
+        // Display order code
+        document.getElementById('displayOrderCode').textContent = orderCode;
+        document.title = 'Đơn hàng ' + orderCode + ' - 3T Café';
+
+        // Order summary
+        var summaryBody = document.getElementById('orderSummaryBody');
+        var formattedTotal = formatPrice(parseInt(total) || 0);
+        summaryBody.innerHTML = 
+            '<div class="summary-item-row">' +
+                '<span>Khách hàng</span>' +
+                '<span style="font-weight:600">' + customerName + '</span>' +
+            '</div>' +
+            '<div class="summary-item-row">' +
+                '<span>Phương thức thanh toán</span>' +
+                '<span style="font-weight:600">' + payment + '</span>' +
+            '</div>' +
+            '<div class="summary-item-row">' +
+                '<span>Trạng thái</span>' +
+                '<span style="color:#16a34a;font-weight:700">Đang xử lý</span>' +
+            '</div>' +
+            '<div class="summary-item-row total">' +
+                '<span>Tổng cộng</span>' +
+                '<span>' + formattedTotal + '</span>' +
+            '</div>';
+
+        // Make visible
+        setTimeout(function() {
+            document.querySelectorAll('[data-animate]').forEach(function(el) {
+                el.classList.add('visible');
+            });
+        }, 100);
+
+        // Confetti animation
+        createConfetti();
+
+        function createConfetti() {
+            var container = document.createElement('div');
+            container.className = 'confetti';
+            document.body.appendChild(container);
+
+            var colors = ['#22c55e', '#16a34a', '#f59e0b', '#ef4444', '#3b82f6', '#8b5cf6', '#ec4899'];
+            var pieces = 40;
+
+            for (var i = 0; i < pieces; i++) {
+                (function(index) {
+                    setTimeout(function() {
+                        var piece = document.createElement('div');
+                        piece.className = 'confetti-piece';
+                        piece.style.left = Math.random() * 100 + '%';
+                        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                        piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+                        piece.style.animationDelay = (Math.random() * 0.5) + 's';
+                        piece.style.width = (6 + Math.random() * 8) + 'px';
+                        piece.style.height = (6 + Math.random() * 8) + 'px';
+                        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                        container.appendChild(piece);
+
+                        setTimeout(function() {
+                            piece.remove();
+                        }, 4000);
+                    }, index * 50);
+                })(i);
+            }
+
+            setTimeout(function() {
+                container.remove();
+            }, 5000);
+        }
+    })();
+    </script>
+</body>
+</html>

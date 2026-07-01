@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mã giảm giá - 3T Café. Khám phá các voucher và ưu đãi hấp dẫn.">
+    <title>Mã giảm giá - 3T Café</title>
+    <link rel="shortcut icon" href="images/iconas.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/total.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+    <style>
+        .voucher-section { padding: 4rem 0; }
+        .voucher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+        .voucher-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: var(--bs-shadow);
+            border: 1px solid rgba(245,230,211,0.8);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .voucher-card:hover {
+            box-shadow: var(--bs-shadow-lg);
+            transform: translateY(-4px);
+        }
+        .voucher-card.expired {
+            opacity: 0.6;
+            filter: grayscale(0.5);
+        }
+        .voucher-card.expired:hover {
+            transform: none;
+            box-shadow: var(--bs-shadow);
+        }
+        .voucher-card-top {
+            background: linear-gradient(135deg, var(--coffee-700), var(--coffee-600));
+            padding: 1.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .voucher-card-top::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+        .voucher-card.expired .voucher-card-top {
+            background: linear-gradient(135deg, var(--coffee-400), var(--coffee-300));
+        }
+        .voucher-discount-badge {
+            font-family: var(--bs-heading-font-family);
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+        .voucher-type-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .voucher-card-body {
+            padding: 1.25rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .voucher-desc {
+            color: var(--coffee-700);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .voucher-conditions { margin-bottom: 1rem; flex: 1; }
+        .voucher-condition {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--coffee-600);
+            margin-bottom: 6px;
+        }
+        .voucher-condition-icon {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--coffee-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+        .voucher-code-box {
+            background: var(--coffee-50);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 2px dashed var(--coffee-300);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .voucher-code {
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--coffee-800);
+            letter-spacing: 2px;
+        }
+        .btn-copy {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--coffee-600), var(--coffee-500));
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .btn-copy:hover {
+            background: linear-gradient(135deg, var(--coffee-500), var(--coffee-400));
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(125,74,46,0.3);
+        }
+        .btn-copy.copied { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .btn-copy:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .voucher-card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--coffee-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .voucher-expiry {
+            font-size: 0.8rem;
+            color: var(--coffee-500);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .voucher-usage { font-size: 0.8rem; color: var(--coffee-400); }
+        .expired-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(239,68,68,0.1);
+            color: #dc2626;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .active-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(34,197,94,0.1);
+            color: #16a34a;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .stats-bar {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--bs-shadow-sm);
+            border: 1px solid rgba(245,230,211,0.8);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-family: var(--bs-heading-font-family);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--coffee-700);
+            margin-bottom: 2px;
+        }
+        .stat-item p { font-size: 0.8rem; color: var(--coffee-500); margin: 0; }
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid var(--coffee-200);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--coffee-600);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            font-family: inherit;
+        }
+        .filter-btn:hover { border-color: var(--coffee-500); color: var(--coffee-600); }
+        .filter-btn.active {
+            background: var(--coffee-600);
+            border-color: var(--coffee-600);
+            color: white;
+        }
+        @media (max-width: 575.98px) {
+            .voucher-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body class="bg-coffee-50">
+
+    <!-- PAGE LOADER -->
+    <div id="page-loader">
+        <div class="loader-logo">3T Café</div>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between py-2">
+                <a href="trang-chu.html" class="site-logo d-flex align-items-center gap-2">
+                    <img src="images/logo.png" alt="3T Café - Cà phê nguyên chất" style="height:48px; width:48px; border-radius:50%; object-fit:cover; border:2px solid rgba(255,255,255,0.15)">
+                    <span class="d-none d-sm-inline" style="font-family:var(--bs-heading-font-family);font-weight:800;font-size:1.3rem;letter-spacing:0.5px">3T Café</span>
+                </a>
+                <nav class="d-none d-md-flex align-items-center gap-1">
+                    <a href="trang-chu.html" class="nav-link">Trang chủ</a>
+                    <a href="san-pham.html" class="nav-link">Menu</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="thong-tin-don-hang.html" class="nav-link">Theo dõi đơn</a>
+                    <a href="lien-he.html" class="nav-link">Liên hệ</a>
+                </nav>
+                <div class="d-flex align-items-center gap-2">
+                    <form id="headerSearchForm" class="d-none d-lg-flex">
+                        <div class="header-search">
+                            <input type="search" name="q" placeholder="Tìm kiếm..." autocomplete="off">
+                            <button type="submit">🔍</button>
+                        </div>
+                    </form>
+                    <a href="trang-yeu-thich.html" class="nav-link d-none d-sm-flex align-items-center justify-content-center" style="width:38px;height:38px;padding:0">
+                        <span style="font-size:18px">♥</span>
+                    </a>
+                    <button class="nav-link d-flex align-items-center justify-content-center position-relative"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer"
+                            onclick="openCartDrawer()" data-cart-toggle title="Giỏ hàng">
+                        <span style="font-size:18px">🛒</span>
+                        <span id="cartBadge" class="cart-badge" style="display:none">0</span>
+                    </button>
+                    <div id="navAuthItem">
+                        <a href="dang-nhap.html" class="nav-link d-flex align-items-center gap-1">
+                             
+                            <span class="d-none d-sm-inline">Đăng nhập</span>
+                        </a>
+                    </div>
+                    <button id="mobileMenuToggle" class="d-md-none nav-link d-flex align-items-center justify-content-center"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer">
+                        <span class="menu-icon" style="font-size:20px">☰</span>
+                    </button>
+                </div>
+            </div>
+            <nav id="mobileNav" class="mobile-nav collapse">
+                <a href="trang-chu.html" class="nav-link d-block">Trang chủ</a>
+                 <a href="san-pham.html" class="nav-link d-block">Menu</a>
+                <a href="blog.html" class="nav-link d-block">Blog</a>
+                <a href="thong-tin-don-hang.html" class="nav-link d-block">Theo dõi đơn hàng</a>
+                <a href="lien-he.html" class="nav-link d-block">Liên hệ</a>
+                <a href="trang-yeu-thich.html" class="nav-link d-block">Yêu thích</a>
+                <a href="dang-nhap.html" class="nav-link d-block">Đăng nhập / Đăng ký</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="page-hero">
+            <div class="page-hero-bg" style="background-image:url('images/banner1.jpg')"></div>
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content">
+                <div class="breadcrumb-nav">
+                    <a href="trang-chu.html">Trang chủ</a>
+                    <span>/</span>
+                    <span>Mã giảm giá</span>
+                </div>
+                <h1>🎟️ Mã giảm giá</h1>
+                <p>Khám phá các voucher và ưu đãi hấp dẫn dành cho bạn</p>
+            </div>
+        </section>
+
+        <!-- CONTENT -->
+        <section class="voucher-section">
+            <div class="container">
+                <!-- Stats -->
+                <div class="stats-bar" data-animate>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h3 id="totalCount">-</h3>
+                            <p>Tổng voucher</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 id="activeCount" style="color:#16a34a">-</h3>
+                            <p>Đang hoạt động</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 id="expiredCount" style="color:#ef4444">-</h3>
+                            <p>Đã hết hạn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter -->
+                <div class="filter-bar" data-animate>
+                    <button class="filter-btn active" data-filter="all" onclick="filterVouchers('all', this)">Tất cả</button>
+                    <button class="filter-btn" data-filter="percent" onclick="filterVouchers('percent', this)">Giảm %</button>
+                    <button class="filter-btn" data-filter="fixed" onclick="filterVouchers('fixed', this)">Giảm tiền</button>
+                    <button class="filter-btn" data-filter="freeship" onclick="filterVouchers('freeship', this)">Miễn phí ship</button>
+                    <button class="filter-btn" data-filter="expired" onclick="filterVouchers('expired', this)">Đã hết hạn</button>
+                </div>
+
+                <!-- Voucher Grid -->
+                <div class="voucher-grid" id="voucherGrid">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Empty state -->
+                <div id="emptyState" style="display:none;text-align:center;padding:3rem">
+                    <div style="font-size:4rem;margin-bottom:1rem;opacity:0.4">🎫</div>
+                    <h3 style="color:var(--coffee-800);font-family:var(--bs-heading-font-family)">Không có voucher nào</h3>
+                    <p style="color:var(--coffee-500)">Không tìm thấy voucher phù hợp với bộ lọc.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container py-5">
+            <div class="row g-4 g-lg-5">
+                <div class="col-lg-4">
+                    <div class="footer-brand mb-3">
+                        <a href="trang-chu.html" class="d-flex align-items-center gap-2 mb-3">
+                            <img src="images/logo.png" alt="3T Café" style="height:40px;border-radius:50%">
+                            <span class="logo-text">3T Café</span>
+                        </a>
+                    </div>
+                    <p style="font-size:0.875rem;line-height:1.7;margin-bottom:1rem">
+                        Trải nghiệm cà phê nguyên chất, rang xay từ những hạt cà phê chọn lọc vùng Tây Nguyên Việt Nam.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><img src="images/facebook.png" alt="Facebook" width="32" height="24"></a>
+                        <a href="#" title="Instagram"><img src="images/insta.png" alt="Instagram" width="22" height="24"></a>
+                        <a href="#" title="Zalo"><img src="images/zalo.png" alt="Zalo" width="32" height="24"></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Cửa hàng</h5>
+                    <ul class="footer-links">
+                        <li><a href="san-pham.html">Sản phẩm</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-den">Cà phê đen</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-sua">Cà phê sữa</a></li>
+                        <li><a href="san-pham.html?category=latte-cappuccino">Latte & Cappuccino</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Hỗ trợ</h5>
+                    <ul class="footer-links">
+                        <li><a href="cau-hoi-thuong-gap.html">Câu hỏi thường gặp</a></li>
+                        <li><a href="thong-tin-don-hang.html">Theo dõi đơn hàng</a></li>
+                        <li><a href="chinh-sach-doi-tra.html">Chính sách đổi trả</a></li>
+                        <li><a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a></li>
+                        <li><a href="dieu-khoan.html">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Liên hệ</h5>
+                    <ul class="footer-links" style="gap:1rem;display:flex;flex-direction:column">
+                        <li class="d-flex gap-2">
+                            <span>📍</span>
+                            <span>Số 1 Võ Văn Ngân, P.Linh Chiểu, TP.Thủ Đức, TP.HCM</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>📞</span>
+                            <a href="tel:0901234567">0898369761</a>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>✉️</span>
+                            <a href="mailto:thanhtram.ute@gmail.com">thanhtram.ute@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                    <p class="mb-0">© 2025–2026 3T Café. Tất cả quyền được bảo lưu.</p>
+                    <p class="mb-0" style="color:var(--coffee-600)">☕ Cà phê nguyên chất - Vì người Việt</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART DRAWER -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h4>🛒 Giỏ hàng</h4>
+            <button class="cart-drawer-close" id="cartDrawerClose">✕</button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody"></div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none"></div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button id="backToTop" title="Lên đầu trang">↑</button>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/layout.js"></script>
+
+    <script>
+    (function() {
+        var vouchers = (typeof DATA !== 'undefined' && DATA.vouchers) || [];
+        var currentFilter = 'all';
+
+        function isExpired(expDate) {
+            if (!expDate) return false;
+            return new Date(expDate) < new Date();
+        }
+
+        function formatDiscount(voucher) {
+            if (voucher.discountType === 'freeship') {
+                return 'Miễn phí ship';
+            }
+            if (voucher.discountType === 'percent') {
+                return voucher.discount + '%';
+            }
+            return formatPrice(voucher.discount);
+        }
+
+        function formatDiscountSub(voucher) {
+            if (voucher.discountType === 'freeship') {
+                return 'Miễn phí vận chuyển';
+            }
+            if (voucher.discountType === 'percent') {
+                return 'Giảm ' + voucher.discount + '%';
+            }
+            return 'Giảm ' + formatPrice(voucher.discount);
+        }
+
+        function formatExpiryDate(expDate) {
+            if (!expDate) return 'Không giới hạn';
+            var d = new Date(expDate);
+            return 'Hết hạn: ' + d.toLocaleDateString('vi-VN', { day: '2-digit', month: 'long', year: 'numeric' });
+        }
+
+        function formatMinOrder(minOrder) {
+            if (!minOrder || minOrder === 0) return 'Không yêu cầu';
+            return 'Từ ' + formatPrice(minOrder);
+        }
+
+        function renderVouchers(filter) {
+            var grid = document.getElementById('voucherGrid');
+            var emptyState = document.getElementById('emptyState');
+
+            var filtered = vouchers.filter(function(v) {
+                var expired = isExpired(v.expDate);
+                if (filter === 'all') return true;
+                if (filter === 'expired') return expired;
+                if (filter === 'percent') return v.discountType === 'percent' && !expired;
+                if (filter === 'fixed') return v.discountType === 'fixed' && !expired;
+                if (filter === 'freeship') return v.discountType === 'freeship' && !expired;
+                return true;
+            });
+
+            // Stats
+            var total = vouchers.length;
+            var active = vouchers.filter(function(v) { return !isExpired(v.expDate); }).length;
+            var expired = total - active;
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('activeCount').textContent = active;
+            document.getElementById('expiredCount').textContent = expired;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+
+            grid.innerHTML = filtered.map(function(v, idx) {
+                var expired = isExpired(v.expDate);
+                var remaining = (v.usageLimit || 0) - (v.usedCount || 0);
+                var maxDiscountText = (v.maxDiscount && v.discountType === 'percent') ? ' (tối đa ' + formatPrice(v.maxDiscount) + ')' : '';
+
+                return '<div class="voucher-card' + (expired ? ' expired' : '') + '" data-animate style="animation-delay:' + (idx * 80) + 'ms">' +
+                    '<div class="voucher-card-top">' +
+                        '<div class="voucher-discount-badge">' + formatDiscount(v) + '</div>' +
+                        '<div class="voucher-type-label">' + formatDiscountSub(v) + maxDiscountText + '</div>' +
+                    '</div>' +
+                    '<div class="voucher-card-body">' +
+                        '<p class="voucher-desc">' + (v.description || 'Voucher đặc biệt từ 3T Café') + '</p>' +
+                        '<div class="voucher-conditions">' +
+                            '<div class="voucher-condition">' +
+                                '<span class="voucher-condition-icon">💰</span>' +
+                                '<span>Đơn tối thiểu: ' + formatMinOrder(v.minOrder) + '</span>' +
+                            '</div>' +
+                            (v.maxDiscount && v.discountType === 'percent' ? '<div class="voucher-condition">' +
+                                '<span class="voucher-condition-icon">📊</span>' +
+                                '<span>Giảm tối đa ' + formatPrice(v.maxDiscount) + '</span>' +
+                            '</div>' : '') +
+                            '<div class="voucher-condition">' +
+                                '<span class="voucher-condition-icon">🎯</span>' +
+                                '<span>Còn ' + (remaining > 0 ? remaining + ' lượt sử dụng' : 'hết lượt') + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="voucher-code-box">' +
+                            '<span class="voucher-code">' + v.code + '</span>' +
+                            '<button class="btn-copy" onclick="copyCode(\'' + v.code + '\', this); applyVoucherFromPage(\'' + v.code + '\');" ' + (expired ? 'disabled' : '') + '>' +
+                                (expired ? 'Đã hết hạn' : 'Sao chép') +
+                            '</button>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="voucher-card-footer">' +
+                        '<div class="voucher-expiry">' +
+                            '<span>📅</span>' +
+                            '<span>' + formatExpiryDate(v.expDate) + '</span>' +
+                        '</div>' +
+                        (expired ? '<span class="expired-badge">⏰ Hết hạn</span>' : '<span class="active-badge">✓ Còn hạn</span>') +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            // Trigger animations
+            setTimeout(function() {
+                document.querySelectorAll('.voucher-card[data-animate]').forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }, 50);
+        }
+
+        window.filterVouchers = function(filter, btn) {
+            currentFilter = filter;
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            if (btn) btn.classList.add('active');
+            renderVouchers(filter);
+        };
+
+        window.copyCode = function(code, btn) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(function() {
+                    showCopyFeedback(btn, code);
+                }).catch(function() {
+                    fallbackCopy(code, btn);
+                });
+            } else {
+                fallbackCopy(code, btn);
+            }
+        };
+
+        // Save voucher to localStorage when copying so checkout page can use it
+        window.applyVoucherFromPage = function(code) {
+            var voucher = vouchers.find(function(v) { return v.code === code; });
+            if (!voucher) return;
+            localStorage.setItem('plei_applied_coupon', JSON.stringify(voucher));
+            localStorage.setItem('plei_copied_voucher', code);
+            showToast('Đã lưu mã "' + code + '"! Mã sẽ được áp dụng khi thanh toán.', 'success');
+        };
+
+        function fallbackCopy(text, btn) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showCopyFeedback(btn, text);
+            } catch(e) {
+                showToast('Không thể sao chép mã!', 'error');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function showCopyFeedback(btn, code) {
+            var originalText = btn.textContent;
+            btn.textContent = '✓ Đã lưu!';
+            btn.classList.add('copied');
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // Initial render
+        renderVouchers('all');
+
+    })();
+    </script>
+</body>
+</html>

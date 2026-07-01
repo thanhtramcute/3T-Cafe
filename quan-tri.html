@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - 3T Coffee</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="shortcut icon" href="images/iconas.ico">
+</head>
+<body>
+
+<div id="loadingOverlay" class="loading-overlay hidden">
+    <div class="spinner"></div>
+    <div class="loading-text">Đang tải...</div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-brand">
+            <a href="trang-chu.html">
+                <img src="images/logo.png" alt="3T Coffee">
+            </a>
+            <h1>3T Coffee Admin</h1>
+            <p>Panel quản trị hệ thống</p>
+        </div>
+
+        <div class="sidebar-section-title">Tổng quan</div>
+        <nav class="sidebar-nav">
+            <a class="sidebar-link active" data-page="dashboard">
+                <span class="si flaticon-dashboard"></span> Dashboard
+            </a>
+        </nav>
+
+        <div class="sidebar-section-title">Quản lý</div>
+        <nav class="sidebar-nav">
+            <a class="sidebar-link" data-page="products">
+                <span class="si flaticon-coffee-bean-rang"></span> Sản phẩm
+            </a>
+            <a class="sidebar-link" data-page="categories">
+                <span class="si flaticon-bookmark"></span> Danh mục
+            </a>
+            <a class="sidebar-link" data-page="orders">
+                <span class="si flaticon-shopping-bag-1"></span> Đơn hàng
+            </a>
+            <a class="sidebar-link" data-page="customers">
+                <span class="si flaticon-user"></span> Khách hàng
+            </a>
+        </nav>
+
+        <div class="sidebar-section-title">Nội dung</div>
+        <nav class="sidebar-nav">
+            <a class="sidebar-link" data-page="vouchers">
+                <span class="si flaticon-coupon"></span> Voucher
+            </a>
+            <a class="sidebar-link" data-page="blogs">
+                <span class="si flaticon-document"></span> Blog
+            </a>
+            <a class="sidebar-link" data-page="banners">
+                <span class="si flaticon-image"></span> Banner
+            </a>
+            <a class="sidebar-link" data-page="faqs">
+                <span class="si flaticon-chat"></span> FAQ
+            </a>
+            <a class="sidebar-link" data-page="reviews">
+                <span class="si flaticon-star"></span> Đánh giá
+            </a>
+        </nav>
+
+        <div class="sidebar-section-title">Hệ thống</div>
+        <nav class="sidebar-nav">
+            <a class="sidebar-link" data-page="settings">
+                <span class="si flaticon-settings"></span> Cài đặt
+            </a>
+            <a class="sidebar-link" data-page="audit">
+                <span class="si flaticon-shield"></span> Audit Log
+            </a>
+            <a class="sidebar-link" data-page="contacts">
+                <span class="si flaticon-mail"></span> Tin nhắn
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="trang-chu.html">
+                <span class="si flaticon-home"></span> Về trang chủ
+            </a>
+            <a href="#" onclick="Admin.logout(); return false;">
+                <span class="si flaticon-logout"></span> Đăng xuất
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+        <!-- Topbar -->
+        <header class="admin-topbar">
+            <div class="topbar-left">
+                <button class="mobile-toggle" onclick="Admin.toggleSidebar()">☰</button>
+                <h2 id="topbarTitle">Dashboard</h2>
+            </div>
+            <div class="topbar-right">
+                <div class="avatar-circle" id="adminAvatar" style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6b4423,#8b5a2b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(107,68,35,0.3);">A</div>
+                <span class="admin-name">Admin: <strong id="adminDisplayName">Admin</strong></span>
+                <a href="trang-chu.html" class="btn btn-sm btn-outline">← Trang chủ</a>
+            </div>
+        </header>
+
+        <div class="admin-content" id="adminContent">
+            <!-- Content injected by JS -->
+        </div>
+    </main>
+</div>
+
+<!-- Modal Template -->
+<div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal-box" id="modalBox">
+        <div class="modal-header">
+            <h3 id="modalTitle">Modal</h3>
+            <button class="btn btn-sm btn-outline" onclick="Admin.closeModal()">✕ Đóng</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-footer" id="modalFooter"></div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/api.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

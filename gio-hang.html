@@ -1,0 +1,819 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="3T Café - Giỏ hàng của bạn. Xem và quản lý các sản phẩm đã chọn.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/iconas.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/total.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+
+    <title>Giỏ hàng - 3T Café</title>
+</head>
+<body class="bg-coffee-50">
+
+    <!-- PAGE LOADER -->
+    <div id="page-loader">
+        <div class="loader-logo">3T Café</div>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- ============================
+         HEADER
+         ============================ -->
+    <header class="site-header">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between py-2">
+                <!-- Logo -->
+                <a href="trang-chu.html" class="site-logo d-flex align-items-center gap-2">
+                    <img src="images/logo.png" alt="3T Café - Cà phê nguyên chất" style="height:48px; width:48px; border-radius:50%; object-fit:cover; border:2px solid rgba(255,255,255,0.15)">
+                    <span class="d-none d-sm-inline" style="font-family:var(--bs-heading-font-family);font-weight:800;font-size:1.3rem;letter-spacing:0.5px">3T Café</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="d-none d-md-flex align-items-center gap-1">
+                    <a href="trang-chu.html" class="nav-link">Trang chủ</a>
+                    <a href="san-pham.html" class="nav-link">Menu</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="thong-tin-don-hang.html" class="nav-link">Theo dõi đơn</a>
+                    <a href="lien-he.html" class="nav-link">Liên hệ</a>
+                </nav>
+
+                <!-- Right Actions -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Search -->
+                    <form id="headerSearchForm" class="d-none d-lg-flex">
+                        <div class="header-search">
+                            <input type="search" name="q" placeholder="Tìm kiếm..." autocomplete="off">
+                            <button type="submit">🔍</button>
+                        </div>
+                    </form>
+
+                    <!-- Wishlist -->
+                    <a href="trang-yeu-thich.html" class="nav-link d-none d-sm-flex align-items-center justify-content-center" style="width:38px;height:38px;padding:0">
+                        <span style="font-size:18px">♡</span>
+                    </a>
+
+                    <!-- Cart -->
+                    <button class="nav-link d-flex align-items-center justify-content-center position-relative"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer"
+                            onclick="openCartDrawer()" data-cart-toggle title="Giỏ hàng">
+                        <span style="font-size:18px">🛒</span>
+                        <span id="cartBadge" class="cart-badge" style="display:none">0</span>
+                    </button>
+
+                    <!-- Auth -->
+                    <div id="navAuthItem">
+                        <a href="dang-nhap.html" class="nav-link d-flex align-items-center gap-1">
+                             
+                            <span class="d-none d-sm-inline">Đăng nhập</span>
+                        </a>
+                    </div>
+
+                    <!-- Mobile Toggle -->
+                    <button id="mobileMenuToggle" class="d-md-none nav-link d-flex align-items-center justify-content-center"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer">
+                        <span class="menu-icon" style="font-size:20px">☰</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav -->
+            <nav id="mobileNav" class="mobile-nav collapse">
+                <a href="trang-chu.html" class="nav-link d-block">Trang chủ</a>
+                 <a href="san-pham.html" class="nav-link d-block">Menu</a>
+                <a href="blog.html" class="nav-link d-block">Blog</a>
+                <a href="thong-tin-don-hang.html" class="nav-link d-block">Theo dõi đơn hàng</a>
+                <a href="lien-he.html" class="nav-link d-block">Liên hệ</a>
+                <a href="trang-yeu-thich.html" class="nav-link d-block">Yêu thích</a>
+                <a href="dang-nhap.html" class="nav-link d-block">Đăng nhập / Đăng ký</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================
+         PAGE HERO
+         ============================ -->
+    <section class="page-hero">
+        <div class="page-hero-bg" style="background-image:url('images/1.png')"></div>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Giỏ hàng</h1>
+            <div class="breadcrumb-nav">
+                <a href="trang-chu.html">Trang chủ</a>
+                <span>›</span>
+                <span>Giỏ hàng</span>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- ============================
+             CART CONTENT
+             ============================ -->
+        <section class="section">
+            <div class="container">
+                <!-- Empty Cart State -->
+                <div id="emptyCartState" style="display:none" class="text-center py-5">
+                    <div style="font-size:5rem;margin-bottom:1.5rem;opacity:0.4">🛒</div>
+                    <h2 class="font-display mb-3" style="color:var(--coffee-800)">Giỏ hàng trống</h2>
+                    <p style="color:var(--coffee-500);max-width:400px;margin:0 auto 2rem;font-size:1rem">
+                        Bạn chưa có sản phẩm nào trong giỏ hàng. Hãy khám phá menu và chọn cho mình một ly cà phê ngon nhé!
+                    </p>
+                    <a href="san-pham.html" class="btn-coffee d-inline-flex align-items-center gap-2" style="padding:14px 32px;border-radius:50px;font-weight:600">
+                        ☕ Khám phá menu
+                    </a>
+                </div>
+
+                <!-- Cart Layout -->
+                <div id="cartContent" style="display:none">
+                    <div class="row g-4">
+                        <!-- LEFT: Cart Items -->
+                        <div class="col-lg-8">
+                            <div class="card-coffee p-3 p-md-4">
+                                <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom">
+                                    <h3 class="mb-0" style="font-size:1.1rem;font-weight:700;color:var(--coffee-800)">
+                                        <span id="cartItemCount">0</span> sản phẩm
+                                    </h3>
+                                    <a href="san-pham.html" class="btn-secondary-coffee" style="font-size:0.85rem;padding:8px 16px">
+                                        + Thêm sản phẩm
+                                    </a>
+                                </div>
+
+                                <!-- Cart Items List -->
+                                <div id="cartItemsList">
+                                    <!-- Populated by JS -->
+                                </div>
+
+                                <!-- Continue Shopping -->
+                                <div class="mt-4 pt-3 border-top">
+                                    <a href="san-pham.html" class="d-inline-flex align-items-center gap-2" style="color:var(--coffee-600);font-weight:500;font-size:0.9rem">
+                                        ← Tiếp tục mua sắm
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT: Order Summary (Sticky) -->
+                        <div class="col-lg-4">
+                            <div class="order-summary-card">
+                                <h4>📋 Tóm tắt đơn hàng</h4>
+
+                                <!-- Coupon Input -->
+                                <div class="mb-4">
+                                    <label style="font-weight:600;font-size:0.875rem;color:var(--coffee-700);margin-bottom:0.5rem;display:block">Mã giảm giá</label>
+                                    <div class="d-flex gap-2" id="couponInputRow">
+                                        <input type="text" id="couponInput" class="form-control-coffee flex-grow-1" placeholder="Nhập mã coupon..." style="font-size:0.9rem">
+                                        <button onclick="applyCoupon()" class="btn-coffee" style="width:auto;padding:10px 20px;font-size:0.85rem;white-space:nowrap">Áp dụng</button>
+                                    </div>
+                                    <!-- Applied Coupon Display -->
+                                    <div id="appliedCouponDisplay" class="coupon-applied mt-2" style="display:none">
+                                        <div class="d-flex align-items-center justify-content-between w-100">
+                                            <div>
+                                                <span style="font-size:0.75rem;color:var(--coffee-500)">Đã áp dụng:</span>
+                                                <strong id="appliedCouponCode" style="display:block;color:var(--coffee-700)"></strong>
+                                                <span id="appliedCouponDesc" style="font-size:0.8rem;color:#22c55e"></span>
+                                            </div>
+                                            <button onclick="removeCoupon()" style="background:none;border:none;color:#ef4444;font-size:1.1rem;cursor:pointer;padding:4px" title="Xóa coupon">✕</button>
+                                        </div>
+                                    </div>
+                                    <!-- Coupon Error -->
+                                    <div id="couponError" class="mt-2" style="display:none">
+                                        <small style="color:#ef4444;font-weight:500"></small>
+                                    </div>
+                                </div>
+
+                                <!-- Summary Rows -->
+                                <div class="summary-row">
+                                    <span>Tạm tính</span>
+                                    <span id="summarySubtotal">0đ</span>
+                                </div>
+                                <div class="summary-row" id="discountRow" style="display:none">
+                                    <span>Giảm giá</span>
+                                    <span id="summaryDiscount" class="text-success">-0đ</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Phí giao hàng</span>
+                                    <span id="summaryShipping">30.000đ</span>
+                                </div>
+
+                                <!-- Free Shipping Progress -->
+                                <div id="freeShipProgress" class="mt-3 mb-3" style="display:none">
+                                    <div style="background:var(--coffee-100);border-radius:8px;padding:12px">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <span style="font-size:1rem">🚚</span>
+                                            <span style="font-size:0.8rem;color:var(--coffee-700);font-weight:500" id="freeShipMsg">Mua thêm 0đ để được miễn phí giao hàng!</span>
+                                        </div>
+                                        <div style="background:var(--coffee-200);height:6px;border-radius:3px;overflow:hidden">
+                                            <div id="freeShipBar" style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;border-radius:3px;width:0%;transition:width 0.5s ease"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="summary-row total">
+                                    <span>Tổng cộng</span>
+                                    <span id="summaryTotal" class="text-primary" style="font-size:1.3rem">0đ</span>
+                                </div>
+
+                                <!-- Checkout Button -->
+                                <a href="thanh-toan.html" class="btn-coffee mt-4 d-block text-center" style="padding:16px;border-radius:0.75rem;font-size:1rem;font-weight:700;background:linear-gradient(135deg,#22c55e,#16a34a)">
+                                    Thanh toán ngay →
+                                </a>
+
+                                <!-- Trust Badges -->
+                                <div class="mt-4 pt-3 border-top">
+                                    <div class="d-flex flex-column gap-2">
+                                        <div class="d-flex align-items-center gap-2" style="font-size:0.8rem;color:var(--coffee-800)">
+                                            <span>🔒</span>
+                                            <span>Thanh toán an toàn & bảo mật</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2" style="font-size:0.8rem;color:var(--coffee-800)">
+                                            <span>🚚</span>
+                                            <span>Giao hàng nhanh 30 phút</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2" style="font-size:0.8rem;color:var(--coffee-800)">
+                                            <span>↩️</span>
+                                            <span>Đổi trả trong 24 giờ</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================
+         FOOTER
+         ============================ -->
+    <footer class="site-footer">
+        <div class="container py-5">
+            <div class="row g-4 g-lg-5">
+                <div class="col-lg-4">
+                    <div class="footer-brand mb-3">
+                        <a href="trang-chu.html" class="d-flex align-items-center gap-2 mb-3">
+                            <img src="images/logo.png" alt="3T Café" style="height:40px;border-radius:50%">
+                            <span class="logo-text">3T Café</span>
+                        </a>
+                    </div>
+                    <p style="font-size:0.875rem;line-height:1.7;margin-bottom:1rem">
+                        Trải nghiệm cà phê nguyên chất, rang xay từ những hạt cà phê chọn lọc vùng Tây Nguyên Việt Nam.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><img src="images/facebook.png" alt="Facebook" width="32" height="24"></a>
+                        <a href="#" title="Instagram"><img src="images/insta.png" alt="Instagram" width="22" height="24"></a>
+                        <a href="#" title="Zalo"><img src="images/zalo.png" alt="Zalo" width="32" height="24"></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Cửa hàng</h5>
+                    <ul class="footer-links">
+                        <li><a href="san-pham.html">Sản phẩm</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-den">Cà phê đen</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-sua">Cà phê sữa</a></li>
+                        <li><a href="san-pham.html?category=latte-cappuccino">Latte & Cappuccino</a></li>
+                        <li><a href="voucher.html">Voucher</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Hỗ trợ</h5>
+                    <ul class="footer-links">
+                        <li><a href="cau-hoi-thuong-gap.html">Câu hỏi thường gặp</a></li>
+                        <li><a href="thong-tin-don-hang.html">Theo dõi đơn hàng</a></li>
+                        <li><a href="chinh-sach-doi-tra.html">Chính sách đổi trả</a></li>
+                        <li><a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a></li>
+                        <li><a href="dieu-khoan.html">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Liên hệ</h5>
+                    <ul class="footer-links" style="gap:1rem;display:flex;flex-direction:column">
+                        <li class="d-flex gap-2">
+                            <span>📍</span>
+                            <span>Số 1 Võ Văn Ngân, P.Linh Chiểu, TP.Thủ Đức, TP.HCM</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>📞</span>
+                            <a href="tel:0901234567">0898369761</a>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>📧</span>
+                            <a href="mailto:thanhtram.ute@gmail.com">thanhtram.ute@gmail.com</a>
+                        </li>
+                    </ul>
+                    <div class="mt-3">
+                        <p style="font-size:0.75rem;color:var(--coffee-500);margin-bottom:8px">Chấp nhận thanh toán:</p>
+                        <div class="payment-badges">
+                            <span>💵 COD</span>
+                            <span>🏦 Banking</span>
+                            <span>💳 VNPay</span>
+                            <span>📱 MoMo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                    <p class="mb-0">© 2025–2026 3T Café. Tất cả quyền được bảo lưu.</p>
+                    <p class="mb-0" style="color:var(--coffee-600)">☕ Cà phê nguyên chất - Vì người Việt</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================
+         CART DRAWER
+         ============================ -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h4>🛒 Giỏ hàng</h4>
+            <button class="cart-drawer-close" id="cartDrawerClose">✕</button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody"></div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none"></div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button id="backToTop" title="Lên đầu trang">↑</button>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/layout.js"></script>
+
+    <!-- PAGE INIT -->
+    <script>
+    (function() {
+        'use strict';
+
+        // Settings
+        var settings = (typeof DATA !== 'undefined' && DATA.settings) || {};
+        var FREE_SHIPPING_MIN = settings.freeShippingMin || 200000;
+        var SHIPPING_FEE = settings.shippingFee || 30000;
+
+        // Get cart from localStorage
+        function getCart() {
+            return JSON.parse(localStorage.getItem('plei_cart') || '[]');
+        }
+
+        // Save cart to localStorage
+        function saveCart(cart) {
+            localStorage.setItem('plei_cart', JSON.stringify(cart));
+        }
+
+        // Get applied coupon
+        function getAppliedCoupon() {
+            var c = localStorage.getItem('plei_applied_coupon');
+            return c ? JSON.parse(c) : null;
+        }
+
+        // Save applied coupon
+        function saveAppliedCoupon(coupon) {
+            localStorage.setItem('plei_applied_coupon', JSON.stringify(coupon));
+        }
+
+        // Remove applied coupon
+        function removeAppliedCoupon() {
+            localStorage.removeItem('plei_applied_coupon');
+        }
+
+        // Format price
+        function fmtPrice(price) {
+            if (typeof price !== 'number') price = parseInt(price) || 0;
+            return new Intl.NumberFormat('vi-VN').format(price) + 'đ';
+        }
+
+        // Calculate discount from coupon
+        function calcDiscount(coupon, subtotal) {
+            if (!coupon) return 0;
+            switch (coupon.discountType) {
+                case 'fixed':
+                    return coupon.discount;
+                case 'percent':
+                    var disc = subtotal * (coupon.discount / 100);
+                    if (coupon.maxDiscount) disc = Math.min(disc, coupon.maxDiscount);
+                    return Math.floor(disc);
+                case 'freeship':
+                    return 0;
+                default:
+                    return 0;
+            }
+        }
+
+        // Change quantity
+        window.changeCartQty = function(id, delta) {
+            var cart = getCart();
+            var item = cart.find(function(i) { return i.id === id; });
+            if (!item) return;
+            item.quantity = Math.max(1, item.quantity + delta);
+            saveCart(cart);
+            updateCartUI();
+            renderCartDrawer();
+            updateHeaderCart();
+        };
+
+        // Remove item
+        window.removeCartItem = function(id) {
+            var cart = getCart();
+            cart = cart.filter(function(i) { return i.id !== id; });
+            saveCart(cart);
+            updateCartUI();
+            renderCartDrawer();
+            updateHeaderCart();
+            showToast('Đã xóa sản phẩm khỏi giỏ hàng', 'info');
+        };
+
+        // Apply coupon
+        window.applyCoupon = function() {
+            var input = document.getElementById('couponInput');
+            var errorEl = document.getElementById('couponError');
+            if (!input) return;
+            var code = input.value.trim().toUpperCase();
+            if (!code) {
+                showError('Vui lòng nhập mã coupon!');
+                return;
+            }
+
+            var voucher = null;
+            if (typeof DATA !== 'undefined' && DATA.vouchers) {
+                voucher = DATA.vouchers.find(function(v) {
+                    return v.code.toUpperCase() === code && v.isActive;
+                });
+            }
+
+            if (!voucher) {
+                showError('Mã coupon không hợp lệ!');
+                return;
+            }
+
+            // Check expiry
+            if (new Date(voucher.expDate) < new Date()) {
+                showError('Mã coupon đã hết hạn!');
+                return;
+            }
+
+            // Check usage limit
+            if (voucher.usageLimit > 0 && voucher.usedCount >= voucher.usageLimit) {
+                showError('Mã coupon đã hết lượt sử dụng!');
+                return;
+            }
+
+            var cart = getCart();
+            var subtotal = cart.reduce(function(s, i) { return s + (i.salePrice || i.price) * i.quantity; }, 0);
+
+            // Check minOrder
+            if (voucher.minOrder > 0 && subtotal < voucher.minOrder) {
+                showError('Đơn hàng tối thiểu ' + fmtPrice(voucher.minOrder) + ' để sử dụng mã này!');
+                return;
+            }
+
+            saveAppliedCoupon(voucher);
+            input.value = '';
+            hideError();
+            showToast('Áp dụng coupon thành công!', 'success');
+            updateCartUI();
+        };
+
+        // Remove coupon
+        window.removeCoupon = function() {
+            removeAppliedCoupon();
+            updateCartUI();
+            showToast('Đã xóa coupon', 'info');
+        };
+
+        function showError(msg) {
+            var errorEl = document.getElementById('couponError');
+            if (errorEl) {
+                errorEl.style.display = 'block';
+                errorEl.querySelector('small').textContent = msg;
+            }
+        }
+
+        function hideError() {
+            var errorEl = document.getElementById('couponError');
+            if (errorEl) errorEl.style.display = 'none';
+        }
+
+        // Main update UI function
+        window.updateCartUI = function() {
+            var cart = getCart();
+            var itemsList = document.getElementById('cartItemsList');
+            var emptyState = document.getElementById('emptyCartState');
+            var cartContent = document.getElementById('cartContent');
+            var itemCountEl = document.getElementById('cartItemCount');
+
+            if (cart.length === 0) {
+                if (emptyState) emptyState.style.display = 'block';
+                if (cartContent) cartContent.style.display = 'none';
+                return;
+            }
+
+            if (emptyState) emptyState.style.display = 'none';
+            if (cartContent) cartContent.style.display = 'block';
+            if (itemCountEl) itemCountEl.textContent = cart.length;
+
+            // Calculate totals
+            var subtotal = cart.reduce(function(s, i) {
+                return s + (i.salePrice || i.price) * i.quantity;
+            }, 0);
+
+            var coupon = getAppliedCoupon();
+            var discount = coupon ? calcDiscount(coupon, subtotal) : 0;
+
+            var shipping = subtotal >= FREE_SHIPPING_MIN ? 0 : SHIPPING_FEE;
+
+            // Check if coupon gives free shipping
+            if (coupon && coupon.discountType === 'freeship') {
+                shipping = 0;
+            }
+
+            var total = subtotal + shipping - discount;
+
+            // Render items
+            if (itemsList) {
+                itemsList.innerHTML = cart.map(function(item) {
+                    var price = item.salePrice || item.price;
+                    var lineTotal = price * item.quantity;
+                    return '<div class="cart-page-item">' +
+                        '<div class="cart-page-item-img">' +
+                            '<img src="' + (item.image || 'images/placeholder.jpg') + '" alt="' + item.name + '" loading="lazy">' +
+                        '</div>' +
+                        '<div class="cart-page-item-info">' +
+                            '<a href="chi-tiet-san-pham.html?id=' + item.productId + '" class="cart-page-item-name">' + item.name + '</a>' +
+                            '<div class="cart-page-item-price">' + fmtPrice(price) + '</div>' +
+                            '<div class="cart-page-item-actions">' +
+                                '<div class="qty-selector">' +
+                                    '<button class="qty-btn" onclick="changeCartQty(\'' + item.id + '\', -1)">−</button>' +
+                                    '<input class="qty-input" type="text" value="' + item.quantity + '" readonly>' +
+                                    '<button class="qty-btn" onclick="changeCartQty(\'' + item.id + '\', 1)">+</button>' +
+                                '</div>' +
+                                '<button class="cart-page-item-remove" onclick="removeCartItem(\'' + item.id + '\')" title="Xóa sản phẩm">' +
+                                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"></polyline><path d="M19,6 L19,20a2,2 0 0,1-2,2H7a2,2 0 0,1-2-2V6m2,0V4a2,2 0 0,1-2-2H4"></path></svg>' +
+                                    ' Xóa' +
+                                '</button>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="cart-page-item-total">' +
+                            '<div class="cart-page-subtotal-label">Thành tiền</div>' +
+                            '<div class="cart-page-subtotal-value">' + fmtPrice(lineTotal) + '</div>' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+            }
+
+            // Update summary
+            var subTotalEl = document.getElementById('summarySubtotal');
+            var discountRowEl = document.getElementById('discountRow');
+            var discountEl = document.getElementById('summaryDiscount');
+            var shippingEl = document.getElementById('summaryShipping');
+            var totalEl = document.getElementById('summaryTotal');
+            var freeShipProgressEl = document.getElementById('freeShipProgress');
+            var freeShipMsgEl = document.getElementById('freeShipMsg');
+            var freeShipBarEl = document.getElementById('freeShipBar');
+            var appliedCouponDisplayEl = document.getElementById('appliedCouponDisplay');
+            var appliedCouponCodeEl = document.getElementById('appliedCouponCode');
+            var appliedCouponDescEl = document.getElementById('appliedCouponDesc');
+            var couponInputRowEl = document.getElementById('couponInputRow');
+
+            if (subTotalEl) subTotalEl.textContent = fmtPrice(subtotal);
+
+            if (discountRowEl && discountEl) {
+                if (discount > 0) {
+                    discountRowEl.style.display = 'flex';
+                    discountEl.textContent = '-' + fmtPrice(discount);
+                } else {
+                    discountRowEl.style.display = 'none';
+                }
+            }
+
+            if (shippingEl) {
+                if (shipping === 0) {
+                    shippingEl.innerHTML = '<span style="color:#22c55e;font-weight:600">Miễn phí</span>';
+                } else {
+                    shippingEl.textContent = fmtPrice(shipping);
+                }
+            }
+
+            if (totalEl) totalEl.textContent = fmtPrice(total);
+
+            // Free shipping progress
+            if (freeShipProgressEl && freeShipMsgEl && freeShipBarEl) {
+                if (shipping > 0) {
+                    freeShipProgressEl.style.display = 'block';
+                    var remaining = FREE_SHIPPING_MIN - subtotal;
+                    if (remaining > 0) {
+                        freeShipMsgEl.textContent = 'Mua thêm ' + fmtPrice(remaining) + ' để được miễn phí giao hàng!';
+                    } else {
+                        freeShipMsgEl.textContent = 'Bạn đã đủ điều kiện free ship! 🎉';
+                    }
+                    var pct = Math.min(100, (subtotal / FREE_SHIPPING_MIN) * 100);
+                    freeShipBarEl.style.width = pct + '%';
+                } else {
+                    freeShipProgressEl.style.display = 'none';
+                }
+            }
+
+            // Applied coupon display
+            if (appliedCouponDisplayEl && appliedCouponCodeEl && appliedCouponDescEl && couponInputRowEl) {
+                if (coupon) {
+                    appliedCouponDisplayEl.style.display = 'block';
+                    appliedCouponCodeEl.textContent = coupon.code;
+                    var desc = '';
+                    switch (coupon.discountType) {
+                        case 'fixed': desc = 'Giảm ' + fmtPrice(coupon.discount); break;
+                        case 'percent': desc = 'Giảm ' + coupon.discount + '%'; break;
+                        case 'freeship': desc = 'Miễn phí giao hàng'; break;
+                    }
+                    appliedCouponDescEl.textContent = desc;
+                    couponInputRowEl.style.display = 'none';
+                } else {
+                    appliedCouponDisplayEl.style.display = 'none';
+                    couponInputRowEl.style.display = 'flex';
+                }
+            }
+
+            // Also update header cart
+            updateHeaderCart();
+        };
+
+        // Boot
+        function boot() {
+            updateCartUI();
+            renderCartDrawer();
+            updateHeaderCart();
+
+            // Hide page loader
+            var loader = document.getElementById('page-loader');
+            if (loader) {
+                setTimeout(function() {
+                    loader.style.opacity = '0';
+                    setTimeout(function() { loader.style.display = 'none'; }, 500);
+                }, 300);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', boot);
+        } else { boot(); }
+    })();
+    </script>
+
+    <style>
+    /* Cart Page Item Styles */
+    .cart-page-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.25rem 0;
+        border-bottom: 1px solid var(--coffee-100);
+    }
+
+    .cart-page-item:last-child {
+        border-bottom: none;
+    }
+
+    .cart-page-item-img {
+        flex-shrink: 0;
+        width: 90px;
+        height: 90px;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 1px solid var(--coffee-100);
+        background: var(--coffee-50);
+    }
+
+    .cart-page-item-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .cart-page-item-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .cart-page-item-name {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--coffee-800);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 4px;
+        line-height: 1.3;
+        transition: color 0.2s;
+    }
+
+    .cart-page-item-name:hover {
+        color: var(--coffee-600);
+    }
+
+    .cart-page-item-price {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--coffee-500);
+        margin-bottom: 0.75rem;
+    }
+
+    .cart-page-item-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .cart-page-item-remove {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: none;
+        border: 1px solid var(--coffee-200);
+        color: var(--coffee-500);
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .cart-page-item-remove:hover {
+        background: rgba(239, 68, 68, 0.08);
+        border-color: #ef4444;
+        color: #ef4444;
+    }
+
+    .cart-page-item-total {
+        flex-shrink: 0;
+        text-align: right;
+    }
+
+    .cart-page-subtotal-label {
+        font-size: 0.75rem;
+        color: var(--coffee-400);
+        margin-bottom: 2px;
+        font-weight: 500;
+    }
+
+    .cart-page-subtotal-value {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: var(--coffee-700);
+    }
+
+    /* Responsive */
+    @media (max-width: 575.98px) {
+        .cart-page-item {
+            flex-wrap: wrap;
+        }
+
+        .cart-page-item-total {
+            width: 100%;
+            text-align: left;
+            padding-top: 0.5rem;
+            border-top: 1px dashed var(--coffee-100);
+            margin-top: 0.5rem;
+        }
+
+        .cart-page-subtotal-label {
+            display: inline;
+        }
+
+        .cart-page-subtotal-value {
+            display: inline;
+            margin-left: 8px;
+            color: var(--coffee-600);
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .cart-page-item-img {
+            width: 72px;
+            height: 72px;
+        }
+    }
+    </style>
+</body>
+</html>

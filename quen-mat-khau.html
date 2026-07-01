@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Quên mật khẩu - 3T Coffee</title>
+    <meta name="description" content="Khôi phục mật khẩu tài khoản 3T Coffee">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+    <link rel="shortcut icon" href="images/iconas.ico">
+
+    <style>
+        :root {
+            --coffee-50: #fdf8f3;
+            --coffee-100: #f5e6d3;
+            --coffee-200: #e8c9a8;
+            --coffee-300: #d4a574;
+            --coffee-400: #c08552;
+            --coffee-500: #a0623a;
+            --coffee-600: #7d4a2e;
+            --coffee-700: #5c3522;
+            --coffee-800: #3d2318;
+            --coffee-900: #2a1810;
+        }
+
+        body.auth-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--coffee-50) 0%, var(--coffee-100) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 60px rgba(45, 35, 24, 0.2);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            border: 1px solid rgba(245, 230, 211, 0.8);
+        }
+
+        .auth-card .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-card .logo img {
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .auth-card .logo-text {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+        }
+
+        .auth-card h3 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-card .subtitle {
+            text-align: center;
+            color: var(--coffee-500);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--coffee-700);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .form-control-coffee {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--coffee-200);
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--coffee-900);
+            background: white;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .form-control-coffee:focus {
+            border-color: var(--coffee-500);
+            box-shadow: 0 0 0 3px rgba(125, 74, 46, 0.1);
+        }
+
+        .form-control-coffee::placeholder {
+            color: var(--coffee-400);
+        }
+
+        .form-control-coffee.is-invalid {
+            border-color: #ef4444;
+        }
+
+        .form-error {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-error.show {
+            display: block;
+        }
+
+        .btn-coffee {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--coffee-600), var(--coffee-500));
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-coffee:hover {
+            background: linear-gradient(135deg, var(--coffee-500), var(--coffee-400));
+            box-shadow: 0 4px 16px rgba(125, 74, 46, 0.4);
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        .btn-coffee:active {
+            transform: scale(0.98);
+        }
+
+        .btn-coffee:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-coffee-outline {
+            width: 100%;
+            padding: 13px;
+            background: transparent;
+            color: var(--coffee-600);
+            border: 2px solid var(--coffee-300);
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-coffee-outline:hover {
+            background: var(--coffee-50);
+            border-color: var(--coffee-600);
+            color: var(--coffee-600);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--coffee-600);
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: var(--coffee-600);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .login-link a:hover {
+            color: var(--coffee-500);
+            text-decoration: underline;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .plei-toast {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: toastIn 0.4s ease;
+            max-width: 360px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes toastOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+
+        .toast-success { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .toast-error { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .toast-info { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+        .home-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .home-link a {
+            color: var(--coffee-500);
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .home-link a:hover {
+            color: var(--coffee-700);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--coffee-100), var(--coffee-200));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+        }
+
+        .icon-box svg {
+            width: 28px;
+            height: 28px;
+            color: var(--coffee-600);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            animation: scaleIn 0.4s ease;
+        }
+
+        .success-icon svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .success-message h4 {
+            font-family: 'Josefin Sans', sans-serif;
+            color: var(--coffee-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: var(--coffee-600);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .success-message .email-display {
+            background: var(--coffee-50);
+            border: 1px solid var(--coffee-200);
+            border-radius: 0.5rem;
+            padding: 8px 16px;
+            display: inline-block;
+            font-weight: 600;
+            color: var(--coffee-700);
+            font-size: 0.9rem;
+            margin: 0.5rem 0 1.5rem;
+            word-break: break-all;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .back-link {
+            display: flex;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .back-link a {
+            color: var(--coffee-500);
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .back-link a:hover {
+            color: var(--coffee-700);
+        }
+
+        @media (max-width: 575.98px) {
+            .auth-card {
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="auth-page">
+
+    <div class="auth-card">
+        <div class="logo">
+            <img src="images/logo.png" alt="3T Coffee Logo">
+            <span class="logo-text">3T Coffee</span>
+        </div>
+
+        <div id="formSection" class="form-section active">
+            <div class="icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                </svg>
+            </div>
+            <h3>Quên mật khẩu?</h3>
+            <p class="subtitle">Không sao cả! Nhập email của bạn và chúng tôi sẽ gửi liên kết đặt lại mật khẩu.</p>
+
+            <div id="alertContainer"></div>
+
+            <form id="forgotForm" onsubmit="handleForgotPassword(event)">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control-coffee" placeholder="email@example.com" required autocomplete="email">
+                    <div class="form-error" id="emailError">Vui lòng nhập email hợp lệ</div>
+                </div>
+
+                <button type="submit" class="btn-coffee" id="submitBtn">
+                    <span id="submitText">Gửi yêu cầu</span>
+                </button>
+            </form>
+
+            <div class="back-link">
+                <a href="dang-nhap.html">← Quay lại đăng nhập</a>
+            </div>
+        </div>
+
+        <div id="successSection" class="form-section">
+            <div class="success-message">
+                <div class="success-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <h4>Kiểm tra email của bạn!</h4>
+                <p>Chúng tôi đã gửi liên kết đặt lại mật khẩu đến:</p>
+                <div class="email-display" id="sentEmail"></div>
+                <p style="font-size: 0.8rem; color: var(--coffee-400);">Vui lòng kiểm tra hộp thư (kể cả mục spam) và nhấp vào liên kết để đặt lại mật khẩu.</p>
+            </div>
+
+            <a href="dang-nhap.html" class="btn-coffee-outline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
+                </svg>
+                Quay lại đăng nhập
+            </a>
+
+            <div class="back-link">
+                <a href="dang-nhap.html" style="margin-top: 0.75rem;">← Đăng nhập</a>
+            </div>
+        </div>
+
+        <div class="home-link">
+            <a href="trang-chu.html">← Về trang chủ</a>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+
+    <script>
+        function showToast(message, type) {
+            type = type || 'success';
+            var existing = document.querySelector('.plei-toast');
+            if (existing) existing.remove();
+
+            var toast = document.createElement('div');
+            toast.className = 'plei-toast toast-' + type;
+            toast.innerHTML = '<span>' + message + '</span>';
+            document.body.appendChild(toast);
+
+            setTimeout(function() {
+                toast.style.animation = 'toastOut 0.4s ease forwards';
+                setTimeout(function() { toast.remove(); }, 400);
+            }, 3000);
+        }
+
+        function showAlert(message, type) {
+            var container = document.getElementById('alertContainer');
+            container.innerHTML = '<div style="border-radius: 0.75rem; padding: 12px 16px; margin-bottom: 1rem; font-size: 0.9rem; background: ' + (type === 'success' ? '#dcfce7; border: 1px solid #bbf7d0; color: #16a34a;' : '#fee2e2; border: 1px solid #fecaca; color: #dc2626;') + '">' + message + '</div>';
+            setTimeout(function() {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function handleForgotPassword(event) {
+            event.preventDefault();
+
+            var email = document.getElementById('email').value.trim();
+            var btn = document.getElementById('submitBtn');
+            var btnText = document.getElementById('submitText');
+
+            if (!email || !validateEmail(email)) {
+                document.getElementById('email').classList.add('is-invalid');
+                document.getElementById('emailError').classList.add('show');
+                return;
+            }
+
+            document.getElementById('email').classList.remove('is-invalid');
+            document.getElementById('emailError').classList.remove('show');
+
+            btn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span> Đang gửi...';
+
+            setTimeout(function() {
+                var allUsers = DATA.users || [];
+                var storedUsers = localStorage.getItem('plei_users');
+                if (storedUsers) {
+                    try {
+                        var extraUsers = JSON.parse(storedUsers);
+                        if (Array.isArray(extraUsers)) {
+                            allUsers = allUsers.concat(extraUsers);
+                        }
+                    } catch(e) {}
+                }
+
+                var found = allUsers.some(function(u) { return u.email === email; });
+
+                if (found) {
+                    document.getElementById('sentEmail').textContent = email;
+                    document.getElementById('formSection').classList.remove('active');
+                    document.getElementById('successSection').classList.add('active');
+                    document.querySelector('.home-link').style.display = 'none';
+                } else {
+                    showAlert('Email này chưa được đăng ký. Vui lòng kiểm tra lại hoặc <a href="dang-ky.html" style="color: inherit; font-weight: 600;">đăng ký mới</a>.', 'danger');
+                    btn.disabled = false;
+                    btnText.textContent = 'Gửi yêu cầu';
+                }
+            }, 800);
+        }
+    </script>
+</body>
+</html>

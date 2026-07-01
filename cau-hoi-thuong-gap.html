@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Câu hỏi thường gặp - 3T Café. Giải đáp mọi thắc mắc về sản phẩm, giao hàng, thanh toán và dịch vụ.">
+    <meta name="robots" content="index, follow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/iconas.ico">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/total.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+
+    <title>Câu hỏi thường gặp - 3T Café</title>
+</head>
+<body class="bg-coffee-50">
+
+    <!-- TẢI TRANG -->
+    <div id="page-loader">
+        <div class="loader-logo">3T Café</div>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- ============================
+         HEADER
+         ============================ -->
+    <header class="site-header">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between py-2">
+                <a href="trang-chu.html" class="site-logo d-flex align-items-center gap-2">
+                    <img src="images/logo.png" alt="3T Cafe - Cà phê nguyên chất" style="height:48px; width:48px; border-radius:50%; object-fit:cover; border:2px solid rgba(255,255,255,0.15)">
+                    <span class="d-none d-sm-inline" style="font-family:var(--bs-heading-font-family);font-weight:800;font-size:1.3rem;letter-spacing:0.5px">3T Café</span>
+                </a>
+
+                <nav class="d-none d-md-flex align-items-center gap-1">
+                    <a href="trang-chu.html" class="nav-link">Trang chủ</a>
+                    <a href="san-pham.html" class="nav-link">Menu</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="thong-tin-don-hang.html" class="nav-link">Theo dõi đơn</a>
+                    <a href="lien-he.html" class="nav-link">Liên hệ</a>
+                </nav>
+
+                <div class="d-flex align-items-center gap-2">
+                    <form id="headerSearchForm" class="d-none d-lg-flex">
+                        <div class="header-search">
+                            <input type="search" name="q" placeholder="Tìm kiếm..." autocomplete="off">
+                            <button type="submit">🔍</button>
+                        </div>
+                    </form>
+
+                    <a href="trang-yeu-thich.html" class="nav-link d-none d-sm-flex align-items-center justify-content-center" style="width:38px;height:38px;padding:0">
+                        <span style="font-size:18px">♥</span>
+                    </a>
+
+                    <button class="nav-link d-flex align-items-center justify-content-center position-relative"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer"
+                            onclick="openCartDrawer()" data-cart-toggle title="Giỏ hàng">
+                        <span style="font-size:18px">🛒</span>
+                        <span id="cartBadge" class="cart-badge" style="display:none">0</span>
+                    </button>
+
+                    <div id="navAuthItem">
+                        <a href="dang-nhap.html" class="nav-link d-flex align-items-center gap-1">
+                             
+                            <span class="d-none d-sm-inline">Đăng nhập</span>
+                        </a>
+                    </div>
+
+                    <button id="mobileMenuToggle" class="d-md-none nav-link d-flex align-items-center justify-content-center"
+                            style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer">
+                        <span class="menu-icon" style="font-size:20px">☰</span>
+                    </button>
+                </div>
+            </div>
+
+            <nav id="mobileNav" class="mobile-nav collapse">
+                <a href="trang-chu.html" class="nav-link d-block">Trang chủ</a>
+                 <a href="san-pham.html" class="nav-link d-block">Menu</a>
+                <a href="blog.html" class="nav-link d-block">Blog</a>
+                <a href="thong-tin-don-hang.html" class="nav-link d-block">Theo dõi đơn hàng</a>
+                <a href="lien-he.html" class="nav-link d-block">Liên hệ</a>
+                <a href="trang-yeu-thich.html" class="nav-link d-block">Yêu thích</a>
+                <a href="dang-nhap.html" class="nav-link d-block">Đăng nhập / Đăng ký</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ============================
+               ẢNH BÌA TRANG
+             ============================ -->
+        <section class="page-hero">
+            <div class="page-hero-bg" style="background-image:url('images/3.png')"></div>
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content">
+                <h1>Câu hỏi thường gặp</h1>
+                <div class="breadcrumb-nav mt-2">
+                    <a href="trang-chu.html">Trang chủ</a>
+                    <span>/</span>
+                    <span>FAQ</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================
+              PHẦN CÂU HỎI THƯỜNG GẶP
+             ============================ -->
+        <section class="section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <!-- Tìm kiếm -->
+                        <div class="mb-5">
+                            <div style="position:relative;max-width:560px;margin:0 auto">
+                                <input type="text" id="faqSearchInput" class="form-control-coffee" placeholder="🔍 Tìm kiếm câu hỏi..." autocomplete="off" style="padding-right:3rem">
+                                <button id="faqSearchClear" onclick="clearFaqSearch()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--coffee-400);font-size:1.1rem;cursor:pointer;display:none" title="Xóa tìm kiếm">✕</button>
+                            </div>
+                            <p id="faqSearchResult" style="text-align:center;color:var(--coffee-500);font-size:0.875rem;margin-top:0.75rem;display:none"></p>
+                        </div>
+
+                        <!--  Danh mục nhanh -->
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" id="faqCategoryFilters">
+                            <button class="filter-tag active" data-category="all" onclick="filterFaqs('all', this)">📋 Tất cả</button>
+                            <button class="filter-tag" data-category="giao-hang" onclick="filterFaqs('giao-hang', this)">🚚 Giao hàng</button>
+                            <button class="filter-tag" data-category="thanh-toan" onclick="filterFaqs('thanh-toan', this)">💳 Thanh toán</button>
+                            <button class="filter-tag" data-category="doi-tra" onclick="filterFaqs('doi-tra', this)">🔄 Đổi trả</button>
+                            <button class="filter-tag" data-category="san-pham" onclick="filterFaqs('san-pham', this)">☕ Sản phẩm</button>
+                        </div>
+
+                        <!-- Danh sách câu hỏi  -->
+                        <div id="faqListContainer">
+                            <div id="faqList">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Không tìm thấy kết quả -->
+                        <div id="faqNoResults" style="display:none">
+                            <div class="text-center py-5">
+                                <div style="font-size:4rem;margin-bottom:1rem;opacity:0.4">🔍</div>
+                                <h4 style="color:var(--coffee-700);margin-bottom:0.5rem">Không tìm thấy câu hỏi phù hợp</h4>
+                                <p style="color:var(--coffee-500);font-size:0.9rem">Thử tìm kiếm với từ khóa khác hoặc <a href="lien-he.html" style="color:var(--coffee-600);font-weight:600">liên hệ trực tiếp</a> với chúng tôi.</p>
+                            </div>
+                        </div>
+
+                        <!-- Liên hệ hỗ trợ -->
+                        <div class="text-center mt-5 p-4 rounded-3" style="background:linear-gradient(135deg,var(--coffee-100),var(--coffee-50));border:1px solid rgba(245,230,211,0.8)">
+                            <h4 style="color:var(--coffee-800);margin-bottom:0.5rem">Không tìm được câu trả lời?</h4>
+                            <p style="color:var(--coffee-600);font-size:0.9rem;margin-bottom:1.25rem">Đội ngũ hỗ trợ của 3T Café luôn sẵn sàng giúp bạn 24/7</p>
+                            <a href="lien-he.html" class="btn-coffee d-inline-flex align-items-center gap-2" style="padding:12px 28px;border-radius:50px">
+                                💬 Liên hệ hỗ trợ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================
+             ĐĂNG KÝ NHẬN TIN
+             ============================ -->
+        <section class="newsletter-cta">
+            <div class="container text-center text-white">
+                <h2 class="font-display mb-3" style="color:var(--coffee-50);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800">Đăng ký nhận ưu đãi</h2>
+                <p class="mb-4" style="color:var(--coffee-50);max-width:500px;margin:0 auto 1.5rem">
+                    Nhận ngay coupon giảm 10% cho đơn hàng đầu tiên và cập nhật những ưu đãi độc quyền
+                </p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Nhập email của bạn" required>
+                    <button type="submit">Đăng ký ngay</button>
+                </form>
+                <div id="newsletterSuccess" style="display:none" class="mt-3">
+                    <div style="background:rgba(34,197,94,0.2);border-radius:1rem;padding:1.5rem;max-width:440px;margin:0 auto">
+                        <p style="font-weight:700;font-size:1.1rem;margin-bottom:0.25rem;color:white">Đăng ký thành công!</p>
+                        <p style="color:var(--coffee-200);margin:0;font-size:0.9rem">Cảm ơn bạn đã đăng ký. Hãy kiểm tra email!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================
+         FOOTER
+         ============================ -->
+    <footer class="site-footer">
+        <div class="container py-5">
+            <div class="row g-4 g-lg-5">
+                <div class="col-lg-4">
+                    <div class="footer-brand mb-3">
+                        <a href="trang-chu.html" class="d-flex align-items-center gap-2 mb-3">
+                            <img src="images/logo.png" alt="3T Café" style="height:40px;border-radius:50%">
+                            <span class="logo-text">3T Café</span>
+                        </a>
+                    </div>
+                    <p style="font-size:0.875rem;line-height:1.7;margin-bottom:1rem">
+                        Trải nghiệm cà phê nguyên chất, rang xay từ những hạt cà phê chọn lọc vùng Tây Nguyên Việt Nam.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><img src="images/facebook.png" alt="Facebook" width="32" height="24"></a>
+                        <a href="#" title="Instagram"><img src="images/insta.png" alt="Instagram" width="22" height="24"></a>
+                        <a href="#" title="Zalo"><img src="images/zalo.png" alt="Zalo" width="32" height="24"></a>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h5>Cửa hàng</h5>
+                    <ul class="footer-links">
+                        <li><a href="san-pham.html">Sản phẩm</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-den">Cà phê đen</a></li>
+                        <li><a href="san-pham.html?category=ca-phe-sua">Cà phê sữa</a></li>
+                        <li><a href="san-pham.html?category=latte-cappuccino">Latte & Cappuccino</a></li>
+                        <li><a href="voucher.html">Voucher</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h5>Hỗ trợ</h5>
+                    <ul class="footer-links">
+                        <li><a href="cau-hoi-thuong-gap.html">Câu hỏi thường gặp</a></li>
+                        <li><a href="thong-tin-don-hang.html">Theo dõi đơn hàng</a></li>
+                        <li><a href="chinh-sach-doi-tra.html">Chính sách đổi trả</a></li>
+                        <li><a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a></li>
+                        <li><a href="dieu-khoan.html">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <h5>Liên hệ</h5>
+                    <ul class="footer-links" style="gap:1rem;display:flex;flex-direction:column">
+                        <li class="d-flex gap-2">
+                            <span>📍</span>
+                            <span>Số 1 Võ Văn Ngân, P.Linh Chiểu, TP.Thủ Đức, TP.HCM</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>📞</span>
+                            <a href="tel:0901234567">0898369761</a>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span>✉️</span>
+                            <a href="mailto:thanhtram.ute@gmail.com">thanhtram.ute@gmail.com</a>
+                        </li>
+                    </ul>
+                    <div class="mt-3">
+                        <p style="font-size:0.75rem;color:var(--coffee-500);margin-bottom:8px">Chấp nhận thanh toán:</p>
+                        <div class="payment-badges">
+                            <span>💵 COD</span>
+                            <span>🏦 Banking</span>
+                            <span>📲 VNPay</span>
+                            <span>📱 MoMo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                    <p class="mb-0">© 2025–2026 3T Café. Tất cả quyền được bảo lưu.</p>
+                    <p class="mb-0" style="color:var(--coffee-600)">☕ Cà phê nguyên chất - Vì người Việt</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================
+         NGĂN GIỎ HÀNG
+         ============================ -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h4>🛒 Giỏ hàng</h4>
+            <button class="cart-drawer-close" id="cartDrawerClose">✕</button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody">
+        </div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none">
+        </div>
+    </div>
+
+    <button id="backToTop" title="Lên đầu trang">↑</button>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/layout.js"></script>
+
+    <!-- KHỞI TẠO TRANG -->
+    <script>
+    (function() {
+        'use strict';
+
+        var faqs = DATA.faqs || [];
+        var currentCategory = 'all';
+        var searchQuery = '';
+
+        //Phân loại FAQ dựa trên từ khóa
+        function getFaqCategory(faq) {
+            var text = (faq.question + ' ' + faq.answer).toLowerCase();
+            if (/giao|ship|vận chuyển|thời gian/.test(text)) return 'giao-hang';
+            if (/thanh toán|banking|cod|momo|vnpay/.test(text)) return 'thanh-toan';
+            if (/đổi|trả|hoàn/.test(text)) return 'doi-tra';
+            if (/đơn hàng|sản phẩm|mua/.test(text)) return 'san-pham';
+            return 'all';
+        }
+
+        function getFilteredFaqs() {
+            return faqs.filter(function(f) {
+                // Lọc theo danh mục
+                if (currentCategory !== 'all') {
+                    if (getFaqCategory(f) !== currentCategory) return false;
+                }
+                // Lọc theo từ khóa tìm kiếm
+                if (searchQuery) {
+                    var q = searchQuery.toLowerCase();
+                    var text = (f.question + ' ' + f.answer).toLowerCase();
+                    return text.indexOf(q) > -1;
+                }
+                return true;
+            });
+        }
+
+        function renderFaqs() {
+            var filtered = getFilteredFaqs();
+            var faqList = document.getElementById('faqList');
+            var noResults = document.getElementById('faqNoResults');
+            var searchResult = document.getElementById('faqSearchResult');
+
+            if (!faqList) return;
+
+            if (filtered.length === 0) {
+                faqList.innerHTML = '';
+                if (noResults) noResults.style.display = 'block';
+                if (searchQuery && searchResult) {
+                    searchResult.textContent = 'Không có kết quả cho "' + searchQuery + '"';
+                    searchResult.style.display = 'block';
+                }
+                return;
+            }
+
+            if (noResults) noResults.style.display = 'none';
+            if (searchResult) {
+                if (searchQuery) {
+                    searchResult.textContent = 'Tìm thấy ' + filtered.length + ' câu hỏi cho "' + searchQuery + '"';
+                    searchResult.style.display = 'block';
+                } else {
+                    searchResult.style.display = 'none';
+                }
+            }
+
+            faqList.innerHTML = filtered.map(function(f, i) {
+                return '<div class="faq-item" data-index="' + i + '">' +
+                    '<button class="faq-question w-100" onclick="toggleFaqItem(this)">' +
+                        '<span class="flex-grow-1 text-start" style="font-weight:600;color:var(--coffee-800)">' + f.question + '</span>' +
+                        '<span class="faq-toggle">+</span>' +
+                    '</button>' +
+                    '<div class="faq-answer" style="display:none">' + f.answer + '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        window.toggleFaqItem = function(btn) {
+            var item = btn.closest('.faq-item');
+            var answer = item.querySelector('.faq-answer');
+            var isOpen = item.classList.contains('open');
+
+            // Đóng tất cả câu hỏi
+            document.querySelectorAll('.faq-item.open').forEach(function(i) {
+                i.classList.remove('open');
+                var a = i.querySelector('.faq-answer');
+                if (a) a.style.display = 'none';
+                var t = i.querySelector('.faq-toggle');
+                if (t) t.textContent = '+';
+            });
+
+            //Mở hoặc đóng câu hỏi hiện tại
+            if (!isOpen) {
+                item.classList.add('open');
+                if (answer) answer.style.display = 'block';
+                var toggle = item.querySelector('.faq-toggle');
+                if (toggle) toggle.textContent = '+';
+                toggle.style.transform = 'rotate(45deg)';
+                toggle.style.background = 'var(--coffee-600)';
+                toggle.style.color = 'white';
+            }
+        };
+
+        window.filterFaqs = function(category, btn) {
+            currentCategory = category;
+            document.querySelectorAll('#faqCategoryFilters .filter-tag').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            if (btn) btn.classList.add('active');
+            renderFaqs();
+        };
+
+        window.clearFaqSearch = function() {
+            var input = document.getElementById('faqSearchInput');
+            var clearBtn = document.getElementById('faqSearchClear');
+            if (input) input.value = '';
+            if (clearBtn) clearBtn.style.display = 'none';
+            searchQuery = '';
+            renderFaqs();
+        };
+
+        // Ô tìm kiếm
+        var searchInput = document.getElementById('faqSearchInput');
+        var searchClearBtn = document.getElementById('faqSearchClear');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                searchQuery = this.value.trim();
+                if (searchClearBtn) {
+                    searchClearBtn.style.display = searchQuery ? 'block' : 'none';
+                }
+                renderFaqs();
+            });
+        }
+
+        //Đăng ký nhận tin
+        var nlForm = document.getElementById('newsletterForm');
+        if (nlForm) {
+            nlForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                nlForm.style.display = 'none';
+                document.getElementById('newsletterSuccess').style.display = 'block';
+                showToast('Đăng ký thành công! Cảm ơn bạn 🎉', 'success');
+            });
+        }
+
+        // Khởi tạo
+        renderFaqs();
+
+    })();
+    </script>
+</body>
+</html>

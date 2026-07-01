@@ -1,0 +1,514 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đăng nhập - 3T Coffee</title>
+    <meta name="description" content="Đăng nhập tài khoản 3T Coffee - Cà phê nguyên chất từ Pleiku">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/coffee-bootstrap.css">
+    <link rel="shortcut icon" href="images/iconas.ico">
+
+    <style>
+        :root {
+            --coffee-50: #fdf8f3;
+            --coffee-100: #f5e6d3;
+            --coffee-200: #e8c9a8;
+            --coffee-300: #d4a574;
+            --coffee-400: #c08552;
+            --coffee-500: #a0623a;
+            --coffee-600: #7d4a2e;
+            --coffee-700: #5c3522;
+            --coffee-800: #3d2318;
+            --coffee-900: #2a1810;
+        }
+
+        body.auth-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--coffee-50) 0%, var(--coffee-100) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 60px rgba(45, 35, 24, 0.2);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            border: 1px solid rgba(245, 230, 211, 0.8);
+        }
+
+        .auth-card .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-card .logo img {
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .auth-card .logo-text {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+        }
+
+        .auth-card h3 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--coffee-800);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-card .subtitle {
+            text-align: center;
+            color: var(--coffee-500);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--coffee-700);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .form-control-coffee {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--coffee-200);
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--coffee-900);
+            background: white;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .form-control-coffee:focus {
+            border-color: var(--coffee-500);
+            box-shadow: 0 0 0 3px rgba(125, 74, 46, 0.1);
+        }
+
+        .form-control-coffee::placeholder {
+            color: var(--coffee-400);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .form-control-coffee {
+            padding-right: 48px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--coffee-400);
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            padding: 4px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: var(--coffee-600);
+        }
+
+        .btn-coffee {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--coffee-600), var(--coffee-500));
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-coffee:hover {
+            background: linear-gradient(135deg, var(--coffee-500), var(--coffee-400));
+            box-shadow: 0 4px 16px rgba(125, 74, 46, 0.4);
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        .btn-coffee:active {
+            transform: scale(0.98);
+        }
+
+        .btn-coffee:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-coffee-outline {
+            width: 100%;
+            padding: 13px;
+            background: transparent;
+            color: var(--coffee-600);
+            border: 2px solid var(--coffee-300);
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-coffee-outline:hover {
+            background: var(--coffee-50);
+            border-color: var(--coffee-600);
+            color: var(--coffee-600);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--coffee-400);
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--coffee-200);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        .forgot-link {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.25rem;
+        }
+
+        .forgot-link a {
+            color: var(--coffee-600);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .forgot-link a:hover {
+            color: var(--coffee-500);
+            text-decoration: underline;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--coffee-600);
+            font-size: 0.9rem;
+        }
+
+        .register-link a {
+            color: var(--coffee-600);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .register-link a:hover {
+            color: var(--coffee-500);
+            text-decoration: underline;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .plei-toast {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: toastIn 0.4s ease;
+            max-width: 360px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes toastOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+
+        .toast-success { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .toast-error { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .toast-info { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+        .home-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .home-link a {
+            color: var(--coffee-500);
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .home-link a:hover {
+            color: var(--coffee-700);
+        }
+
+        @media (max-width: 575.98px) {
+            .auth-card {
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="auth-page">
+
+    <div class="auth-card">
+        <div class="logo">
+            <img src="images/logo-bill.png" alt="3T Coffee Logo">
+            <span class="logo-text">3T Coffee</span>
+        </div>
+
+        <h3>Đăng nhập</h3>
+        <p class="subtitle">Chào mừng bạn quay trở lại!</p>
+
+        <div id="alertContainer"></div>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control-coffee" placeholder="email@example.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" class="form-control-coffee" placeholder="Nhập mật khẩu" required autocomplete="current-password">
+                    <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Hiện/ẩn mật khẩu">
+                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="forgot-link">
+                <a href="quen-mat-khau.html">Quên mật khẩu?</a>
+            </div>
+
+            <button type="submit" class="btn-coffee" id="loginBtn">
+                <span id="loginText">Đăng nhập</span>
+            </button>
+        </form>
+
+        <div class="divider"><span>hoặc</span></div>
+
+        <div class="register-link">
+            Chưa có tài khoản? <a href="dang-ky.html">Đăng ký ngay</a>
+        </div>
+
+        <div class="home-link">
+            <a href="trang-chu.html">← Về trang chủ</a>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/layout.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentUser = localStorage.getItem('plei_current_user');
+            if (currentUser) {
+                try {
+                    var user = JSON.parse(currentUser);
+                    if (user && user.email) {
+                        if (user.role === 'admin') {
+                            window.location.href = 'quan-tri.html';
+                        } else {
+                            window.location.href = 'tai-khoan.html';
+                        }
+                    }
+                } catch(e) {}
+            }
+        });
+
+        function togglePassword() {
+            var input = document.getElementById('password');
+            var icon = document.getElementById('eyeIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+            }
+        }
+
+        function showToast(message, type) {
+            type = type || 'success';
+            var existing = document.querySelector('.plei-toast');
+            if (existing) existing.remove();
+
+            var toast = document.createElement('div');
+            toast.className = 'plei-toast toast-' + type;
+            toast.innerHTML = '<span>' + message + '</span>';
+            document.body.appendChild(toast);
+
+            setTimeout(function() {
+                toast.style.animation = 'toastOut 0.4s ease forwards';
+                setTimeout(function() { toast.remove(); }, 400);
+            }, 3000);
+        }
+
+        function showAlert(message, type) {
+            var container = document.getElementById('alertContainer');
+            var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            container.innerHTML = '<div class="alert ' + alertClass + '" style="border-radius: 0.75rem; padding: 12px 16px; margin-bottom: 1rem; font-size: 0.9rem; background: ' + (type === 'success' ? '#dcfce7; border: 1px solid #bbf7d0; color: #16a34a;' : '#fee2e2; border: 1px solid #fecaca; color: #dc2626;') + '">' + message + '</div>';
+            setTimeout(function() {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            var email = document.getElementById('email').value.trim();
+            var password = document.getElementById('password').value;
+            var btn = document.getElementById('loginBtn');
+            var btnText = document.getElementById('loginText');
+
+            if (!email || !password) {
+                showAlert('Vui lòng nhập đầy đủ email và mật khẩu!', 'danger');
+                return;
+            }
+
+            btn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span> Đang xử lý...';
+
+            setTimeout(function() {
+                var foundUser = null;
+                var allUsers = DATA.users || [];
+
+                var storedUsers = localStorage.getItem('plei_users');
+                if (storedUsers) {
+                    try {
+                        var extraUsers = JSON.parse(storedUsers);
+                        if (Array.isArray(extraUsers)) {
+                            allUsers = allUsers.concat(extraUsers);
+                        }
+                    } catch(e) {}
+                }
+
+                for (var i = 0; i < allUsers.length; i++) {
+                    if (allUsers[i].email === email && allUsers[i].password === password) {
+                        foundUser = allUsers[i];
+                        break;
+                    }
+                }
+
+                if (foundUser) {
+                    var safeUser = {
+                        id: foundUser.id,
+                        email: foundUser.email,
+                        name: foundUser.name,
+                        role: foundUser.role,
+                        phone: foundUser.phone || '',
+                        address: foundUser.address || '',
+                        loyaltyPoints: foundUser.loyaltyPoints || 0
+                    };
+
+                    localStorage.setItem('plei_current_user', JSON.stringify(safeUser));
+                    localStorage.setItem('plei_user', JSON.stringify(safeUser));
+                    localStorage.setItem('currentUser', JSON.stringify(safeUser));
+
+                    showToast('Đăng nhập thành công!', 'success');
+
+                    setTimeout(function() {
+                        if (safeUser.role === 'admin') {
+                            window.location.href = 'quan-tri.html';
+                        } else {
+                            window.location.href = 'tai-khoan.html';
+                        }
+                    }, 800);
+                } else {
+                    showAlert('Email hoặc mật khẩu không đúng!', 'danger');
+                    btn.disabled = false;
+                    btnText.textContent = 'Đăng nhập';
+                }
+            }, 600);
+        }
+    </script>
+</body>
+</html>
