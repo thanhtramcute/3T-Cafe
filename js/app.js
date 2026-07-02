@@ -1,10 +1,10 @@
 ﻿// ================================
-// 3TCoffee - MAIN APPLICATION
+// 3TCoffee - ỨNG DỤNG CHÍNH
 // ================================
 
 const App = {
     // ================================
-    // CONFIG
+    // CẤU HÌNH
     // ================================
     config: {
         currency: 'đ',
@@ -17,7 +17,7 @@ const App = {
     },
 
     // ================================
-    // UTILITIES
+    // TIỆN ÍCH
     // ================================
     utils: {
         formatPrice: function(price) {
@@ -68,7 +68,7 @@ const App = {
     },
 
     // ================================
-    // STORAGE (LocalStorage wrapper)
+    // LƯU TRỮ (Bọc LocalStorage)
     // ================================
     storage: {
         key: 'plei_cart', // shared key with layout.js
@@ -122,7 +122,7 @@ const App = {
             this.loadOrders();
             const lastUser = this.load('currentUser', null);
             if (lastUser) {
-                // Also save to legacy keys
+                // Đồng thời lưu vào các khóa cũ (legacy)
                 this.save('plei_current_user', lastUser);
                 this.save('plei_user', lastUser);
                 App.auth.currentUser = lastUser;
@@ -131,7 +131,7 @@ const App = {
     },
 
     // ================================
-    // AUTHENTICATION
+    // XÁC THỰC
     // ================================
     auth: {
         currentUser: null,
@@ -151,7 +151,7 @@ const App = {
                 const { password, ...safeUser } = user;
                 this.currentUser = safeUser;
                 App.storage.save('currentUser', safeUser);
-                // Also save to legacy keys for header compatibility
+                // Đồng thời lưu vào các khóa cũ để tương thích với header
                 App.storage.save('plei_current_user', safeUser);
                 App.storage.save('plei_user', safeUser);
                 this.updateUI();
@@ -241,7 +241,7 @@ const App = {
         },
 
         injectNavAuth: function() {
-            // Handle #navAuthItem (layout.js-style header, used on most pages)
+            // Xử lý #navAuthItem (header kiểu layout.js, dùng ở hầu hết các trang)
             const authItem = document.getElementById('navAuthItem');
             if (authItem) {
                 if (this.isLoggedIn()) {
@@ -254,7 +254,7 @@ const App = {
                 }
             }
 
-            // Handle #ftco-nav navbar (Bootstrap-style nav used on some pages)
+            // Xử lý thanh điều hướng #ftco-nav (kiểu Bootstrap, dùng ở một số trang)
             document.querySelectorAll('#ftco-nav .navbar-nav').forEach(nav => {
                 if (nav.querySelector('[data-nav-auth]')) return;
 
@@ -278,16 +278,15 @@ const App = {
                 }
             });
 
-            // Also call layout.js initAuthState if available
+            // Đồng thời gọi initAuthState của layout.js nếu có
             if (typeof initAuthState === 'function') {
                 initAuthState();
             }
         },
-        },
     },
 
     // ================================
-    // CART
+    // GIỎ HÀNG
     // ================================
     cart: {
         items: [],
@@ -323,7 +322,7 @@ const App = {
 
             this.save();
             this.updateUI();
-            // Toast is shown by layout.js addToCart wrapper
+            // Thông báo (toast) được hiển thị bởi hàm addToCart trong layout.js
             return true;
         },
 
@@ -679,7 +678,7 @@ const App = {
     },
 
     // ================================
-    // VOUCHERS
+    // MÃ GIẢM GIÁ
     // ================================
     vouchers: {
         appliedCode: null,
@@ -705,17 +704,17 @@ const App = {
                 return { valid: false, message: 'Mã voucher không hợp lệ!' };
             }
 
-            // Check expiry date
+            // Kiểm tra ngày hết hạn
             if (new Date(voucher.expDate) < new Date()) {
                 return { valid: false, message: 'Mã voucher đã hết hạn!' };
             }
 
-            // Check usage limit
+            // Kiểm tra giới hạn số lần sử dụng
             if (voucher.usageLimit > 0 && voucher.usedCount >= voucher.usageLimit) {
                 return { valid: false, message: 'Mã voucher đã hết lượt sử dụng!' };
             }
 
-            // Check minimum order
+            // Kiểm tra giá trị đơn hàng tối thiểu
             if (voucher.minOrder > subtotal) {
                 return { valid: false, message: `Đơn hàng tối thiểu ${App.utils.formatPrice(voucher.minOrder)} để sử dụng mã này!` };
             }
@@ -771,7 +770,7 @@ const App = {
     },
 
     // ================================
-    // REVIEWS
+    // ĐÁNH GIÁ
     // ================================
     reviews: {
         userReviews: [],
@@ -808,7 +807,7 @@ const App = {
             this.userReviews.push(review);
             App.storage.save('userReviews', this.userReviews);
 
-            // Update product rating
+            // Cập nhật điểm đánh giá sản phẩm
             const product = DATA.products.find(p => p.id === reviewData.productId);
             if (product) {
                 const allReviews = this.getByProduct(reviewData.productId);
@@ -838,7 +837,7 @@ const App = {
     },
 
     // ================================
-    // WISHLIST
+    // DANH SÁCH YÊU THÍCH
     // ================================
     wishlist: {
         items: [],
@@ -926,7 +925,7 @@ const App = {
     },
 
     // ================================
-    // ORDERS
+    // ĐƠN HÀNG
     // ================================
     orders: {
         items: [],
@@ -1022,7 +1021,7 @@ const App = {
     },
 
     // ================================
-    // PRODUCTS
+    // SẢN PHẨM
     // ================================
     products: {
         getAll: function() {
@@ -1116,7 +1115,7 @@ const App = {
     },
 
     // ================================
-    // CATEGORIES
+    // DANH MỤC
     // ================================
     categories: {
         getAll: function() {
@@ -1133,7 +1132,7 @@ const App = {
     },
 
     // ================================
-    // BLOGS
+    // BÀI VIẾT
     // ================================
     blogs: {
         getAll: function() {
@@ -1154,7 +1153,7 @@ const App = {
     },
 
     // ================================
-    // FAQS
+    // CÂU HỎI THƯỜNG GẶP
     // ================================
     faqs: {
         getAll: function() {
@@ -1167,7 +1166,7 @@ const App = {
     },
 
     // ================================
-    // TOAST NOTIFICATIONS
+    // THÔNG BÁO (TOAST)
     // ================================
     toast: {
         container: null,
@@ -1205,15 +1204,15 @@ const App = {
 
             this.container.appendChild(toast);
 
-            // Animate in
+            // Hiệu ứng xuất hiện
             setTimeout(() => toast.classList.add('show'), 10);
 
-            // Close button
+            // Nút đóng
             toast.querySelector('.toast-close').addEventListener('click', () => {
                 this.dismiss(toast);
             });
 
-            // Auto dismiss
+            // Tự động ẩn
             setTimeout(() => this.dismiss(toast), 4000);
 
             return toast;
@@ -1232,7 +1231,7 @@ const App = {
     },
 
     // ================================
-    // RENDER HELPERS
+    // HÀM HỖ TRỢ HIỂN THỊ
     // ================================
         render: {
             productCard: function(product) {
@@ -1473,7 +1472,7 @@ const App = {
         },
 
     // ================================
-    // INITIALIZATION
+    // KHỞI TẠO
     // ================================
     init: function() {
         this.auth.init();
@@ -1517,11 +1516,11 @@ const App = {
     },
 };
 
-// Global aliases for backward compatibility
+// Bí danh toàn cục để tương thích ngược
 App.formatPrice = App.utils.formatPrice.bind(App.utils);
 window.updateCartUI = function() { App.cart.updateUI(); };
 
-// Initialize when DOM is ready
+// Khởi tạo khi DOM đã sẵn sàng
 document.addEventListener('DOMContentLoaded', function() {
     App.init();
 });

@@ -839,16 +839,17 @@
 
     <!-- PAGE SCRIPT -->
     <script>
+//Lưu thông tin sản phẩm đang được xem., được chọn, được đánh giá 
+
     (function() {
         'use strict';
 
-        // State
         var currentProduct = null;
         var currentQty = 1;
         var currentRating = 0;
         var activeTab = 'description';
 
-        // Get product ID from URL
+        //  Tìm sản phẩm theo ID
         function getProductId() {
             var params = new URLSearchParams(window.location.search);
             return params.get('id');
@@ -859,12 +860,14 @@
             return DATA.products.find(function(p) { return p.id === id; });
         }
 
-        // Format price
+        //  Định dạng giá tiền
         function formatPrice(price) {
             return new Intl.NumberFormat('vi-VN').format(price) + 'đ';
         }
 
-        // Get stars HTML
+        // Hiển thị số sao đánh giá
+        // - Sao vàng biểu thị số điểm đánh giá.
+// - Sao xám biểu thị số sao chưa đạt.
         function getStarsHTML(rating) {
             rating = parseFloat(rating) || 0;
             var html = '';
@@ -880,7 +883,7 @@
             return html;
         }
 
-        // Get user reviews from localStorage
+        // Lấy danh sách đánh giá từ Local Storage
         function getUserReviews() {
             try {
                 return JSON.parse(localStorage.getItem('plei_user_reviews') || '[]');
@@ -889,21 +892,21 @@
             }
         }
 
-        // Save user review
+        // Lưu người đánh giá
         function saveUserReview(review) {
             var reviews = getUserReviews();
             reviews.push(review);
             localStorage.setItem('plei_user_reviews', JSON.stringify(reviews));
         }
 
-        // Get all reviews for product
+        // Lấy tất cả đánh giá của sản phẩm
         function getProductReviews(productId) {
             var dataReviews = DATA.reviews.filter(function(r) { return r.productId === productId; });
             var userReviews = getUserReviews().filter(function(r) { return r.productId === productId; });
             return [...dataReviews, ...userReviews];
         }
 
-        // Calculate average rating
+        // Tính điểm đánh giá trung bình
         function getAverageRating(productId) {
             var reviews = getProductReviews(productId);
             if (reviews.length === 0) return 0;
@@ -911,7 +914,7 @@
             return sum / reviews.length;
         }
 
-        // Get rating counts
+        // Thống kê số lượng đánh giá
         function getRatingCounts(productId) {
             var reviews = getProductReviews(productId);
             var counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
@@ -921,15 +924,14 @@
             return counts;
         }
 
-        // Check if wishlisted
+        //Kiểm tra sản phẩm có trong yêu thích
         function isWishlisted(productId) {
             try {
                 var wl = JSON.parse(localStorage.getItem('plei_wishlist') || '[]');
                 return wl.indexOf(productId) > -1;
             } catch(e) { return false; }
         }
-
-        // Render breadcrumb
+// - Tạo đường dẫn từ Trang chủ → Sản phẩm → Danh mục → Tên sản phẩm.
         function renderBreadcrumb(product) {
             var breadcrumb = document.getElementById('breadcrumb');
             breadcrumb.innerHTML =
@@ -944,7 +946,7 @@
                 '<span class="breadcrumb-current">' + product.name + '</span>';
         }
 
-        // Render gallery
+        //Lấy danh sách ảnh của sản phẩm.
         function renderGallery(product) {
             var mainImg = document.getElementById('mainProductImage');
             var thumbs = document.getElementById('galleryThumbs');
@@ -963,7 +965,7 @@
             }
         }
 
-        // Change main image
+        //Thay đổi ảnh chính khi click thumbnail
         window.changeMainImage = function(src, thumbEl) {
             var mainImg = document.getElementById('mainProductImage');
             mainImg.src = src;
@@ -972,8 +974,12 @@
             });
             thumbEl.classList.add('active');
         };
-
-        // Render product info
+// Hiển thị thông tin sản phẩm (Product Info)
+// - Hiển thị danh mục sản phẩm (có link lọc theo category).
+// - Hiển thị tên sản phẩm.
+// - Hiển thị đánh giá sao và điểm rating trung bình.
+// - Hiển thị số lượng đánh giá.
+// - Hiển thị số lượng sản phẩm đã bá
         function renderProductInfo(product) {
             document.getElementById('productCategory').innerHTML =
                 '<a href="san-pham.html?category=' + product.categoryId + '" style="color:var(--coffee-500);font-size:0.875rem;font-weight:600;text-transform:uppercase;letter-spacing:1px">' +
@@ -991,7 +997,7 @@
             document.getElementById('soldCountText').textContent =
                 product.soldCount ? product.soldCount.toLocaleString('vi-VN') + ' đã bán' : '';
 
-            // Price
+            // Giá
             var salePrice = product.salePrice || product.price;
             var hasDiscount = product.salePrice && product.salePrice < product.price;
             var discount = hasDiscount ? Math.round((1 - product.salePrice / product.price) * 100) : 0;
@@ -1009,7 +1015,7 @@
                 document.getElementById('discountBadge').style.display = 'none';
             }
 
-            // Stock
+            // Số lượng còn lại
             var stockEl = document.getElementById('stockStatus');
             if (product.stock > 0) {
                 stockEl.innerHTML = '<div class="stock-badge stock-in"><span class="stock-dot"></span>Còn hàng (' + product.stock + ' sản phẩm)</div>';
@@ -1021,10 +1027,10 @@
                 document.getElementById('addToCartText').textContent = 'Hết hàng';
             }
 
-            // Description
+            // Mô tả
             document.getElementById('productDescription').textContent = product.description || '';
 
-            // Meta info
+            // Bổ sung mô tả sp
             var metaHtml = '';
             if (product.volume) {
                 metaHtml += '<div class="product-meta-item"><span class="product-meta-icon">📏</span><div><strong>Dung tích:</strong> <span>' + product.volume + '</span></div></div>';
@@ -1037,14 +1043,14 @@
             }
             document.getElementById('productMeta').innerHTML = metaHtml;
 
-            // Wishlist state
+            // cập nhật trạng thái yêu thích
             updateWishlistUI();
 
-            // Page title
+            // Tieu đề
             document.title = product.name + ' - 3T Café';
         }
 
-        // Update wishlist UI
+        // cập nhật sản phẩm yêu thích
         function updateWishlistUI() {
             if (!currentProduct) return;
             var wlBtn = document.getElementById('wishlistBtn');
@@ -1062,8 +1068,11 @@
                 if (wlText) { wlText.textContent = 'Thêm vào yêu thích'; wlText.style.color = 'var(--coffee-700)'; }
             }
         }
-
-        // Change quantity
+// ======================================================
+// THAY ĐỔI SỐ LƯỢNG SẢN PHẨM
+// - Tăng/giảm số lượng theo delta
+// - Giới hạn tối thiểu = 1
+// - Giới hạn tối đa = tồn kho (hoặc 99
         window.changeQty = function(delta) {
             var input = document.getElementById('qtyInput');
             var newQty = Math.max(1, Math.min(currentProduct.stock || 99, currentQty + delta));
@@ -1071,21 +1080,31 @@
             input.value = newQty;
         };
 
-        // Handle add to cart
+// THÊM SẢN PHẨM VÀO GIỎ HÀNG
+// - Kiểm tra sản phẩm hợp lệ
+// - Lấy số lượng từ input
+// - Gọi hàm addToCart
         window.handleAddToCart = function() {
             if (!currentProduct) return;
             var qty = parseInt(document.getElementById('qtyInput').value) || 1;
             addToCart(currentProduct.id);
         };
-
-        // Handle toggle wishlist
+// ======================================================
+// THÊM / XÓA YÊU THÍCH (WISHLIST)
+// - Toggle trạng thái wishlist của sản phẩm
+// - Cập nhật lại UI sau khi thay đổi
         window.handleToggleWishlist = function() {
             if (!currentProduct) return;
             toggleWishlist(currentProduct.id);
             updateWishlistUI();
         };
 
-        // Switch tab
+    // ======================================================
+// CHUYỂN TAB NỘI DUNG SẢN PHẨM
+// - description: mô tả sản phẩm
+// - ingredients: thành phần / dinh dưỡng
+// - reviews: đánh giá
+// - Cập nhật trạng thái active của tab + nội dung
         window.switchTab = function(tab) {
             activeTab = tab;
             document.querySelectorAll('.product-tab-btn').forEach(function(btn) {
@@ -1098,13 +1117,19 @@
             document.getElementById(contentId).classList.add('active');
         };
 
-        // Render full description
+   // ======================================================
+// HIỂN THỊ MÔ TẢ SẢN PHẨM
+// - Nếu không có mô tả thì hiển thị mặc định
+// - Tách đoạn theo dấu chấm để hiển thị đẹp hơn
+// ======================================================
         function renderDescription(product) {
             var desc = product.description || 'Sản phẩm này hiện chưa có mô tả chi tiết.';
             document.getElementById('fullDescription').innerHTML = '<p>' + desc.split('. ').join('.</p><p>') + '</p>';
         }
 
-        // Render ingredients
+  // HIỂN THỊ THÀNH PHẦN / THÔNG TIN SẢN PHẨM
+// - Thành phần, dung tích, calories, danh mục
+// - Trạng thái còn hàng / hết hàng
         function renderIngredients(product) {
             var tbody = document.getElementById('ingredientsTableBody');
             var rows = [];
@@ -1123,15 +1148,14 @@
             rows.push('<tr><td><strong>Tình trạng</strong></td><td>' + (product.stock > 0 ? 'Còn hàng' : 'Hết hàng') + '</td></tr>');
             tbody.innerHTML = rows.join('');
         }
-
-        // Render reviews
+// HIỂN THỊ ĐÁNH GIÁ SẢN PHẨM
         function renderReviews(product) {
             var reviews = getProductReviews(product.id);
             var avgRating = getAverageRating(product.id);
             var ratingCounts = getRatingCounts(product.id);
             var totalReviews = reviews.length;
 
-            // Rating summary
+           // KHỞI TẠO FORM ĐÁNH GIÁ SAO
             var summaryHtml = '<div class="rating-big">' + (avgRating > 0 ? avgRating.toFixed(1) : '0') + '</div>';
             summaryHtml += '<div style="color:#f59e0b;font-size:1.25rem;line-height:1">' + getStarsHTML(avgRating) + '</div>';
             summaryHtml += '<div style="color:var(--coffee-500);font-size:0.8rem">' + totalReviews + ' đánh giá</div>';
@@ -1149,7 +1173,7 @@
             summaryHtml += '<div class="rating-bars">' + barsHtml + '</div>';
             document.getElementById('ratingSummary').innerHTML = summaryHtml;
 
-            // Reviews list
+            // Danh sách đánh giá
             if (reviews.length === 0) {
                 document.getElementById('reviewsList').innerHTML =
                     '<div style="text-align:center;padding:2rem;background:white;border-radius:1rem;border:1px solid rgba(245,230,211,0.8)">' +
@@ -1176,7 +1200,15 @@
                 document.getElementById('reviewsList').innerHTML = listHtml;
             }
 
-            // Review form - check login
+          // KIỂM TRA ĐĂNG NHẬP NGƯỜI DÙNG (REVIEW FORM)
+// - Lấy user từ localStorage (có fallback 2 key khác nhau)
+// - Nếu đã đăng nhập:
+//      + Ẩn thông báo login
+//      + Hiển thị form đánh giá
+// - Nếu chưa đăng nhập:
+//      + Hiển thị prompt yêu cầu login
+//      + Ẩn form đánh giá
+// =================================
             var user = null;
             try {
                 user = JSON.parse(localStorage.getItem('plei_current_user') || localStorage.getItem('plei_user') || '{}');
@@ -1198,7 +1230,7 @@
             });
         }
 
-        // Init star rating form
+       // KHỞI TẠO FORM ĐÁNH GIÁ SAO (STAR RATING)
         function initStarRatingForm() {
             document.querySelectorAll('#reviewFormStars .star-btn').forEach(function(btn) {
                 btn.addEventListener('click', function() {
@@ -1224,7 +1256,7 @@
             });
         }
 
-        // Submit review
+        // nhập review
         function initReviewForm() {
             var form = document.getElementById('reviewForm');
             if (!form) return;
@@ -1291,7 +1323,7 @@
             }
         }
 
-        // Share functions
+        // Share chức năng
         window.shareFacebook = function() {
             var url = encodeURIComponent(window.location.href);
             window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank', 'width=600,height=400');
@@ -1309,7 +1341,7 @@
             });
         };
 
-        // Initialize page
+    //KHỞI TẠO TRANG CHI TIẾT SẢN PHẨM
         function init() {
             var productId = getProductId();
             var product = productId ? getProduct(productId) : null;
@@ -1322,7 +1354,7 @@
 
             currentProduct = product;
 
-            // Show product section (initially hidden via CSS)
+            // HIỂN THỊ GIAO DIỆN SẢN PHẨM
             document.getElementById('productDetailSection').style.display = '';
             // Render all sections
             renderBreadcrumb(product);
@@ -1341,12 +1373,12 @@
             // Update page title
             document.title = product.name + ' - 3T Café';
 
-            // Update OG tags
+            // - Cập nhật meta description theo sản phẩm hiện tạ
             var ogDesc = document.querySelector('meta[name="description"]');
             if (ogDesc) ogDesc.setAttribute('content', product.description || product.name);
         }
 
-        // Boot when DOM ready
+
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {

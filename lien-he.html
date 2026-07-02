@@ -468,6 +468,13 @@
 
     <!-- PAGE INIT -->
     <script>
+     // CONTACT FORM - ERROR HANDLING UTILITIES
+// ======================================================
+// - showFieldError: hiển thị lỗi cho từng input
+// - clearFieldError: xóa lỗi của một field
+// - clearAllErrors: reset toàn bộ trạng thái lỗi
+// - Dùng border đỏ + message dưới input
+
     (function() {
         'use strict';
 
@@ -565,12 +572,12 @@
                     return;
                 }
 
-                // Show loading
+                // Hiển thị trạng thái loading khi submit form
                 submitText.style.display = 'none';
                 submitSpinner.style.display = 'inline-block';
                 submitBtn.disabled = true;
 
-                // Simulate submission (replace with real API call)
+               // Giả lập gửi dữ liệu (thay bằng API thật sau này)
                 setTimeout(function() {
                     submitText.style.display = 'inline';
                     submitSpinner.style.display = 'none';
@@ -589,8 +596,7 @@
             successDiv.style.display = 'none';
             clearAllErrors();
         };
-
-        // Newsletter
+//đăng kí
         var nlForm = document.getElementById('newsletterForm');
         if (nlForm) {
             nlForm.addEventListener('submit', function(e) {

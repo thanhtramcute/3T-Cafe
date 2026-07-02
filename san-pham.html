@@ -389,7 +389,8 @@
         // ──Quy định mỗi trang chỉ hiển thị 12 sản phẩm ──
         var PRODUCTS_PER_PAGE = 12;
 
-        // ── Lưu đúng trang của bộ lọc sản phẩm ──
+        // ── Lưu đúng trang của bộ lọc sản phẩm ,Lưu toàn bộ trạng thái lọc hiện tại:
+        //  search, categories, priceMin, priceMax, onSale, sort, page ──
         var state = {
             search: '',
             categories: [],
@@ -399,8 +400,8 @@
             sort: 'default',
             page: 1
         };
-
-        // ── Thiết lập khi mở trang ──
+        // ── Thiết lập khi mở trang ,Hàm khởi động: đọc URL → 
+        // vẽ checkbox danh mục → gắn sự kiện → chạy lọc lần đầu. ──
         function init() {
             readURLParams();
             renderCategoryFilters(); //Đọc các tham số trên URL để biết người dùng đang xem danh mục hoặc từ khóa nào.
@@ -408,7 +409,7 @@
             applyFilters();
         }
 
-        // ── Read URL Params ──
+        // ── Read URL Params,đã lọc sẵn và dùng nút Back/Forward đúng. ──
         function readURLParams() {
             var params = new URLSearchParams(window.location.search);
             if (params.has('category')) {
@@ -420,39 +421,39 @@
                     return cat ? cat.id : c;
                 });
             }
-            if (params.has('search')) {
+            if (params.has('search')) {   // Tìm kiếm
                 state.search = params.get('search').trim();
                 var searchInput = document.getElementById('filterSearch');
                 if (searchInput) searchInput.value = state.search;
             }
-            if (params.has('onSale')) {
+            if (params.has('onSale')) {  // Lọc sản phẩm giảm giá
                 state.onSale = params.get('onSale') === 'true';
                 var cb = document.getElementById('filterOnSale');
                 if (cb) cb.checked = state.onSale;
             }
-            if (params.has('sort')) {
+            if (params.has('sort')) {  // Sắp xếp
                 state.sort = params.get('sort');
                 var sel = document.getElementById('sortSelect');
                 if (sel) sel.value = state.sort;
             }
-            if (params.has('minPrice')) {
+            if (params.has('minPrice')) { // Khoảng giá (min)
                 var mp = parseInt(params.get('minPrice')) || 0;
                 state.priceMin = mp;
                 var inp = document.getElementById('priceMin');
                 if (inp) inp.value = mp;
             }
-            if (params.has('maxPrice')) {
+            if (params.has('maxPrice')) {  // Khoảng giá (max)
                 var mx = parseInt(params.get('maxPrice')) || 200000;
                 state.priceMax = mx;
                 var inp = document.getElementById('priceMax');
                 if (inp) inp.value = mx;
             }
-            if (params.has('page')) {
+            if (params.has('page')) {   // Phân trang
                 state.page = parseInt(params.get('page')) || 1;
             }
         }
 
-        // ── Update URL ──
+        // ── Cập nhật URL ──
         function updateURL() {
             var params = new URLSearchParams();
             if (state.search) params.set('search', state.search);
@@ -485,6 +486,11 @@
         }
 
         // ── Bind Events ──
+        // Bao gồm:
+// - Checkbox category
+// - Search input (Enter để tìm)
+// - Sort select
+// - Mỗi thay đổi sẽ reset page về 1 và gọi applyFilters()
         function bindEvents() {
             // Category checkboxes
             document.addEventListener('change', function(e) {
@@ -500,7 +506,7 @@
                 }
             });
 
-            // Search
+            // Tìm kiếm
             var searchInput = document.getElementById('filterSearch');
             if (searchInput) {
                 searchInput.addEventListener('keypress', function(e) {
@@ -513,7 +519,7 @@
                 });
             }
 
-            // Sort
+            // sắp xếp sản phẩm
             var sortSelect = document.getElementById('sortSelect');
             if (sortSelect) {
                 sortSelect.addEventListener('change', function() {
@@ -523,7 +529,7 @@
                 });
             }
 
-            // On sale checkbox
+            // CHỈ HIỂN THỊ SẢN PHẨM GIẢM GIÁ
             var onSaleCb = document.getElementById('filterOnSale');
             if (onSaleCb) {
                 onSaleCb.addEventListener('change', function() {
@@ -533,7 +539,7 @@
                 });
             }
 
-            // Mobile filter toggle
+            // Mhiển thị trên điện thoại
             var mobileToggle = document.getElementById('mobileFilterToggle');
             if (mobileToggle) {
                 mobileToggle.addEventListener('click', function() {
@@ -551,7 +557,7 @@
                         sidebar.classList.toggle('overflow-auto');
                         sidebar.classList.toggle('bg-white');
 
-                        // Add overlay
+                        // nền tôis
                         if (sidebar.classList.contains('position-fixed')) {
                             var overlay = document.createElement('div');
                             overlay.id = 'filterMobileOverlay';
@@ -571,9 +577,9 @@
             }
         }
 
-        // ── Apply Filters ──
+        //XỬ LÝ TOÀN BỘ LỌC SẢN PHẨM
         function applyFilters() {
-            // Update state from inputs
+            // Đồng bộ state 
             var searchInput = document.getElementById('filterSearch');
             if (searchInput) state.search = searchInput.value.trim();
 
@@ -586,10 +592,10 @@
             var onSaleCb = document.getElementById('filterOnSale');
             if (onSaleCb) state.onSale = onSaleCb.checked;
 
-            // Filter products
+            // lọc sản phẩm
             var products = DATA.products || [];
             var filtered = products.filter(function(p) {
-                // Search
+                // Tìm kiếm
                 if (state.search) {
                     var q = state.search.toLowerCase();
                     var matchName = p.name.toLowerCase().indexOf(q) > -1;
@@ -598,7 +604,7 @@
                     if (!matchName && !matchCat && !matchDesc) return false;
                 }
 
-                // Category
+                // danh mục
                 if (state.categories.length > 0) {
                     var pCatId = p.categoryId || '';
                     var pCatSlug = '';
@@ -612,7 +618,7 @@
                     if (!match) return false;
                 }
 
-                // Price
+                // giá
                 var price = p.salePrice || p.price;
                 if (price < state.priceMin || price > state.priceMax) return false;
 
@@ -644,14 +650,14 @@
             // Update URL
             updateURL();
 
-            // Scroll to top of grid
+            // Scroll to cao nhât of grid
             var gridArea = document.querySelector('.col-lg-9');
             if (gridArea) {
                 gridArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
-        // ── Sort Products ──
+        // ── sắp xếp sản phẩm ──
         function sortProducts(products, sortBy) {
             var sorted = products.slice();
             switch (sortBy) {
@@ -673,7 +679,7 @@
             return sorted;
         }
 
-        // ── Render Products ──
+        // ──HIỂN THỊ DANH SÁCH SẢN PHẨM ──
         function renderProducts(products) {
             var grid = document.getElementById('productGrid');
             var emptyState = document.getElementById('emptyState');
@@ -720,7 +726,7 @@
                 '<button class="page-link" onclick="goToPage(' + (current - 1) + ')" ' + (current === 1 ? 'disabled' : '') + '>‹</button>' +
                 '</li>';
 
-            // Page numbers
+            // số trang
             var maxVisible = 5;
             var startPage = Math.max(1, current - Math.floor(maxVisible / 2));
             var endPage = Math.min(totalPages, startPage + maxVisible - 1);

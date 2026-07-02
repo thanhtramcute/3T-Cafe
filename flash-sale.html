@@ -246,7 +246,7 @@
     (function() {
         var saleProducts = [];
 
-        // Load category filter
+        // Danh sách sản phẩm đang giảm giá
         var catSelect = document.getElementById('categoryFilter');
         if (catSelect && typeof DATA !== 'undefined') {
             DATA.categories.forEach(function(cat) {
@@ -257,18 +257,19 @@
             });
         }
 
-        // Load sale products
+// Lấy danh sách sản phẩm đang giảm giá
+
         if (typeof DATA !== 'undefined') {
             saleProducts = DATA.products.filter(function(p) {
                 return p.salePrice && p.salePrice < p.price;
             });
             saleProducts.forEach(function(p) {
-                p.discountPercent = Math.round((1 - p.salePrice / p.price) * 100);
+                p.discountPercent = Math.round((1 - p.salePrice / p.price) * 100); //  % giảm giá
             });
         }
-
+// Lọc và sắp xếp sản phẩm Flash Sale
         window.filterSaleProducts = function() {
-            var search = document.getElementById('searchInput').value.toLowerCase();
+            var search = document.getElementById('searchInput').value.toLowerCase();  // tìm kiếm sp
             var catId = document.getElementById('categoryFilter').value;
             var sortBy = document.getElementById('sortFilter').value;
 
@@ -287,14 +288,22 @@
 
             renderSaleProducts(filtered);
         };
-
+// Đặt lại bộ lọc về mặc định
+// - Xóa từ khóa tìm kiếm.
+// - Đưa danh mục về mặc định.
+// - Đưa kiểu sắp xếp về "Giảm giá cao nhất".
+// - Hiển thị lại toàn bộ sản phẩm Flash Sale.
         window.resetSaleFilters = function() {
             document.getElementById('searchInput').value = '';
             document.getElementById('categoryFilter').value = '';
             document.getElementById('sortFilter').value = 'discount';
             filterSaleProducts();
         };
-
+//Hiển thị danh sách sản phẩm Flash Sale
+// - Cập nhật số lượng sản phẩm tìm được.
+// - Hiển thị thông báo nếu không có kết quả.
+// - Tạo giao diện (Product Card) cho từng sản phẩm.
+// - Cập nhật hiệu ứng Animation sau khi render.
         function renderSaleProducts(products) {
             var container = document.getElementById('saleProductsGrid');
             var noResults = document.getElementById('noResults');
@@ -322,7 +331,9 @@
             }
         }
 
-        // Countdown
+// Thiết lập thời gian kết thúc Flash Sale
+// - Lấy thời gian kết thúc từ DATA.settings.
+// - Nếu chưa có dữ liệu, mặc định thời gian kết thúc là sau 3 ngày.
         var settings = (typeof DATA !== 'undefined' && DATA.settings) || {};
         var endTime = settings.flashSaleEnd ? new Date(settings.flashSaleEnd).getTime() : (function() {
             var d = new Date(); d.setDate(d.getDate() + 3); return d.getTime();
@@ -337,7 +348,7 @@
                     var diff = endTime - Date.now();
                     if (diff <= 0) { el.innerHTML = '<span style="color:white">Đã kết thúc</span>'; return; }
                     var h = Math.floor(diff/3600000);
-                    var m = Math.floor((diff%3600000)/60000);
+                    var m = Math.floor((diff%3600000)/60000); // sang Giờ, Phút và Giây để hiển thị
                     var s = Math.floor((diff%60000)/1000);
                     function pad(n){return String(n).padStart(2,'0');}
                     el.innerHTML = '<div class="flash-countdown justify-content-center">' +
@@ -348,7 +359,7 @@
                         '<div class="countdown-unit"><span class="countdown-number">'+pad(s)+'</span><span class="countdown-label">Giây</span></div>' +
                     '</div>';
                 }
-                updateCountdown();
+                updateCountdown(); // Khởi chạy đồng hồ đếm ngược
                 setInterval(updateCountdown, 1000);
             }
         }

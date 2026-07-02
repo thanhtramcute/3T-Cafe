@@ -302,7 +302,7 @@
     <script>
     (function() {
         'use strict';
-
+//Lấy danh sách sản phẩm đã lưu trong localStorage
         var wishlistIds = JSON.parse(localStorage.getItem('plei_wishlist') || '[]');
 
         function getWishlistProducts() {
@@ -354,14 +354,14 @@
                 return '<div class="col-6 col-md-4 col-lg-3" data-animate>' + renderProductCard(p) + '</div>';
             }).join('');
 
-            // Trigger animations
+          // HIỆU ỨNG HIỂN THỊ WISHLIST
             setTimeout(function() {
                 document.querySelectorAll('#wishlistGrid [data-animate]').forEach(function(el) {
                     el.classList.add('visible');
                 });
             }, 50);
 
-            // Recommendations
+            //GỢI Ý SẢN PHẨM
             if (recGrid) {
                 var recs = getRecommendations();
                 recGrid.innerHTML = recs.map(function(p) {
@@ -388,7 +388,7 @@
             showToast('Đã xóa khỏi yêu thích', 'info');
         };
 
-        // Newsletter
+        // đăng kí
         var nlForm = document.getElementById('newsletterForm');
         if (nlForm) {
             nlForm.addEventListener('submit', function(e) {
@@ -398,8 +398,9 @@
                 showToast('Đăng ký thành công! Cảm ơn bạn 🎉', 'success');
             });
         }
-
-        // Override toggleWishlist to re-render
+// - Lưu lại hàm toggleWishlist gốc
+// - Ghi đè lại để thêm hành vi render lại wishlist UI
+// - Sau khi toggle (thêm/xóa), đợi 100ms rồi re-render
         var _originalToggle = window.toggleWishlist;
         window.toggleWishlist = function(productId) {
             _originalToggle(productId);
