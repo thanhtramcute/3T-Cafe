@@ -401,8 +401,8 @@ const DATA = {
     // ================================
     users: [
         { id: 'admin001', email: 'admin@3T.com', password: 'admin123', name: 'Admin 3TCoffee', role: 'admin', phone: '0901234567', address: 'TP.HCM', loyaltyPoints: 0 },
-        { id: 'user002', email: 'tram@gmail.com', password: 'tram123', name: 'Trâm', role: 'customer', phone: '0898369761', address: 'TP.HCM', loyaltyPoints: 200 },
-        { id: 'user003', email: 'truc@gmail.com', password: 'truc123', name: 'Trâm', role: 'customer', phone: '0898369761', address: 'TP.HCM', loyaltyPoints: 200 },
+        { id: 'user002', email: 'tram@gmail.com', password: 'tram123', name: 'Trâm', role: 'customer', phone: '0334780643', address: 'TP.HCM', loyaltyPoints: 200 },
+        { id: 'user003', email: 'truc@gmail.com', password: 'truc123', name: 'Trâm', role: 'customer', phone: '0334780643', address: 'TP.HCM', loyaltyPoints: 200 },
     ],
 
     // ================================
