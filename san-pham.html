@@ -7,7 +7,7 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="3T Café">
 
-    <!-- Open Graph -->
+    <!-- Mở banner ngay đầu trang -->
     <meta property="og:title" content="Sản phẩm - 3T Café">
     <meta property="og:description" content="Danh sách sản phẩm cà phê nguyên chất. Lọc theo danh mục, giá, khuyến mãi.">
     <meta property="og:type" content="website">
@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Favicon -->
+    <!-- icon logo tie4eu đề-->
     <link rel="shortcut icon" href="images/iconas.ico">
 
     <!-- CSS -->
@@ -34,13 +34,13 @@
 </head>
 <body class="bg-coffee-50">
 
-    <!-- PAGE LOADER -->
+    <!-- load trang->
     <div id="page-loader">
         <div class="loader-logo">3T Café</div>
         <div class="loader-spinner"></div>
     </div>
 
-    <!-- ============================
+    <!--============================
          HEADER
          ============================ -->
     <header class="site-header">
@@ -52,7 +52,7 @@
                     <span class="d-none d-sm-inline" style="font-family:var(--bs-heading-font-family);font-weight:800;font-size:1.3rem;letter-spacing:0.5px">3T Café</span>
                 </a>
 
-                <!-- Desktop Nav -->
+                <!-- Thanh điều hướng -->
                 <nav class="d-none d-md-flex align-items-center gap-1">
                     <a href="trang-chu.html" class="nav-link">Trang chủ</a>
                     <a href="san-pham.html" class="nav-link active">Menu</a>
@@ -61,7 +61,7 @@
                     <a href="lien-he.html" class="nav-link">Liên hệ</a>
                 </nav>
 
-                <!-- Right Actions -->
+                <!-- Điều huowbgs bên phải-->
                 <div class="d-flex align-items-center gap-2">
                     <!-- Search -->
                     <form id="headerSearchForm" class="d-none d-lg-flex">
@@ -76,7 +76,7 @@
                         <span style="font-size:18px">♡</span>
                     </a>
 
-                    <!-- Cart -->
+                    <!-- giỏ hàng -->
                     <button class="nav-link d-flex align-items-center justify-content-center position-relative"
                             style="width:18px;height:38px;padding:0;background:none;border:none;cursor:pointer"
                             onclick="openCartDrawer()" data-cart-toggle title="Giỏ hàng">
@@ -84,7 +84,7 @@
                         <span id="cartBadge" class="cart-badge" style="display:none">0</span>
                     </button>
 
-                    <!-- Auth -->
+                    <!-- đăng nhập -->
                     <div id="navAuthItem">
                         <a href="dang-nhap.html" class="nav-link d-flex align-items-center gap-1">
                              
@@ -92,7 +92,7 @@
                         </a>
                     </div>
 
-                    <!-- Mobile Toggle -->
+                    <!-- Thanh điều hướng thả xuống -->
                     <button id="mobileMenuToggle" class="d-md-none nav-link d-flex align-items-center justify-content-center"
                             style="width:38px;height:38px;padding:0;background:none;border:none;cursor:pointer">
                         <span class="menu-icon" style="font-size:20px">☰</span>
@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <!-- Mobile Nav -->
+            <!-- Liên kết link-->
             <nav id="mobileNav" class="mobile-nav collapse">
                 <a href="trang-chu.html" class="nav-link d-block">Trang chủ</a>
                  <a href="san-pham.html" class="nav-link d-block">Menu</a>
@@ -115,7 +115,7 @@
 
     <main>
         <!-- ============================
-             PAGE HERO
+             Nội dung
              ============================ -->
         <section class="page-hero">
             <div class="page-hero-bg" style="background-image:url('images/3.png')"></div>
@@ -131,20 +131,20 @@
         </section>
 
         <!-- ============================
-             MAIN CONTENT
+             Thanh tìm kiếm
              ============================ -->
         <section class="section-sm">
             <div class="container">
-                <!-- Mobile Filter Toggle -->
+                <!--Mục thả tìm kiếm theo chữ -->
                 <button id="mobileFilterToggle" class="d-lg-none btn-coffee mb-3 w-100" type="button" style="border-radius:0.75rem;padding:12px">
                     <span>🔍</span> Bộ lọc & Sắp xếp
                 </button>
 
                 <div class="row g-4">
-                    <!-- Filter Sidebar -->
+                    <!-- Ô tìm kiếm-->
                     <aside id="filterSidebar" class="col-lg-3 d-none d-lg-block">
                         <div class="filter-sidebar">
-                            <!-- Search in filter -->
+                            <!-- Tìm kiếm trong ô -->
                             <div class="filter-section">
                                 <h5>Tìm kiếm</h5>
                                 <div class="position-relative">
@@ -155,15 +155,13 @@
                                 </div>
                             </div>
 
-                            <!-- Categories -->
+                            <!-- sản phẩm -->
                             <div class="filter-section">
                                 <h5>Danh mục</h5>
                                 <div id="categoryFilters">
-                                    <!-- Rendered by JS -->
                                 </div>
                             </div>
-
-                            <!-- Price Range -->
+                            <!-- Sắp xếp theo giá -->
                             <div class="filter-section">
                                 <h5>Mức giá</h5>
                                 <div class="price-range-display mb-2">
@@ -178,7 +176,7 @@
                                 <button class="btn-coffee mt-3 w-100" onclick="applyFilters()" style="padding:8px;font-size:0.85rem">Áp dụng</button>
                             </div>
 
-                            <!-- Sale Filter -->
+                            <!-- sản phẩm sale -->
                             <div class="filter-section">
                                 <h5>Khuyến mãi</h5>
                                 <div class="form-check mb-2">
@@ -189,19 +187,19 @@
                                 </div>
                             </div>
 
-                            <!-- Clear Filters -->
+                            <!-- xóa bộ lọc -->
                             <button class="btn-coffee-outline w-100" onclick="clearAllFilters()" style="padding:10px;font-size:0.875rem">
                                 <span>✕</span> Xóa tất cả bộ lọc
                             </button>
                         </div>
                     </aside>
 
-                    <!-- Product Grid Area -->
+                    <!-- thanh sắp xếp -->
                     <div class="col-lg-9">
                         <!-- Sort Bar -->
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
                             <div class="d-flex align-items-center gap-2 flex-wrap">
-                                <span id="productCount" class="text-coffee-500 fw-medium" style="font-size:0.9rem">Hiển thị 16 sản phẩm</span>
+                                <span id="productCount" class="text-coffee-500 fw-medium" style="font-size:0.9rem">Hiển thị 21 sản phẩm</span>
                             </div>
                             <div class="d-flex align-items-center gap-2">
                                 <label for="sortSelect" class="text-coffee-500 fw-medium" style="font-size:0.85rem;white-space:nowrap">Sắp xếp:</label>
@@ -223,12 +221,12 @@
                             </div>
                         </div>
 
-                        <!-- Product Grid -->
+                        <!-- lấy sp -->
                         <div id="productGrid" class="row g-3 g-lg-4">
-                            <!-- Rendered by JS -->
+                           
                         </div>
 
-                        <!-- Empty State -->
+                        <!-- Thông báo rỗng -->
                         <div id="emptyState" class="text-center py-5" style="display:none">
                             <div style="font-size:4rem;margin-bottom:1rem">🔍</div>
                             <h3 style="color:var(--coffee-700);margin-bottom:0.5rem">Không tìm thấy sản phẩm</h3>
@@ -236,10 +234,10 @@
                             <button class="btn-coffee mt-3" onclick="clearAllFilters()">Xóa bộ lọc</button>
                         </div>
 
-                        <!-- Pagination -->
+                        <!-- Phân trang-->
                         <nav id="paginationArea" class="mt-5" aria-label="Product pagination">
                             <ul id="paginationList" class="pagination pagination-coffee justify-content-center" style="gap:4px">
-                                <!-- Rendered by JS -->
+                              
                             </ul>
                         </nav>
                     </div>
@@ -285,7 +283,7 @@
                     </ul>
                 </div>
 
-                <!-- Support -->
+                <!--Hỗ trợ -->
                 <div class="col-6 col-lg-2">
                     <h5>Hỗ trợ</h5>
                     <ul class="footer-links">
@@ -297,7 +295,7 @@
                     </ul>
                 </div>
 
-                <!-- Contact -->
+                <!-- Liên hệ -->
                 <div class="col-lg-4">
                     <h5>Liên hệ</h5>
                     <ul class="footer-links" style="gap:1rem;display:flex;flex-direction:column">
@@ -336,7 +334,7 @@
     </footer>
 
     <!-- ============================
-         CART DRAWER
+         giỏ hàng
          ============================ -->
     <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
     <div class="cart-drawer" id="cartDrawer">
@@ -345,15 +343,15 @@
             <button class="cart-drawer-close" id="cartDrawerClose">✕</button>
         </div>
         <div class="cart-drawer-body" id="cartDrawerBody">
-            <!-- Populated by JS -->
+         
         </div>
         <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none">
-            <!-- Populated by JS -->
+        
         </div>
     </div>
 
     <!-- ============================
-         MARKETING POPUP
+          POPUP
          ============================ -->
     <div id="marketingPopup" class="marketing-popup" style="display:none">
         <div class="marketing-popup-overlay" onclick="closeMarketingPopup()"></div>
@@ -388,10 +386,10 @@
     (function() {
         'use strict';
 
-        // ── Config ──
+        // ──Quy định mỗi trang chỉ hiển thị 12 sản phẩm ──
         var PRODUCTS_PER_PAGE = 12;
 
-        // ── State ──
+        // ── Lưu đúng trang của bộ lọc sản phẩm ──
         var state = {
             search: '',
             categories: [],
@@ -402,10 +400,10 @@
             page: 1
         };
 
-        // ── Init ──
+        // ── Thiết lập khi mở trang ──
         function init() {
             readURLParams();
-            renderCategoryFilters();
+            renderCategoryFilters(); //Đọc các tham số trên URL để biết người dùng đang xem danh mục hoặc từ khóa nào.
             bindEvents();
             applyFilters();
         }
@@ -415,10 +413,10 @@
             var params = new URLSearchParams(window.location.search);
             if (params.has('category')) {
                 var cats = params.get('category').split(',');
-                // Normalize: convert slugs to IDs if needed, otherwise use slug as-is
+                // chuyển đổi slug thành ID nếu cần, nếu không thì giữ nguyên slug.
                 state.categories = cats.filter(Boolean).map(function(c) {
                     var cat = (DATA.categories || []).find(function(x) { return x.slug === c || x.id === c; });
-                    // Prefer ID for internal use, fallback to slug
+                    // Ưu tiên sử dụng ID cho mục đích nội bộ, dùng slug làm phương án dự phòng.0
                     return cat ? cat.id : c;
                 });
             }
@@ -469,7 +467,7 @@
             window.history.replaceState({}, '', newUrl);
         }
 
-        // ── Render Category Filters ──
+        // ── Lọc sản phẩm ──
         function renderCategoryFilters() {
             var container = document.getElementById('categoryFilters');
             if (!container || typeof DATA === 'undefined') return;
@@ -624,13 +622,13 @@
                 return true;
             });
 
-            // Sort
+            // loại
             filtered = sortProducts(filtered, state.sort);
 
             // Update filter tags
             updateFilterTags();
 
-            // Paginate
+            // Đánh số trang
             var totalPages = Math.max(1, Math.ceil(filtered.length / PRODUCTS_PER_PAGE));
             if (state.page > totalPages) state.page = totalPages;
 
@@ -704,7 +702,7 @@
             }
         }
 
-        // ── Render Pagination ──
+        // ── phân trangh ──
         function renderPagination(totalItems, totalPages) {
             var container = document.getElementById('paginationList');
             if (!container) return;
